@@ -7,11 +7,14 @@
 
 #include "DriveTrain.h"
 
-DriveTrain::DriveTrain() : Subsystem("ExampleSubsystem") {}
+DriveTrain::DriveTrain() : Subsystem("DriveTrain") {}
 
 void DriveTrain::InitDefaultCommand() {
-  // Set the default command for a subsystem here.
-  // SetDefaultCommand(new MySpecialCommand());
+  SetDefaultCommand(new TankDrive_Joystick());
+}
+
+void DriveTrain::f_TankDrive(float left, float right) {
+  Drive.TankDrive(left, right);
 }
 
 // Put methods for controlling this subsystem

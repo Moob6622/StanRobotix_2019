@@ -6,15 +6,15 @@
 /*----------------------------------------------------------------------------*/
 
 #pragma once
-#include <RobotMap.h>
 
-class OI {
-  public:
-    OI();
-    float JoystickGetX();
-    float JoystickGetY();
-  private:
-    frc::Joystick joystick1{kJoystick1};
-    frc::Joystick joystick2{kJoystick2};
+#include <Commands/Command.h>
 
+class TankDrive_Joystick : public frc::Command {
+ public:
+  ExampleCommand();
+  void Initialize() override;
+  void Execute() override;
+  bool IsFinished() override;
+  void End() override;
+  void Interrupted() override;
 };

@@ -11,6 +11,7 @@
 #include <SmartDashboard/SmartDashboard.h>
 
 ExampleSubsystem Robot::m_subsystem;
+DriveTrain Robot::m_drivetrain;
 OI Robot::m_oi;
 
 void Robot::RobotInit() {
