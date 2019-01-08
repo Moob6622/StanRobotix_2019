@@ -10,29 +10,24 @@
 #include <Commands/Subsystem.h>
 #include "RobotMap.h"
 
-//includes un peu foireux, a changer
 #include <SpeedController.h>
 #include <SpeedControllerGroup.h>
-#include <Spark.h>
-// !!!
+#include "C:\Users\lenovo i5 2\wpilib\user\cpp\include\ctre\Phoenix.h"
+#include "C:\Users\lenovo i5 2\wpilib\cpp\current\include\Drive\DifferentialDrive.h"
+#include "C:\Users\lenovo i5 2\wpilib\user\cpp\include\ctre\phoenix\MotorControl\CAN\WPI_TalonSRX.h"
 
 class DriveTrain : public frc::Subsystem {
  private:
 
-  //cest faux mais cest vrai
-
-  frc::Spark motorL1{kMotorLeft1};
-	frc::Spark motorL2{kMotorLeft2};
-	frc::Spark motorR1{kMotorRight1};
-	frc::Spark motorR2{kMotorRight2};
+  WPI_TalonSRX motorL1{kMotorLeft1};
+	WPI_TalonSRX motorL2{kMotorLeft2};
+	WPI_TalonSRX motorR1{kMotorRight1};
+	WPI_TalonSRX motorR2{kMotorRight2};
 
 	frc::SpeedControllerGroup leftSide{motorL1, motorL2};
 	frc::SpeedControllerGroup rightSide{motorR1, motorR2};
 
   DifferentialDrive Drive{leftSide, rightSide};
-
-  //
-
 
   // It's desirable that everything possible under private except
   // for methods that implement subsystem capabilities
