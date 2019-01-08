@@ -21,10 +21,10 @@ class DriveTrain : public frc::Subsystem {
 
   //cest faux mais cest vrai
 
-  frc::Spark motorL1kMotorLeft1};
-	frc::Spark motorL1{kMotorLeft2};
+  frc::Spark motorL1{kMotorLeft1};
+	frc::Spark motorL2{kMotorLeft2};
 	frc::Spark motorR1{kMotorRight1};
-	frc:Spark motorR2{kMotorRight2};
+	frc::Spark motorR2{kMotorRight2};
 
 	frc::SpeedControllerGroup leftSide{motorL1, motorL2};
 	frc::SpeedControllerGroup rightSide{motorR1, motorR2};
