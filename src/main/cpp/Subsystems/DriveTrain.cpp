@@ -13,7 +13,7 @@ void DriveTrain::InitDefaultCommand() {
   SetDefaultCommand(new TankDrive_Joystick());
 }
 
-void DriveTrain::f_TankDrive(float left, float right) {
+void DriveTrain::f_TankDrive(double left, double right) {
   Drive.TankDrive(left, right);
 }
 

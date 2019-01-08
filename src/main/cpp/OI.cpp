@@ -6,9 +6,21 @@
 /*----------------------------------------------------------------------------*/
 
 #include "OI.h"
+#include "Robot.h"
 
 #include <WPILib.h>
 
+using namespace std; 
+
 OI::OI() {
   // Process operator interface input here.
+  joystick = new joystick(kJoystick1);
+}
+
+float OI::JoystickGetLeft() {
+  return -joystick->GetRawAxis(3);
+}
+
+float OI::JoystickGetRight() {
+  return -joystick->GetRawAxis(1);
 }

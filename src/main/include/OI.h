@@ -11,10 +11,9 @@
 class OI {
   public:
     OI();
-    float JoystickGetX();
-    float JoystickGetY();
+    double JoystickGetX();
+    double JoystickGetY();
   private:
-    frc::Joystick joystick1{kJoystick1};
-    frc::Joystick joystick2{kJoystick2};
+    Joystick jostick*;
 
 };
