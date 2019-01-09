@@ -3,7 +3,15 @@
         {
             "name": "Win32",
             "includePath": [
-                "C:/Users/lenovo i5 2/Desktop/StanRobotix_2019/StanRobotix_2019/src/main/include"
+                "${workspaceFolder}",
+                "${workspaceFolder}/main/include",
+                "${workspaceFolder}/main/include/Commands",
+                "${workspaceFolder}/main/include/Subsystems",
+                "C:/Users/lenovo i5 2/wpilib/cpp/current/include",
+                "C:/Users/lenovo i5 2/wpilib/cpp/current/include/Drive",
+                "C:/Users/lenovo i5 2/wpilib/user/cpp/include/ctre",
+                "C:/Users/lenovo i5 2/wpilib/user/cpp/include",
+                "C:/Users/lenovo i5 2/wpilib/user/cpp/include/ctre/phoenix/MotorControl/CAN/"
             ],
             "defines": [
                 "_DEBUG",

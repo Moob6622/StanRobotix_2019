@@ -18,7 +18,7 @@ void TankDrive_Joystick::Initialize() {}
 
 // Called repeatedly when this Command is scheduled to run
 void TankDrive_Joystick::Execute() {
-  m_drivetrain->f_TankDrive(OI::JoystickGetLeft, OI::JoystickGetRight);
+  Robot::m_drivetrain.f_TankDrive(Robot::m_oi.JoystickGetLeft(), Robot::m_oi.JoystickGetRight());
 }
 
 // Make this return true when this Command no longer needs to run execute()
@@ -26,11 +26,11 @@ bool TankDrive_Joystick::IsFinished() { return false; }
 
 // Called once after isFinished returns true
 void TankDrive_Joystick::End() {
-  m_drivetrain->f_TankDrive(0,0)
+  Robot::m_drivetrain.f_TankDrive(0,0);
 }
 
 // Called when another command which requires one or more of the same
 // subsystems is scheduled to run
 void TankDrive_Joystick::Interrupted() {
-  m_drivetrain->f_TankDrive(0,0)
+  Robot::m_drivetrain.f_TankDrive(0,0);
 }

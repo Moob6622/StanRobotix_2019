@@ -14,13 +14,13 @@ using namespace std;
 
 OI::OI() {
   // Process operator interface input here.
-  joystick = new joystick(kJoystick1);
+  joystick = new Joystick(kJoystick1);
 }
 
-float OI::JoystickGetLeft() {
+double OI::JoystickGetLeft() {
   return -joystick->GetRawAxis(3);
 }
 
-float OI::JoystickGetRight() {
+double OI::JoystickGetRight() {
   return -joystick->GetRawAxis(1);
 }

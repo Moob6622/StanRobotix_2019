@@ -12,9 +12,10 @@
 
 #include <SpeedController.h>
 #include <SpeedControllerGroup.h>
-#include "C:\Users\lenovo i5 2\wpilib\user\cpp\include\ctre\Phoenix.h"
-#include "C:\Users\lenovo i5 2\wpilib\cpp\current\include\Drive\DifferentialDrive.h"
-#include "C:\Users\lenovo i5 2\wpilib\user\cpp\include\ctre\phoenix\MotorControl\CAN\WPI_TalonSRX.h"
+#include "Phoenix.h"
+#include "DifferentialDrive.h"
+#include "WPI_TalonSRX.h"
+#include "TankDrive_Joystick.h"
 
 class DriveTrain : public frc::Subsystem {
  private:

@@ -7,13 +7,14 @@
 
 #pragma once
 #include <RobotMap.h>
+#include <Joystick.h>
 
 class OI {
   public:
     OI();
-    double JoystickGetX();
-    double JoystickGetY();
+    double JoystickGetLeft();
+    double JoystickGetRight();
   private:
-    Joystick jostick*;
+    Joystick* joystick;
 
 };

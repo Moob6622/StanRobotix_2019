@@ -8,7 +8,7 @@
 #pragma once
 
 /**
- * Les ports et les moteurs sont au hasard. A changer quand on aura le materiel.
+ * Les ports sont au hasard. A changer quand on aura le materiel.
  */
 
 constexpr int kMotorLeft1 = 1;
