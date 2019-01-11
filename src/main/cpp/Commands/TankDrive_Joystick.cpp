@@ -6,7 +6,6 @@
 /*----------------------------------------------------------------------------*/
 
 #include "Commands/TankDrive_Joystick.h"
-
 #include "Robot.h"
 
 TankDrive_Joystick::TankDrive_Joystick() {

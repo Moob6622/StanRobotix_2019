@@ -5,9 +5,9 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-#include "DriveTrain.h"
-
-DriveTrain::DriveTrain() : Subsystem("DriveTrain") {}
+#include "Subsystems\DriveTrain.h"
+#include "Commands\TankDrive_Joystick.h"
+DriveTrain::DriveTrain() : frc::Subsystem("DriveTrain") {}
 
 void DriveTrain::InitDefaultCommand() {
   SetDefaultCommand(new TankDrive_Joystick());

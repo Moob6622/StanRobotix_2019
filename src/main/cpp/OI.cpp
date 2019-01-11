@@ -6,9 +6,7 @@
 /*----------------------------------------------------------------------------*/
 
 #include "OI.h"
-#include "Robot.h"
-
-#include <WPILib.h>
+#include <RobotMap.h>
 
 using namespace std; 
 
