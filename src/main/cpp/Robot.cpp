@@ -12,11 +12,12 @@
 
 
 DriveTrain Robot::m_drivetrain;
+GPS Robot::m_gps;
 OI Robot::m_oi;
 
 void Robot::RobotInit() 
 {
-  m_drivetrain.ResetSensors();
+  m_gps.ResetSensors();
 }
 
 /**

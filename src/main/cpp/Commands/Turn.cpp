@@ -10,7 +10,7 @@
 Turn::Turn(double iAngle) 
 {
   Requires(&Robot::m_drivetrain);
-  mTargetAngle = iAngle + Robot::m_drivetrain.GetAngle(); 
+  mTargetAngle = iAngle + Robot::m_gps.GetAngle(); 
 }
 
 void Turn::Initialize() 
@@ -20,7 +20,7 @@ void Turn::Initialize()
 
 void Turn::Execute() 
 {
-  if(Robot::m_drivetrain.GetAngle() - mTargetAngle > 0) //choisit le sens de rotation
+  if(Robot::m_gps.GetAngle() - mTargetAngle > 0) //choisit le sens de rotation
   {                                                     //selon langle 
     Robot::m_drivetrain.TankDrive(1,-1);
   }
@@ -32,7 +32,7 @@ void Turn::Execute()
 
 bool Turn::IsFinished() 
 { 
-  if(abs(Robot::m_drivetrain.GetAngle() - mTargetAngle) < kGyroSensitivity) 
+  if(abs(Robot::m_gps.GetAngle() - mTargetAngle) < kGyroSensitivity) 
   {
     return true;
   }

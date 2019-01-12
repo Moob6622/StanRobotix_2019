@@ -18,12 +18,6 @@
 #include "Commands/Subsystem.h"
 #include "ctre/Phoenix.h"
 
-#include <AnalogGyro.h>
-#include <BuiltInAccelerometer.h>
-
-#include <Math.h>
-
-
 class DriveTrain : public frc::Subsystem 
 {
  private:
@@ -38,8 +32,6 @@ class DriveTrain : public frc::Subsystem
 
   DifferentialDrive Drive{leftSide, rightSide};
 
-  frc::AnalogGyro * mGyroPtr;
-  frc::BuiltInAccelerometer * mAcceleroPtr;
 
   TankDrive_Joystick * mDefaultDrivePtr;
 
@@ -48,15 +40,7 @@ class DriveTrain : public frc::Subsystem
 
  public:
   DriveTrain();
-
-  void ResetSensors(); 
   void InitDefaultCommand() override;
   void TankDrive(double iLeft, double iRight);
 
-  double GetAngle();
-
-  double GetXAcceleration();
-  double GetYAcceleration();
-  double GetZAcceleration();
-  double GetAcceleration();
 };

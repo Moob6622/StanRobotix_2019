@@ -5,19 +5,31 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-#include "Subsystems\DriveTrain.h"
+#pragma once
 
-DriveTrain::DriveTrain() : frc::Subsystem("DriveTrain"), mDefaultDrivePtr(nullptr) 
-{
-  mDefaultDrivePtr = new TankDrive_Joystick();
-}
+#include <RobotMap.h>
 
-void DriveTrain::InitDefaultCommand() 
-{
-  SetDefaultCommand(mDefaultDrivePtr);
-}
+#include <AnalogGyro.h>
+#include <BuiltInAccelerometer.h>
 
-void DriveTrain::TankDrive(double iLeft, double iRight) 
+#include <Math.h>
+
+class GPS : public frc::Subsystem 
 {
-  Drive.TankDrive(iLeft, iRight);
-}
+ private:
+  
+  frc::AnalogGyro * mGyroPtr;
+  frc::BuiltInAccelerometer * mAcceleroPtr;
+
+ public:
+  GPS();
+  void InitDefaultCommand() override;
+  void ResetSensors(); 
+  
+  double GetAngle();
+
+  double GetXAcceleration();
+  double GetYAcceleration();
+  double GetZAcceleration();
+  double GetAcceleration();
+};

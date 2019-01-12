@@ -9,6 +9,7 @@
 
 #include "OI.h"
 #include "Subsystems/DriveTrain.h"
+#include "Subsystems/GPS.h"
 #include <SmartDashboard/SendableChooser.h>
 #include <TimedRobot.h>
 
@@ -16,6 +17,7 @@ class Robot : public frc::TimedRobot
 {
  public:
   static DriveTrain m_drivetrain;
+  static GPS m_gps; 
   static OI m_oi;
 
   void RobotInit() override;
