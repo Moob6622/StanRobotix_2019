@@ -6,12 +6,14 @@
 /*----------------------------------------------------------------------------*/
 
 #pragma once
-
 #include <Commands/Command.h>
 
-class ExampleCommand : public frc::Command {
+
+class TankDrive_Joystick : public frc::Command 
+{
  public:
-  ExampleCommand();
+  TankDrive_Joystick();
+  
   void Initialize() override;
   void Execute() override;
   bool IsFinished() override;

@@ -8,6 +8,19 @@
 #pragma once
 
 /**
+ * Les ports sont au hasard. A changer quand on aura le materiel.
+ */
+
+constexpr int kMotorLeft1 = 1;
+constexpr int kMotorLeft2 = 2;
+constexpr int kMotorRight1 = 3;
+constexpr int kMotorRight2 = 4;
+
+constexpr int kJoystick1 = 0;
+
+constexpr int kGyro = 1;
+
+/**
  * The RobotMap is a mapping from the ports sensors and actuators are wired into
  * to a variable name. This provides flexibility changing wiring, makes checking
  * the wiring easier and significantly reduces the number of magic numbers

@@ -7,7 +7,17 @@
 
 #pragma once
 
-class OI {
- public:
-  OI();
+#include <Joystick.h>
+
+
+
+class OI 
+{
+  public:
+    OI();
+    double GetLeftJoystick();
+    double GetRightJoystick();
+
+  private:
+    Joystick* joystick;
 };
