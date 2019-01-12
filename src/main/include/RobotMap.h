@@ -19,6 +19,7 @@ constexpr int kMotorRight2 = 4;
 constexpr int kJoystick1 = 0;
 
 constexpr int kGyro = 1;
+constexpr int kGyroSensitivity = 3;
 
 /**
  * The RobotMap is a mapping from the ports sensors and actuators are wired into

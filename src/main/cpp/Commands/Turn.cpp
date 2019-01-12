@@ -6,21 +6,19 @@
 /*----------------------------------------------------------------------------*/
 
 #include "Commands/Turn.h"
+#include <RobotMap.h>
 
 Turn::Turn(double iAngle) 
 {
-  // Use Requires() here to declare subsystem dependencies
   Requires(&Robot::m_drivetrain);
   mTargetAngle = iAngle + Robot::m_drivetrain.GetAngle(); 
 }
 
-// Called just before this Command runs the first time
 void Turn::Initialize() 
 {
 
 }
 
-// Called repeatedly when this Command is scheduled to run
 void Turn::Execute() 
 {
   if(Robot::m_drivetrain.GetAngle() - mTargetAngle > 0) //choisit le sens de rotation
@@ -33,24 +31,20 @@ void Turn::Execute()
   }
 }
 
-// Make this return true when this Command no longer needs to run execute()
 bool Turn::IsFinished() 
 { 
-  if() 
+  if(abs(Robot::m_drivetrain.GetAngle() - mTargetAngle) < kGyroSensitivity) 
   {
     return true;
   }
   else {return false;} 
 }
 
-// Called once after isFinished returns true
 void Turn::End() 
 {
   Robot::m_drivetrain.TankDrive(0,0);
 }
 
-// Called when another command which requires one or more of the same
-// subsystems is scheduled to run
 void Turn::Interrupted() 
 {
   Robot::m_drivetrain.TankDrive(0,0);
