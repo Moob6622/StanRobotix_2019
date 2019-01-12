@@ -6,7 +6,6 @@
 /*----------------------------------------------------------------------------*/
 
 #include "Commands/Turn.h"
-#include <RobotMap.h>
 
 Turn::Turn(double iAngle) 
 {

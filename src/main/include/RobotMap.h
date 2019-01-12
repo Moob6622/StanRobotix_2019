@@ -17,6 +17,7 @@ constexpr int kMotorRight1 = 3;
 constexpr int kMotorRight2 = 4;
 
 constexpr int kJoystick1 = 0;
+constexpr int kLeftTrigger = 4; 
 
 constexpr int kGyro = 1;
 constexpr int kGyroSensitivity = 3;

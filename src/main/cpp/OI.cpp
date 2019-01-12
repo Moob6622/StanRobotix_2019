@@ -7,21 +7,33 @@
 
 #include "OI.h"
 #include <RobotMap.h>
+#include "Commands/Turn.h"
 
 OI::OI() 
 {
   // Process operator interface input here.
-  joystick = new Joystick(kJoystick1);
+  
+  mJoystickPtr = new Joystick(kJoystick1);
+  mLeftTriggerPtr = new JoystickButton(mJoystickPtr, kLeftTrigger);
+
+  //impossible de declarer le mLeftTriggerCommandPtr dans le OI.h,
+  //car le OI est utilise dans le DriveTrain.cpp qui est utilise
+  //dans le Turn.cpp
+  
+  Turn * mLeftTriggerCommandPtr = new Turn(180); 
+
+  mLeftTriggerPtr->WhenPressed(mLeftTriggerCommandPtr);
+
 }
 
 double OI::GetLeftJoystick() 
 {
-  return -joystick->GetRawAxis(1); //signe << - >> devant la valeur des joysticks car 
+  return -mJoystickPtr->GetRawAxis(1); //signe << - >> devant la valeur des joysticks car 
                                    // leur orientation est inversee par rapport au tank drive
 }
 
 double OI::GetRightJoystick() 
 {
-  return -joystick->GetRawAxis(3); //signe << - >> devant la valeur des joysticks car 
+  return -mJoystickPtr->GetRawAxis(3); //signe << - >> devant la valeur des joysticks car 
                                    //leur orientation est inversee par rapport au tank drive
 }
