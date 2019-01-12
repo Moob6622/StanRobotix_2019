@@ -11,12 +11,13 @@
 
 
 
-class OI {
+class OI 
+{
   public:
     OI();
     double GetLeftJoystick();
     double GetRightJoystick();
+
   private:
     Joystick* joystick;
-
 };

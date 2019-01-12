@@ -7,18 +7,19 @@
 
 #include "Subsystems\DriveTrain.h"
 
-DriveTrain::DriveTrain() : frc::Subsystem("DriveTrain") 
+DriveTrain::DriveTrain() : frc::Subsystem("DriveTrain"), mDefaultDrivePtr(nullptr) 
 {
-  DefaultDrive = new TankDrive_Joystick();
+  mDefaultDrivePtr = new TankDrive_Joystick();
 }
 
-void DriveTrain::ResetSensors() {
+void DriveTrain::ResetSensors() 
+{
   gyro.Calibrate(); 
 }
 
 void DriveTrain::InitDefaultCommand() 
 {
-  SetDefaultCommand(DefaultDrive);
+  SetDefaultCommand(mDefaultDrivePtr);
 }
 
 void DriveTrain::TankDrive(double iLeft, double iRight) 

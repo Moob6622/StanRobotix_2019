@@ -9,9 +9,11 @@
 #include <Commands/Command.h>
 
 
-class TankDrive_Joystick : public frc::Command {
+class TankDrive_Joystick : public frc::Command 
+{
  public:
   TankDrive_Joystick();
+  
   void Initialize() override;
   void Execute() override;
   bool IsFinished() override;

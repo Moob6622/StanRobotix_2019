@@ -21,7 +21,8 @@
 #include <AnalogGyro.h>
 
 
-class DriveTrain : public frc::Subsystem {
+class DriveTrain : public frc::Subsystem 
+{
  private:
 
   WPI_TalonSRX motorL1{kMotorLeft1};
@@ -36,13 +37,14 @@ class DriveTrain : public frc::Subsystem {
 
   frc::AnalogGyro gyro{kGyro};
 
-  TankDrive_Joystick * DefaultDrive;
+  TankDrive_Joystick * mDefaultDrivePtr;
 
   // It's desirable that everything possible under private except
   // for methods that implement subsystem capabilities
 
  public:
   DriveTrain();
+
   void ResetSensors(); 
   void InitDefaultCommand() override;
   void TankDrive(double iLeft, double iRight);

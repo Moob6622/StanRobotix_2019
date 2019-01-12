@@ -12,11 +12,9 @@
 #include <SmartDashboard/SendableChooser.h>
 #include <TimedRobot.h>
 
-
-
-class Robot : public frc::TimedRobot {
+class Robot : public frc::TimedRobot 
+{
  public:
- 
   static DriveTrain m_drivetrain;
   static OI m_oi;
 
