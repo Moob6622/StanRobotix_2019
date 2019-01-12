@@ -14,9 +14,11 @@
 #include <SpeedController.h>
 #include <SpeedControllerGroup.h>
 
-#include "C:\Users\lenovo i5 2\wpilib\user\cpp\include\ctre\Phoenix.h"
-#include "C:\Users\lenovo i5 2\wpilib\cpp\current\include\Drive\DifferentialDrive.h"
-#include "C:\Users\lenovo i5 2\wpilib\cpp\current\include\Commands/Subsystem.h"
+
+#include "Drive/DifferentialDrive.h"
+#include "Commands/Subsystem.h"
+#include "ctre/Phoenix.h"
+
 
 
 
