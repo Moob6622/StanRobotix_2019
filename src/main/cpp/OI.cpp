@@ -8,17 +8,17 @@
 #include "OI.h"
 #include <RobotMap.h>
 
-using namespace std; 
-
 OI::OI() {
   // Process operator interface input here.
   joystick = new Joystick(kJoystick1);
 }
 
-double OI::JoystickGetLeft() {
+double OI::GetLeftJoystick() {
   return -joystick->GetRawAxis(3);
 }
 
-double OI::JoystickGetRight() {
+double OI::GetRightJoystick() {
   return -joystick->GetRawAxis(1);
 }
+
+//signe << - >> devant la valeur des joysticks car leur orientation est inversee par rapport au tank drive

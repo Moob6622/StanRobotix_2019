@@ -6,15 +6,29 @@
 /*----------------------------------------------------------------------------*/
 
 #include "Subsystems\DriveTrain.h"
-#include "Commands\TankDrive_Joystick.h"
-DriveTrain::DriveTrain() : frc::Subsystem("DriveTrain") {}
 
-void DriveTrain::InitDefaultCommand() {
-  SetDefaultCommand(new TankDrive_Joystick());
+DriveTrain::DriveTrain() : frc::Subsystem("DriveTrain") 
+{
+  DefaultDrive = new TankDrive_Joystick();
 }
 
-void DriveTrain::f_TankDrive(double left, double right) {
-  Drive.TankDrive(left, right);
+void DriveTrain::ResetSensors() {
+  gyro.Calibrate(); 
+}
+
+void DriveTrain::InitDefaultCommand() 
+{
+  SetDefaultCommand(DefaultDrive);
+}
+
+void DriveTrain::TankDrive(double iLeft, double iRight) 
+{
+  Drive.TankDrive(iLeft, iRight);
+}
+
+double DriveTrain::GetAngle() 
+{
+  return gyro.GetAngle();
 }
 
 // Put methods for controlling this subsystem

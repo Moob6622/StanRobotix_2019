@@ -14,8 +14,8 @@
 class OI {
   public:
     OI();
-    double JoystickGetLeft();
-    double JoystickGetRight();
+    double GetLeftJoystick();
+    double GetRightJoystick();
   private:
     Joystick* joystick;
 

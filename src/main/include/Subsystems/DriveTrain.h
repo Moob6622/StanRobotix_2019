@@ -7,20 +7,18 @@
 
 #pragma once
 
-
 #include <RobotMap.h>
 
+#include "Commands/TankDrive_Joystick.h"
 
 #include <SpeedController.h>
 #include <SpeedControllerGroup.h>
-
 
 #include "Drive/DifferentialDrive.h"
 #include "Commands/Subsystem.h"
 #include "ctre/Phoenix.h"
 
-
-
+#include <AnalogGyro.h>
 
 
 class DriveTrain : public frc::Subsystem {
@@ -36,11 +34,17 @@ class DriveTrain : public frc::Subsystem {
 
   DifferentialDrive Drive{leftSide, rightSide};
 
+  frc::AnalogGyro gyro{kGyro};
+
+  TankDrive_Joystick * DefaultDrive;
+
   // It's desirable that everything possible under private except
   // for methods that implement subsystem capabilities
 
  public:
   DriveTrain();
+  void ResetSensors(); 
   void InitDefaultCommand() override;
-  void f_TankDrive(double left, double right);
+  void TankDrive(double iLeft, double iRight);
+  double GetAngle();
 };
