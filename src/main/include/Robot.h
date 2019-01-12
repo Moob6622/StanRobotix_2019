@@ -11,6 +11,7 @@
 #include "Subsystems/DriveTrain.h"
 #include <SmartDashboard/SendableChooser.h>
 #include <TimedRobot.h>
+#include <CameraServer.h>
 
 
 
@@ -36,4 +37,6 @@ class Robot : public frc::TimedRobot {
   frc::Command* m_autonomousCommand = nullptr;
 
   frc::SendableChooser<frc::Command*> m_chooser;
+  
+  static CameraServer* m_cameraServer;
 };

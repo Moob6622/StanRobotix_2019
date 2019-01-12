@@ -13,8 +13,14 @@
 
 DriveTrain Robot::m_drivetrain;
 OI Robot::m_oi;
+CameraServer* Robot::m_cameraServer;
+
 
 void Robot::RobotInit() {
+
+m_cameraServer->GetInstance();
+m_cameraServer->AddAxisCamera(kCameraIP);
+m_cameraServer->GetVideo();
 }
 
 /**
