@@ -8,6 +8,7 @@
 #pragma once
 
 #include <Commands/Command.h>
+#include <RobotMap.h>
 #include "Robot.h"
 
 class Turn : public frc::Command {
