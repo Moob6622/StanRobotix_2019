@@ -36,7 +36,7 @@ void Turn::Execute()
 // Make this return true when this Command no longer needs to run execute()
 bool Turn::IsFinished() 
 { 
-  if() 
+  if(true) 
   {
     return true;
   }

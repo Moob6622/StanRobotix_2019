@@ -27,6 +27,7 @@ void DriveTrain::InitDefaultCommand()
 
 void DriveTrain::TankDrive(double iLeft, double iRight) 
 {
+  //Drive.TankDrive(0.5,0.5);
   Drive.TankDrive(iLeft, iRight);
 }
 

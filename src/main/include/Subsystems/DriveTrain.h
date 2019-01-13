@@ -33,6 +33,8 @@ class DriveTrain : public frc::Subsystem
 	WPI_TalonSRX motorR1{kMotorRight1};
 	WPI_TalonSRX motorR2{kMotorRight2};
 
+	//frc::SpeedControllerGroup leftSide{motorL1, motorL2};
+	//frc::SpeedControllerGroup rightSide{motorR1, motorR2};
 	frc::SpeedControllerGroup leftSide{motorL1, motorL2};
 	frc::SpeedControllerGroup rightSide{motorR1, motorR2};
 
