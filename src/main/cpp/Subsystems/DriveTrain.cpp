@@ -7,14 +7,17 @@
 
 #include "Subsystems\DriveTrain.h"
 
-DriveTrain::DriveTrain() : frc::Subsystem("DriveTrain"), mDefaultDrivePtr(nullptr) 
+DriveTrain::DriveTrain() : frc::Subsystem("DriveTrain"), mDefaultDrivePtr(nullptr), mGyroPtr(nullptr), mAcceleroPtr(nullptr) 
 {
   mDefaultDrivePtr = new TankDrive_Joystick();
+  mGyroPtr = new AnalogGyro(kGyro);
+  mAcceleroPtr = new frc::BuiltInAccelerometer();
 }
 
 void DriveTrain::ResetSensors() 
 {
-  gyro.Calibrate(); 
+  mGyroPtr->Reset();
+  mGyroPtr->Calibrate();
 }
 
 void DriveTrain::InitDefaultCommand() 
@@ -29,8 +32,36 @@ void DriveTrain::TankDrive(double iLeft, double iRight)
 
 double DriveTrain::GetAngle() 
 {
-  return gyro.GetAngle();
+  return mGyroPtr->GetAngle();
 }
+
+double DriveTrain::GetXAcceleration() 
+{
+  return mAcceleroPtr->GetX();
+}
+
+double DriveTrain::GetYAcceleration() 
+{
+  return mAcceleroPtr->GetY();
+}
+
+double DriveTrain::GetZAcceleration() 
+{
+  return mAcceleroPtr->GetZ();
+}
+
+double DriveTrain::GetAcceleration()
+{
+  return sqrt(pow(mAcceleroPtr->GetX(),2)   //formule pour calculer
+            + pow(mAcceleroPtr->GetY(),2)   // lacceleration totale
+            + pow(mAcceleroPtr->GetZ(),2));
+          
+}
+
+
+
+
+
 
 // Put methods for controlling this subsystem
 // here. Call these from Commands.

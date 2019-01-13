@@ -14,7 +14,9 @@
 DriveTrain Robot::m_drivetrain;
 OI Robot::m_oi;
 
-void Robot::RobotInit() {
+void Robot::RobotInit() 
+{
+  m_drivetrain.ResetSensors();
 }
 
 /**
