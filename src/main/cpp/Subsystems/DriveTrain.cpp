@@ -24,7 +24,7 @@ void DriveTrain::InitDefaultCommand()
 
 void DriveTrain::TankDrive(double iLeft, double iRight) 
 {
-  Drive.TankDrive(iLeft, iRight);
+  Drive.TankDrive(iLeft, iRight, false);
 }
 
 double DriveTrain::GetAngle() 
