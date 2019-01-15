@@ -9,6 +9,8 @@
 
 #include <RobotMap.h>
 
+#include "Commands/Subsystem.h"
+
 #include <AnalogGyro.h>
 #include <BuiltInAccelerometer.h>
 
