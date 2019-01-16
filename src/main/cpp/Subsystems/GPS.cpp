@@ -9,7 +9,7 @@
 
 GPS::GPS() : frc::Subsystem("GPS"), mGyroPtr(nullptr), mAcceleroPtr(nullptr)
 {
-  mGyroPtr = new AnalogGyro(kGyro);
+  mGyroPtr = new ADXRS450_Gyro();
   mAcceleroPtr = new frc::BuiltInAccelerometer();
 }
 
@@ -21,13 +21,14 @@ void GPS::InitDefaultCommand()
 
 void GPS::ResetSensors() 
 {
-  mGyroPtr->Reset();
   mGyroPtr->Calibrate();
 }
 
 double GPS::GetAngle() 
 {
-  return mGyroPtr->GetAngle();
+  double wAngle = mGyroPtr->GetAngle();
+  return fmod(wAngle, 360); //modulo 360 pour avoir une valeur entre
+                            //-360 et 360
 }
 
 double GPS::GetXAcceleration() 

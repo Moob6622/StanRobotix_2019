@@ -7,27 +7,30 @@
 
 #include "Commands/Turn.h"
 
+#include <iostream>
+
 Turn::Turn(double iAngle) 
 {
   Requires(&Robot::m_drivetrain);
-  mTargetAngle = iAngle + Robot::m_gps.GetAngle(); 
+  mAngleIncrement = iAngle;
 }
 
 void Turn::Initialize() 
 {
-
+  mTargetAngle = fmod(mAngleIncrement + Robot::m_gps.GetAngle(), 360);
 }
 
 void Turn::Execute() 
 {
-  if(Robot::m_gps.GetAngle() - mTargetAngle > 0) //choisit le sens de rotation
-  {                                                     //selon langle 
-    Robot::m_drivetrain.TankDrive(1,-1);
-  }
-  else
+  if(mTargetAngle < 0)
   {
-    Robot::m_drivetrain.TankDrive(-1,1);
+    Robot::m_drivetrain.TankDrive(-0.2,0.2);
   }
+  else 
+  {
+    Robot::m_drivetrain.TankDrive(0.2,-0.2);
+  }
+  std::cout<< (abs(Robot::m_gps.GetAngle()) - abs(mTargetAngle)) << std::endl;
 }
 
 bool Turn::IsFinished() 
@@ -36,7 +39,8 @@ bool Turn::IsFinished()
   {
     return true;
   }
-  else {return false;} 
+  else return false; 
+  
 }
 
 void Turn::End() 

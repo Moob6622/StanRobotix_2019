@@ -13,7 +13,8 @@
 
 class Turn : public frc::Command {
  private:
-  double mTargetAngle = 0;
+  double mTargetAngle;
+  double mAngleIncrement;
 
  public:
   Turn(double iAngle);

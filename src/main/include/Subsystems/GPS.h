@@ -11,7 +11,7 @@
 
 #include "Commands/Subsystem.h"
 
-#include <AnalogGyro.h>
+#include <ADXRS450_Gyro.h>
 #include <BuiltInAccelerometer.h>
 
 #include <Math.h>
@@ -20,12 +20,13 @@ class GPS : public frc::Subsystem
 {
  private:
   
-  frc::AnalogGyro * mGyroPtr;
+  frc::ADXRS450_Gyro * mGyroPtr;
   frc::BuiltInAccelerometer * mAcceleroPtr;
 
  public:
   GPS();
   void InitDefaultCommand() override;
+  
   void ResetSensors(); 
   
   double GetAngle();

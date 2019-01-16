@@ -10,6 +10,8 @@
 #include <Commands/Scheduler.h>
 #include <SmartDashboard/SmartDashboard.h>
 
+#include <iostream>
+
 
 DriveTrain Robot::m_drivetrain;
 GPS Robot::m_gps;
