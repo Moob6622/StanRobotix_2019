@@ -35,6 +35,8 @@ class DriveTrain : public frc::Subsystem
 
   TankDrive_Joystick * mDefaultDrivePtr;
 
+  double mPIDOutput;
+
   // It's desirable that everything possible under private except
   // for methods that implement subsystem capabilities
 
@@ -42,5 +44,8 @@ class DriveTrain : public frc::Subsystem
   DriveTrain();
   void InitDefaultCommand() override;
   void TankDrive(double iLeft, double iRight);
+
+  void SetPIDOutput(double iPID);
+  double GetPIDOutput();
 
 };

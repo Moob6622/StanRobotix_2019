@@ -21,3 +21,15 @@ void DriveTrain::TankDrive(double iLeft, double iRight)
 {
   Drive.TankDrive(iLeft, iRight, false);
 }
+
+void DriveTrain::SetPIDOutput(double iPID) 
+{
+  mPIDOutput = iPID;
+}
+
+double DriveTrain::GetPIDOutput() 
+{
+  return mPIDOutput;
+}
+
+

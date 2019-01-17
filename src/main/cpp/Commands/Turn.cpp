@@ -9,38 +9,41 @@
 
 #include <iostream>
 
-Turn::Turn(double iAngle) 
+Turn::Turn(double iAngle, RotationPID* ipid)
 {
   Requires(&Robot::m_drivetrain);
   mAngleIncrement = iAngle;
+  mPidPtr = ipid;
 }
 
 void Turn::Initialize() 
 {
   mTargetAngle = fmod(mAngleIncrement + Robot::m_gps.GetAngle(), 360);
+  mPidPtr->SetSetpoint(mTargetAngle);
 }
 
 void Turn::Execute() 
 {
+  double wPower = Robot::m_drivetrain.GetPIDOutput();
+
   if(mTargetAngle < 0)
   {
-    Robot::m_drivetrain.TankDrive(-0.2,0.2);
+    Robot::m_drivetrain.TankDrive(-wPower, wPower);
   }
   else 
   {
-    Robot::m_drivetrain.TankDrive(0.2,-0.2);
+    Robot::m_drivetrain.TankDrive(wPower,-wPower);
   }
-  std::cout<< (abs(Robot::m_gps.GetAngle()) - abs(mTargetAngle)) << std::endl;
+  std::cout << "execution"<<std::endl;
 }
 
 bool Turn::IsFinished() 
 { 
-  if(abs(Robot::m_gps.GetAngle() - mTargetAngle) < kGyroSensitivity) 
+  if (mPidPtr->OnTarget())
   {
     return true;
   }
-  else return false; 
-  
+  else return false;
 }
 
 void Turn::End() 

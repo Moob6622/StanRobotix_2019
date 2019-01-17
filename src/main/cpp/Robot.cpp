@@ -17,6 +17,14 @@ DriveTrain Robot::m_drivetrain;
 GPS Robot::m_gps;
 OI Robot::m_oi;
 
+RotationPID Robot::mPid; 
+
+/**
+RotationPID * Robot::mPidPtr = new RotationPID(SmartDashboard::GetNumber("DB/Slider 0",0.0),
+                                               SmartDashboard::GetNumber("DB/Slider 1",0.0)*0.05, 
+                                               SmartDashboard::GetNumber("DB/Slider 2",0.0)*0.05);
+**/
+
 void Robot::RobotInit() 
 {
   m_gps.ResetSensors();
@@ -89,7 +97,7 @@ void Robot::TeleopInit()
 
 void Robot::TeleopPeriodic() 
 { 
-  frc::Scheduler::GetInstance()->Run(); 
+  frc::Scheduler::GetInstance()->Run();
 }
 
 void Robot::TestPeriodic() 

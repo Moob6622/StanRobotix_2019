@@ -21,6 +21,15 @@ class OI
 
   private:
     Joystick * mJoystickPtr;
-    JoystickButton * mLeftTriggerPtr;
+
+    JoystickButton * mYButtonPtr;
+    JoystickButton * mXButtonPtr;
+    JoystickButton * mBButtonPtr;
+    JoystickButton * mAButtonPtr;
+
+    JoystickButton * mFrontLeftTriggerPtr;
+    JoystickButton * mBackLeftTriggerPtr;
+    JoystickButton * mFrontRightTriggerPtr;
+    JoystickButton * mBackRightTriggerPtr;
 
 };
