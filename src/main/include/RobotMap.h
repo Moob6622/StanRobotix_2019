@@ -14,7 +14,7 @@
 constexpr int kMotorLeft1 = 1;
 constexpr int kMotorLeft2 = 2;
 constexpr int kMotorRight1 = 3;
-constexpr int kMotorRight2 = 4;
+constexpr int kMotorRight2 = 0;
 
 constexpr int kJoystick1 = 0;
 
