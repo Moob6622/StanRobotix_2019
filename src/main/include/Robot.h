@@ -12,12 +12,12 @@
 #include <SmartDashboard/SendableChooser.h>
 #include <TimedRobot.h>
 #include <CameraServer.h>
+#include "networktables/NetworkTables.h"
 
 
 
 class Robot : public frc::TimedRobot {
  public:
- 
   static DriveTrain m_drivetrain;
   static OI m_oi;
 
