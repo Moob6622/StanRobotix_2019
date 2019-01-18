@@ -9,10 +9,12 @@
 
 #include <Commands/Scheduler.h>
 #include <SmartDashboard/SmartDashboard.h>
+#include <iostream>
 
-
+Sensor Robot::m_sensors;
 DriveTrain Robot::m_drivetrain;
 OI Robot::m_oi;
+
 
 void Robot::RobotInit() {
 }
@@ -25,7 +27,8 @@ void Robot::RobotInit() {
  * <p> This runs after the mode specific periodic functions, but before
  * LiveWindow and SmartDashboard integrated updating.
  */
-void Robot::RobotPeriodic() {}
+void Robot::RobotPeriodic() {
+}
 
 /**
  * This function is called once each time the robot enters Disabled mode. You
@@ -80,6 +83,7 @@ void Robot::TeleopInit()
     m_autonomousCommand->Cancel();
     m_autonomousCommand = nullptr;
   }
+  m_sensors.Reset();
 }
 
 void Robot::TeleopPeriodic() 

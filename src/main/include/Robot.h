@@ -7,16 +7,21 @@
 
 #pragma once
 
+#include <Commands/Command.h>
 #include "OI.h"
 #include "Subsystems/DriveTrain.h"
+#include "Subsystems/Sensor.h"
+#include "Commands/SensorTest.h"
 #include <SmartDashboard/SendableChooser.h>
 #include <TimedRobot.h>
+#include <Encoder.h>
 
 class Robot : public frc::TimedRobot 
 {
  public:
   static DriveTrain m_drivetrain;
   static OI m_oi;
+  static Sensor m_sensors;
 
   void RobotInit() override;
   void RobotPeriodic() override;
