@@ -17,19 +17,25 @@ CameraServer* Robot::m_cameraServer;
 
 
 void Robot::RobotInit() {
-auto inst = nt::NetworkTableInstance::GetDefault();
-auto table = inst.GetTable("GRIP");
-xEntry = table->GetEntry("x1");
-yEntry = table->GetEntry("y1");
+  /*
+  std::shared_ptr<NetworkTable> tab;
+  tab = NetworkTable::GetTable("GRIP");
+*/
 
-//m_cameraServer->GetInstance();
-m_cameraServer->GetInstance()->AddAxisCamera("Axis Cam",kCameraIP);
-m_cameraServer->GetInstance()->PutVideo("Camera MS",480,360);
+  auto inst = nt::NetworkTableInstance::GetDefault();
+  auto table = inst.GetTable("GRIP");
+  xEntry = table->GetEntry("x1");
+  yEntry = table->GetEntry("y1");
 
-cs::CvSink sink = m_cameraServer->GetInstance()->GetVideo();
-//m_cameraServer->StartAutomaticCapture(0);
-//m_cameraServer->GetVideo();
-//detectLines.Process();
+
+  //m_cameraServer->GetInstance();
+  m_cameraServer->GetInstance()->AddAxisCamera("Axis Cam",kCameraIP);
+  m_cameraServer->GetInstance()->PutVideo("Camera MS",480,360);
+
+  cs::CvSink sink = m_cameraServer->GetInstance()->GetVideo();
+  //m_cameraServer->StartAutomaticCapture(0);
+  //m_cameraServer->GetVideo();
+  //detectLines.Process();
 }
 
 /**
@@ -49,7 +55,9 @@ void Robot::RobotPeriodic() {}
  */
 void Robot::DisabledInit() {}
 
-void Robot::DisabledPeriodic() { frc::Scheduler::GetInstance()->Run(); }
+void Robot::DisabledPeriodic() {
+  frc::Scheduler::GetInstance()->Run();
+}
 
 /**
  * This autonomous (along with the chooser code above) shows how to select
@@ -105,7 +113,12 @@ void Robot::TeleopPeriodic() {
   SmartDashboard::PutNumber("y1", yEntry.GetDouble(0));
   }
 
-}
+  void Robot::TestPeriodic()
+  {
+    
+  }
+
+
 
 #ifndef RUNNING_FRC_TESTS
 START_ROBOT_CLASS(Robot)
