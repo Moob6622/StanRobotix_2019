@@ -13,8 +13,23 @@
 
 DriveTrain Robot::m_drivetrain;
 OI Robot::m_oi;
+CameraServer* Robot::m_cameraServer;
+
 
 void Robot::RobotInit() {
+auto inst = nt::NetworkTableInstance::GetDefault();
+auto table = inst.GetTable("GRIP");
+xEntry = table->GetEntry("x1");
+yEntry = table->GetEntry("y1");
+
+//m_cameraServer->GetInstance();
+m_cameraServer->GetInstance()->AddAxisCamera("Axis Cam",kCameraIP);
+m_cameraServer->GetInstance()->PutVideo("Camera MS",480,360);
+
+cs::CvSink sink = m_cameraServer->GetInstance()->GetVideo();
+//m_cameraServer->StartAutomaticCapture(0);
+//m_cameraServer->GetVideo();
+//detectLines.Process();
 }
 
 /**
@@ -82,13 +97,13 @@ void Robot::TeleopInit()
   }
 }
 
-void Robot::TeleopPeriodic() 
-{ 
-  frc::Scheduler::GetInstance()->Run(); 
-}
-
-void Robot::TestPeriodic() 
-{
+void Robot::TeleopPeriodic() {
+  frc::Scheduler::GetInstance()->Run();
+  xEntry.SetDouble(xEntry.GetDouble(0)+1);
+  yEntry.SetDouble(yEntry.GetDouble(0)+1);
+  SmartDashboard::PutNumber("x1", xEntry.GetDouble(0));
+  SmartDashboard::PutNumber("y1", yEntry.GetDouble(0));
+  }
 
 }
 

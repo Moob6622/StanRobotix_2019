@@ -6,6 +6,7 @@
 /*----------------------------------------------------------------------------*/
 
 #pragma once
+#include <string>
 
 /**
  * Les ports sont au hasard. A changer quand on aura le materiel.
@@ -19,6 +20,9 @@ constexpr int kMotorRight2 = 0;
 constexpr int kJoystick1 = 0;
 
 constexpr int kGyro = 1;
+
+static std::string kCameraIP = "10.66.22.20";
+static std::string kCameraName = "camera0";
 
 /**
  * The RobotMap is a mapping from the ports sensors and actuators are wired into
