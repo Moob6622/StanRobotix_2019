@@ -9,31 +9,31 @@
 
 #include <iostream>
 
-Turn::Turn(double iAngle, RotationPID* ipid)
+Turn::Turn(double iAngle, RotationPID* ipid, bool dynamicAngle)
 {
   Requires(&Robot::m_drivetrain);
   mAngleIncrement = iAngle;
   mPidPtr = ipid;
+  mDynamicAngle = dynamicAngle;
 }
 
 void Turn::Initialize() 
 {
+  //mPidPtr = new RotationPID(Robot::PIDSettingsPtr[0], Robot::PIDSettingsPtr[1], Robot::PIDSettingsPtr[2]);
+  mPidPtr = new RotationPID(Robot::PIDP,Robot::PIDI,Robot::PIDD);
+  
+  if (mDynamicAngle)
+  {
+    mAngleIncrement = Robot::PIDVal;
+  }
   mTargetAngle = mAngleIncrement + Robot::m_gps.GetAngle();
   mPidPtr->SetSetpoint(mTargetAngle);
 }
 
 void Turn::Execute() 
 {
-  double wPower = Robot::m_drivetrain.GetPIDOutput();
-
-  if (mAngleIncrement > 0) 
-  {
-    Robot::m_drivetrain.TankDrive(wPower, -wPower);
-  }
-  else 
-  {
-    Robot::m_drivetrain.TankDrive(-wPower, wPower);
-  }
+  double wPower = mPidPtr->GetPIDOutput();
+  Robot::m_drivetrain.TankDrive(wPower, -wPower);
 }
 
 bool Turn::IsFinished() 

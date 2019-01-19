@@ -14,7 +14,8 @@
 OI::OI() 
 {
   // Process operator interface input here.
-  
+  std::cout<<"bool :"<<Robot::PIDVal<<std::endl;
+
   mJoystickPtr = new Joystick(kJoystick1);
 
   mYButtonPtr = new JoystickButton(mJoystickPtr, kYButton);
@@ -26,7 +27,7 @@ OI::OI()
   //car le OI est utilise dans le DriveTrain.cpp qui est utilise
   //dans le Turn.cpp
   
-  Turn * mYButtonCommandPtr = new Turn(SmartDashboard::GetNumber("PIDSetpoint", 15), &Robot::mPid);
+  Turn * mYButtonCommandPtr = new Turn(0.0, &Robot::mPid, true);
 
   mYButtonPtr->WhenPressed(mYButtonCommandPtr);
 

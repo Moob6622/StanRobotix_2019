@@ -16,9 +16,10 @@ class Turn : public frc::Command {
   double mTargetAngle;
   double mAngleIncrement;
   RotationPID* mPidPtr;
+  bool mDynamicAngle;
 
  public:
-  Turn(double iAngle, RotationPID *pid);
+  Turn(double iAngle, RotationPID *pid, bool dynamicAngle = false);
   void Initialize() override;
   void Execute() override;
   bool IsFinished() override;

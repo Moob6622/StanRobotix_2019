@@ -12,10 +12,11 @@
 class RotationPID : public frc::PIDSubsystem {
  public:
   RotationPID();
+  RotationPID(double p, double i, double d);
   double ReturnPIDInput() override;
   void UsePIDOutput(double output) override;
   void InitDefaultCommand() override;
-  double GetPr();
-  double GetIr();
-  double GetDr();
+  double GetPIDOutput();
+ private:
+  double mPIDOutput;
 };

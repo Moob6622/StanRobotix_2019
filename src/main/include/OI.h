@@ -9,6 +9,7 @@
 
 #include <Joystick.h>
 #include <Buttons/JoystickButton.h>
+#include "Preferences.h"
 
 
 //#include <JoystickButton.h>
@@ -32,5 +33,8 @@ class OI
     JoystickButton * mBackLeftTriggerPtr;
     JoystickButton * mFrontRightTriggerPtr;
     JoystickButton * mBackRightTriggerPtr;
+
+    
+    
 
 };
