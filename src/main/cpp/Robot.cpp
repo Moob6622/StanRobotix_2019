@@ -14,6 +14,7 @@
 DriveTrain Robot::m_drivetrain;
 OI Robot::m_oi;
 CameraServer* Robot::m_cameraServer;
+// DetectLines grip::detectLines;
 
 
 void Robot::RobotInit() {
@@ -30,13 +31,12 @@ void Robot::RobotInit() {
   yEntry = table->GetEntry("y1");
 
 
-  //m_cameraServer->GetInstance();
+  // m_cameraServer->GetInstance()->StartAutomaticCapture();
   m_cameraServer->GetInstance()->AddAxisCamera("Axis Cam",kCameraIP);
   m_cameraServer->GetInstance()->PutVideo("Camera MS",480,360);
 
   cs::CvSink sink = m_cameraServer->GetInstance()->GetVideo();
-  //m_cameraServer->StartAutomaticCapture(0);
-  //m_cameraServer->GetVideo();
+  //m_cameraServer->GetInstance()->GetVideo();
   //detectLines.Process();
 }
 

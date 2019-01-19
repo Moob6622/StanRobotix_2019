@@ -27,7 +27,7 @@ class Robot : public frc::TimedRobot
   nt::NetworkTableEntry xEntry;
   nt::NetworkTableEntry yEntry;
 
-  //grip::DetectLines detectLines;
+  //static grip::DetectLines detectLines;
 
   void RobotInit() override;
   void RobotPeriodic() override;
