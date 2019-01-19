@@ -39,5 +39,7 @@ class Robot : public frc::TimedRobot
   frc::Command* m_autonomousCommand = nullptr;
 
   frc::SendableChooser<frc::Command*> m_chooser;
+  frc::SendableChooser<double*> m_PIDChooser;
+  double* m_PIDSetPoint = nullptr;
 
 };

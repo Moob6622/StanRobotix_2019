@@ -9,6 +9,7 @@
 #include <RobotMap.h>
 #include "Commands/Turn.h"
 #include <iostream>
+#include <SmartDashboard/SmartDashboard.h>
 
 OI::OI() 
 {
@@ -25,7 +26,7 @@ OI::OI()
   //car le OI est utilise dans le DriveTrain.cpp qui est utilise
   //dans le Turn.cpp
   
-  Turn * mYButtonCommandPtr = new Turn(180, &Robot::mPid);
+  Turn * mYButtonCommandPtr = new Turn(SmartDashboard::GetNumber("PIDSetpoint", 15), &Robot::mPid);
 
   mYButtonPtr->WhenPressed(mYButtonCommandPtr);
 

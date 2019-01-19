@@ -12,13 +12,14 @@
 #include <Robot.h>
 
 RotationPID::RotationPID()
-    : PIDSubsystem("RotationPID", 0.1, 0.01, 0.01) 
+    : PIDSubsystem("RotationPID", 1, 1, 1) 
 {
-  SetInputRange(-360, 360);
-  SetOutputRange(-0.5,0.5);
-  SetAbsoluteTolerance(5);
-  Enable();
+  SetOutputRange(-0.3,0.3);
+  SetAbsoluteTolerance(1);
+  Enable();                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
 }
+
+
 
 double RotationPID::ReturnPIDInput() {
   // Return your input value for the PID loop

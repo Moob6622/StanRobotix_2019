@@ -8,44 +8,37 @@
 #pragma once
 
 #include <RobotMap.h>
-
-#include "Commands/TankDrive_Joystick.h"
-
+#include "Encoder.h"
+#include "Commands/Subsystem.h"
+#include "Commands/PIDSubsystem.h"
 #include <SpeedController.h>
 #include <SpeedControllerGroup.h>
-
 #include "Drive/DifferentialDrive.h"
-#include "Commands/Subsystem.h"
 #include "ctre/Phoenix.h"
 
-class DriveTrain : public frc::Subsystem 
-{
- private:
+class EncoderPID : public frc::PIDSubsystem {
+ public:
+  EncoderPID();
+  double ReturnPIDInput() override;
+  void UsePIDOutput(double output) override;
+  void InitDefaultCommand() override;
+  double getPe();
+  double GetIe();
+  double GetDe();
+  double GetEncR();
+  double GetEncL();
+  
+  private:
+  Encoder *encR = new Encoder(0,1,false);
+  Encoder *encL = new Encoder(2,3,false);
 
   WPI_TalonSRX motorL1{kMotorLeft1};
 	WPI_TalonSRX motorL2{kMotorLeft2};
 	WPI_TalonSRX motorR1{kMotorRight1};
 	WPI_TalonSRX motorR2{kMotorRight2};
 
-	frc::SpeedControllerGroup leftSide{motorL1, motorL2};
+  frc::SpeedControllerGroup leftSide{motorL1, motorL2};
 	frc::SpeedControllerGroup rightSide{motorR1, motorR2};
 
   DifferentialDrive Drive{leftSide, rightSide};
-
-
-  TankDrive_Joystick * mDefaultDrivePtr;
-
-  double mPIDOutput;        
-
-  // It's desirable that everything possible under private except
-  // for methods that implement subsystem capabilities
-
- public:
-  DriveTrain();
-  void InitDefaultCommand() override;
-  void TankDrive(double iLeft, double iRight);
-
-  void SetPIDOutput(double iPID);
-  double GetPIDOutput();
-
 };

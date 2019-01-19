@@ -18,7 +18,7 @@ Turn::Turn(double iAngle, RotationPID* ipid)
 
 void Turn::Initialize() 
 {
-  mTargetAngle = fmod(mAngleIncrement + Robot::m_gps.GetAngle(), 360);
+  mTargetAngle = mAngleIncrement + Robot::m_gps.GetAngle();
   mPidPtr->SetSetpoint(mTargetAngle);
 }
 
@@ -26,15 +26,14 @@ void Turn::Execute()
 {
   double wPower = Robot::m_drivetrain.GetPIDOutput();
 
-  if(mTargetAngle < 0)
+  if (mAngleIncrement > 0) 
   {
-    Robot::m_drivetrain.TankDrive(-wPower, wPower);
+    Robot::m_drivetrain.TankDrive(wPower, -wPower);
   }
   else 
   {
-    Robot::m_drivetrain.TankDrive(wPower,-wPower);
+    Robot::m_drivetrain.TankDrive(-wPower, wPower);
   }
-  std::cout << "execution"<<std::endl;
 }
 
 bool Turn::IsFinished() 

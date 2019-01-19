@@ -26,9 +26,7 @@ void GPS::ResetSensors()
 
 double GPS::GetAngle() 
 {
-  double wAngle = mGyroPtr->GetAngle();
-  return fmod(wAngle, 360); //modulo 360 pour avoir une valeur entre
-                            //-360 et 360
+  return mGyroPtr->GetAngle();
 }
 
 double GPS::GetXAcceleration() 
