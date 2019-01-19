@@ -17,10 +17,12 @@ CameraServer* Robot::m_cameraServer;
 
 
 void Robot::RobotInit() {
-  /*
-  std::shared_ptr<NetworkTable> tab;
-  tab = NetworkTable::GetTable("GRIP");
-*/
+  
+  // std::shared_ptr<NetworkTable> table;
+  // table = NetworkTable::GetTable("GRIP");
+
+  // std::vector<double> arr = table->GetNumberArray("test",llvm::ArrayRef<double>());
+  // SmartDashboard::PutNumberArray("number array",arr);
 
   auto inst = nt::NetworkTableInstance::GetDefault();
   auto table = inst.GetTable("GRIP");
