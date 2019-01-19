@@ -7,21 +7,15 @@
 
 #pragma once
 
-#include <Commands/Command.h>
-#include <RobotMap.h>
-#include "Robot.h"
+#include "Commands/PIDSubsystem.h"
 
-class Turn : public frc::Command {
- private:
-  double mTargetAngle;
-  double mAngleIncrement;
-  RotationPID* mPidPtr;
-
+class RotationPID : public frc::PIDSubsystem {
  public:
-  Turn(double iAngle, RotationPID *pid);
-  void Initialize() override;
-  void Execute() override;
-  bool IsFinished() override;
-  void End() override;
-  void Interrupted() override;
+  RotationPID();
+  double ReturnPIDInput() override;
+  void UsePIDOutput(double output) override;
+  void InitDefaultCommand() override;
+  double GetPr();
+  double GetIr();
+  double GetDr();
 };

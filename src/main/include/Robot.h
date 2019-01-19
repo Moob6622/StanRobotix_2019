@@ -10,6 +10,7 @@
 #include "OI.h"
 #include "Subsystems/DriveTrain.h"
 #include "Subsystems/GPS.h"
+#include "Subsystems/RotationPID.h"
 #include <SmartDashboard/SendableChooser.h>
 #include <TimedRobot.h>
 
@@ -19,6 +20,8 @@ class Robot : public frc::TimedRobot
   static DriveTrain m_drivetrain;
   static GPS m_gps; 
   static OI m_oi;
+
+  static RotationPID mPid;
 
   void RobotInit() override;
   void RobotPeriodic() override;
@@ -36,4 +39,7 @@ class Robot : public frc::TimedRobot
   frc::Command* m_autonomousCommand = nullptr;
 
   frc::SendableChooser<frc::Command*> m_chooser;
+  frc::SendableChooser<double*> m_PIDChooser;
+  double* m_PIDSetPoint = nullptr;
+
 };

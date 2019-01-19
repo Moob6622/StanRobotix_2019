@@ -7,36 +7,42 @@
 
 #include "Commands/Turn.h"
 
-Turn::Turn(double iAngle) 
+#include <iostream>
+
+Turn::Turn(double iAngle, RotationPID* ipid)
 {
   Requires(&Robot::m_drivetrain);
-  mTargetAngle = iAngle + Robot::m_gps.GetAngle(); 
+  mAngleIncrement = iAngle;
+  mPidPtr = ipid;
 }
 
 void Turn::Initialize() 
 {
-
+  mTargetAngle = mAngleIncrement + Robot::m_gps.GetAngle();
+  mPidPtr->SetSetpoint(mTargetAngle);
 }
 
 void Turn::Execute() 
 {
-  if(Robot::m_gps.GetAngle() - mTargetAngle > 0) //choisit le sens de rotation
-  {                                                     //selon langle 
-    Robot::m_drivetrain.TankDrive(1,-1);
-  }
-  else
+  double wPower = Robot::m_drivetrain.GetPIDOutput();
+
+  if (mAngleIncrement > 0) 
   {
-    Robot::m_drivetrain.TankDrive(-1,1);
+    Robot::m_drivetrain.TankDrive(wPower, -wPower);
+  }
+  else 
+  {
+    Robot::m_drivetrain.TankDrive(-wPower, wPower);
   }
 }
 
 bool Turn::IsFinished() 
 { 
-  if(abs(Robot::m_gps.GetAngle() - mTargetAngle) < kGyroSensitivity) 
+  if (mPidPtr->OnTarget())
   {
     return true;
   }
-  else {return false;} 
+  else return false;
 }
 
 void Turn::End() 

@@ -9,7 +9,7 @@
 
 GPS::GPS() : frc::Subsystem("GPS"), mGyroPtr(nullptr), mAcceleroPtr(nullptr)
 {
-  mGyroPtr = new AnalogGyro(kGyro);
+  mGyroPtr = new ADXRS450_Gyro();
   mAcceleroPtr = new frc::BuiltInAccelerometer();
 }
 
@@ -21,7 +21,6 @@ void GPS::InitDefaultCommand()
 
 void GPS::ResetSensors() 
 {
-  mGyroPtr->Reset();
   mGyroPtr->Calibrate();
 }
 
