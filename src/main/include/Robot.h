@@ -12,7 +12,11 @@
 #include <SmartDashboard/SendableChooser.h>
 #include <TimedRobot.h>
 #include <CameraServer.h>
-#include "networktables/NetworkTables.h"
+#include "networktables/NetworkTable.h"
+#include "networktables/NetworkTableEntry.h"
+#include "networktables/NetworkTableInstance.h"
+//#include "DetectLines.h"
+#include <cscore_oo.h>
 
 
 
@@ -20,6 +24,11 @@ class Robot : public frc::TimedRobot {
  public:
   static DriveTrain m_drivetrain;
   static OI m_oi;
+
+  nt::NetworkTableEntry xEntry;
+  nt::NetworkTableEntry yEntry;
+
+  //grip::DetectLines detectLines;
 
   void RobotInit() override;
   void RobotPeriodic() override;
@@ -37,6 +46,8 @@ class Robot : public frc::TimedRobot {
   frc::Command* m_autonomousCommand = nullptr;
 
   frc::SendableChooser<frc::Command*> m_chooser;
-  
-  static CameraServer* m_cameraServer;
+  cs::VideoSink server;
+  cs::CvSink sink;
+
+  static frc::CameraServer* m_cameraServer;
 };

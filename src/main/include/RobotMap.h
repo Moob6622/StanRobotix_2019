@@ -21,6 +21,7 @@ constexpr int kJoystick1 = 0;
 constexpr int kJoystick2 = 1;
 
 static std::string kCameraIP = "10.66.22.20";
+static std::string kCameraName = "camera0";
 
 /**
  * The RobotMap is a mapping from the ports sensors and actuators are wired into
