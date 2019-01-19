@@ -36,9 +36,12 @@ double EncoderPID::ReturnPIDInput() {
 void EncoderPID::UsePIDOutput(double output) {
   // Use output to drive your system, like a motor
   // e.g. yourMotor->Set(output);
+  frc::SpeedControllerGroup rightSide.Set(output);
+  frc::SpeedControllerGroup leftSide.Set(output);
 }
 
 void EncoderPID::InitDefaultCommand() {
   // Set the default command for a subsystem here.
   // SetDefaultCommand(new MySpecialCommand());
+  encL->reset();
 }
