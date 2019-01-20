@@ -11,6 +11,7 @@
 #include "Subsystems/DriveTrain.h"
 #include "Subsystems/GPS.h"
 #include "Subsystems/RotationPID.h"
+#include "Subsystems/StraightPID.h"
 #include <SmartDashboard/SendableChooser.h>
 #include <TimedRobot.h>
 #include "Preferences.h"

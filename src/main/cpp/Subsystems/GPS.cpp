@@ -51,3 +51,8 @@ double GPS::GetAcceleration()
             + pow(mAcceleroPtr->GetZ(),2));
           
 }
+
+double GPS::GetDistance()
+{
+  return mLeftEncoder->GetRaw()*kCircumference;
+}

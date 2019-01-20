@@ -22,9 +22,6 @@ RotationPID::RotationPID() : PIDSubsystem("RotationPID", 1 ,1, 1)
 
 RotationPID::RotationPID(double p, double i, double d) : PIDSubsystem("RotationPID", p,i,d) 
 {
-  std::cout<<"Constructor Vals"<<p<<" "<<i<<" "<<d<<std::endl;
-  std::cout<<"PID Vals"<<GetPIDController()->GetP()<<" "<<GetPIDController()->GetI()<<" "<<GetPIDController()->GetD()<<std::endl;
-  
   SetOutputRange(-0.3,0.3);
   SetAbsoluteTolerance(1);
   Enable();    

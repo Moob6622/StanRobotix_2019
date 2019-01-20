@@ -92,7 +92,7 @@ void Robot::TeleopInit()
 void Robot::TeleopPeriodic() 
 { 
   frc::Scheduler::GetInstance()->Run();
-  SmartDashboard::PutNumber("PID", m_drivetrain.GetPIDOutput());
+  SmartDashboard::PutNumber("PID", mPid.GetPIDOutput());
 }
 
 void Robot::TestPeriodic() 
