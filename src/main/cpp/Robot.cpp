@@ -6,6 +6,7 @@
 /*----------------------------------------------------------------------------*/
 
 #include "Robot.h"
+#include <iostream>
 
 #include <Commands/Scheduler.h>
 #include <SmartDashboard/SmartDashboard.h>
@@ -26,9 +27,11 @@ void Robot::RobotInit() {
   // SmartDashboard::PutNumberArray("number array",arr);
 
   auto inst = nt::NetworkTableInstance::GetDefault();
-  auto table = inst.GetTable("GRIP");
-  xEntry = table->GetEntry("x1");
-  yEntry = table->GetEntry("y1");
+  auto table = inst.GetTable("GRIP/myLinesReport");
+  //xEntry = table->GetEntry("x1");
+  //yEntry = table->GetEntry("y1");
+  //std::cout<<"xentry = "<<xEntry.GetString("ERR")<<std::endl;
+  //std::cout<<"yentry = "<<yEntry.GetString("ERR")<<std::endl;
 
 
   // m_cameraServer->GetInstance()->StartAutomaticCapture();
@@ -48,7 +51,21 @@ void Robot::RobotInit() {
  * <p> This runs after the mode specific periodic functions, but before
  * LiveWindow and SmartDashboard integrated updating.
  */
-void Robot::RobotPeriodic() {}
+void Robot::RobotPeriodic() {
+  auto inst = nt::NetworkTableInstance::GetDefault();
+  auto table = inst.GetTable("GRIP/myLinesReport");
+
+
+  xEntry = table->GetEntry("x1");
+  yEntry = table->GetEntry("y1");
+  
+  //xEntry.SetDouble(xEntry.GetDouble(0)+1);
+  //yEntry.SetDouble(yEntry.GetDouble(0)+1);
+  
+  SmartDashboard::PutNumber("x1", xEntry.GetDoubleArray(0)[0]);
+  SmartDashboard::PutNumber("y1", yEntry.GetDoubleArray(0)[0]);
+
+}
 
 /**
  * This function is called once each time the robot enters Disabled mode. You
@@ -109,10 +126,8 @@ void Robot::TeleopInit()
 
 void Robot::TeleopPeriodic() {
   frc::Scheduler::GetInstance()->Run();
-  xEntry.SetDouble(xEntry.GetDouble(0)+1);
-  yEntry.SetDouble(yEntry.GetDouble(0)+1);
-  SmartDashboard::PutNumber("x1", xEntry.GetDouble(0));
-  SmartDashboard::PutNumber("y1", yEntry.GetDouble(0));
+
+
   }
 
   void Robot::TestPeriodic()

@@ -21,7 +21,7 @@ constexpr int kJoystick1 = 0;
 
 constexpr int kGyro = 1;
 
-static std::string kCameraIP = "10.66.22.20";
+static std::string kCameraIP = "10.66.22.21";
 static std::string kCameraName = "camera0";
 
 /**
