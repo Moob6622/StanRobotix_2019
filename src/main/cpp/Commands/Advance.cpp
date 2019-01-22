@@ -6,6 +6,7 @@
 /*----------------------------------------------------------------------------*/
 
 #include "Commands/Advance.h"
+#include <iostream>
 
 Advance::Advance(double iDistance, StraightPID *iPid, bool dynamicDistance) 
 {
@@ -18,16 +19,24 @@ Advance::Advance(double iDistance, StraightPID *iPid, bool dynamicDistance)
 void Advance::Initialize() 
 {
   mTargetDistance = mDistanceIncrement + Robot::m_gps.GetDistance();
-  mPidPtr->SetSetpoint(mTargetDistance); 
+  mPidPtr->SetSetpoint(mTargetDistance);
 }
 
 void Advance::Execute() 
 {
+  std::cout<<mTargetDistance - Robot::m_gps.GetDistance()<<std::endl;
   double wPower = mPidPtr->GetPIDOutput();
-  Robot::m_drivetrain.TankDrive(wPower, wPower); 
+  Robot::m_drivetrain.TankDrive(-wPower, -wPower); 
 }
 
-bool Advance::IsFinished() { return false; }
+bool Advance::IsFinished() 
+{ 
+  if (mPidPtr->OnTarget())
+  {
+    return true;
+  }
+  else return false; 
+}
 
 void Advance::End() {}
 

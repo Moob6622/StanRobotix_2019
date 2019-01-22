@@ -8,6 +8,7 @@
 #include "OI.h"
 #include <RobotMap.h>
 #include "Commands/Turn.h"
+#include "Commands/Advance.h"
 #include <iostream>
 #include <SmartDashboard/SmartDashboard.h>
 
@@ -28,8 +29,10 @@ OI::OI()
   //dans le Turn.cpp
   
   Turn * mYButtonCommandPtr = new Turn(0.0, &Robot::mPid, true);
+  Advance * mAButtonCommandPtr = new Advance(1000, &Robot::mS_Pid, false);
 
   mYButtonPtr->WhenPressed(mYButtonCommandPtr);
+  mAButtonPtr->WhenPressed(mAButtonCommandPtr);
 
 }
 

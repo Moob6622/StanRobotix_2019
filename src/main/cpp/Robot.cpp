@@ -21,7 +21,8 @@ double Robot::PIDP;
 double Robot::PIDI;
 double Robot::PIDD;
 
-RotationPID Robot::mPid; 
+RotationPID Robot::mPid;
+StraightPID Robot::mS_Pid;
 
 /**
 RotationPID * Robot::mPidPtr = new RotationPID(SmartDashboard::GetNumber("DB/Slider 0",0.0),
