@@ -27,7 +27,7 @@ OI::OI()
   //car le OI est utilise dans le DriveTrain.cpp qui est utilise
   //dans le Turn.cpp
   
-  Turn * mYButtonCommandPtr = new Turn(0.0, &Robot::mPid, true);
+  Turn * mYButtonCommandPtr = new Turn(0.0, Robot::mPid, true);
 
   mYButtonPtr->WhenPressed(mYButtonCommandPtr);
 

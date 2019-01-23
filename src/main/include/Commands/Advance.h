@@ -7,16 +7,14 @@
 
 #pragma once
 
-#include "Commands/PIDSubsystem.h"
+#include <frc/commands/Command.h>
 
-class RotationPID : public frc::PIDSubsystem {
+class Advance : public frc::Command {
  public:
-  RotationPID();
-  RotationPID(double p, double i, double d);
-  double ReturnPIDInput() override;
-  void UsePIDOutput(double output) override;
-  void InitDefaultCommand() override;
-  double GetPIDOutput();
- private:
-  double mPIDOutput;
+  Advance();
+  void Initialize() override;
+  void Execute() override;
+  bool IsFinished() override;
+  void End() override;
+  void Interrupted() override;
 };

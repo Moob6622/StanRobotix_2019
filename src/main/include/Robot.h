@@ -26,7 +26,7 @@ class Robot : public frc::TimedRobot
   static double PIDI;
   static double PIDD;
 
-  static RotationPID mPid;
+  static RotationPID* mPid;
 
   void RobotInit() override;
   void RobotPeriodic() override;

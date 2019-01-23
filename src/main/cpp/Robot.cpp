@@ -21,7 +21,7 @@ double Robot::PIDP;
 double Robot::PIDI;
 double Robot::PIDD;
 
-RotationPID Robot::mPid; 
+RotationPID* Robot::mPid; 
 
 /**
 RotationPID * Robot::mPidPtr = new RotationPID(SmartDashboard::GetNumber("DB/Slider 0",0.0),
@@ -31,6 +31,7 @@ RotationPID * Robot::mPidPtr = new RotationPID(SmartDashboard::GetNumber("DB/Sli
 
 void Robot::RobotInit() 
 {
+  mPid = new RotationPID();
   prefs = Preferences::GetInstance();
 	PIDVal = prefs->GetDouble("PIDVal", 40.0);
 	PIDP = prefs->GetDouble("PIDP", 1.0);
@@ -92,7 +93,8 @@ void Robot::TeleopInit()
 void Robot::TeleopPeriodic() 
 { 
   frc::Scheduler::GetInstance()->Run();
-  SmartDashboard::PutNumber("PID", m_drivetrain.GetPIDOutput());
+  SmartDashboard::PutNumber("PID", mPid->GetPIDOutput());
+  SmartDashboard::PutNumber("Error", mPid->GetPIDError());
 }
 
 void Robot::TestPeriodic() 
