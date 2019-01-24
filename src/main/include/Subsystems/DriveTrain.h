@@ -43,11 +43,8 @@ class DriveTrain : public frc::Subsystem
   DriveTrain();
   void InitDefaultCommand() override;
   void TankDrive(double iLeft, double iRight);
-<<<<<<< HEAD
-=======
 
   void SetPIDOutput(double iPID);
   double GetPIDOutput();
 
->>>>>>> 18048e68c1842d7f6e47f2597bcbdff50c80a541
 };
