@@ -14,6 +14,7 @@
 
 
 DriveTrain Robot::m_drivetrain;
+Actuator Robot::m_Actuator;
 GPS Robot::m_gps;
 OI Robot::m_oi;
 double Robot::PIDVal;
@@ -48,7 +49,8 @@ void Robot::RobotInit()
  * <p> This runs after the mode specific periodic functions, but before
  * LiveWindow and SmartDashboard integrated updating.
  */
-void Robot::RobotPeriodic() {
+void Robot::RobotPeriodic() 
+{
   prefs = Preferences::GetInstance();
 	PIDVal = prefs->GetDouble("PIDVal", 40.0);
   PIDP = prefs->GetDouble("PIDP", 1.0);

@@ -26,7 +26,7 @@ void Advance::Execute()
 {
   std::cout<<mTargetDistance - Robot::m_gps.GetDistance()<<std::endl;
   double wPower = mPidPtr->GetPIDOutput();
-  Robot::m_drivetrain.TankDrive(-wPower, -wPower); 
+  Robot::m_drivetrain.TankDrive(wPower, wPower); 
 }
 
 bool Advance::IsFinished() 
@@ -38,6 +38,12 @@ bool Advance::IsFinished()
   else return false; 
 }
 
-void Advance::End() {}
+void Advance::End() 
+{
+  Robot::m_drivetrain.TankDrive(0,0);
+}
 
-void Advance::Interrupted() {}
+void Advance::Interrupted() 
+{
+  Robot::m_drivetrain.TankDrive(0,0);
+}

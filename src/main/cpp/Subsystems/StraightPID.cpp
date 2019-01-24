@@ -12,10 +12,10 @@
 #include <Robot.h>
 #include <iostream>
 
-StraightPID::StraightPID(): PIDSubsystem("StraightPID", 0.1, 0.0, 0.0)
+StraightPID::StraightPID(): PIDSubsystem("StraightPID", 0.1, 0.0, 0.1)
 {
   SetOutputRange(-0.3,0.3);
-  SetAbsoluteTolerance(1);
+  SetAbsoluteTolerance(2);
   Enable();
 }
 

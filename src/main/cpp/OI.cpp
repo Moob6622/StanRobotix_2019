@@ -11,6 +11,7 @@
 #include "Commands/Advance.h"
 #include <iostream>
 #include <SmartDashboard/SmartDashboard.h>
+#include "Commands/MoveServo.h"
 
 OI::OI() 
 {
@@ -29,11 +30,14 @@ OI::OI()
   //dans le Turn.cpp
   
   Turn * mYButtonCommandPtr = new Turn(0.0, &Robot::mPid, true);
-  Advance * mAButtonCommandPtr = new Advance(1000, &Robot::mS_Pid, false);
+  Advance * mAButtonCommandPtr = new Advance(72, &Robot::mS_Pid, false);
 
-  mYButtonPtr->WhenPressed(mYButtonCommandPtr);
-  mAButtonPtr->WhenPressed(mAButtonCommandPtr);
-
+  //mYButtonPtr->WhenPressed(mYButtonCommandPtr);
+  //mAButtonPtr->WhenPressed(mAButtonCommandPtr);
+  MoveServo* Retracter = new MoveServo(0.2);
+  MoveServo* Etendre = new MoveServo(0.9);
+  mYButtonPtr->WhenPressed(Etendre);
+  mAButtonPtr->WhenPressed(Retracter);
 }
 
 double OI::GetLeftJoystick() 

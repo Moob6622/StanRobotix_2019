@@ -5,24 +5,21 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-#include "Subsystems\DriveTrain.h"
-#include "Commands/MoveServo.h"
+#pragma once
 
-DriveTrain::DriveTrain() : frc::Subsystem("DriveTrain"), mDefaultDrivePtr(nullptr) 
-{
-  mDefaultDrivePtr = new TankDrive_Joystick();
-}
+#include <Commands/Subsystem.h>
+#include <Servo.h>
 
-void DriveTrain::InitDefaultCommand() 
-{
-  SetDefaultCommand(mDefaultDrivePtr);
-}
+class Actuator : public frc::Subsystem {
+ private:
+  // It's desirable that everything possible under private except
+  // for methods that implement subsystem capabilities
 
-void DriveTrain::TankDrive(double iLeft, double iRight) 
-{
-  Drive.TankDrive(iLeft, iRight, false);
-}
+  Servo mActuator{0};
 
-
-
-
+ public:
+  Actuator();
+  void InitDefaultCommand() override;
+  void Set(double value);
+  void SetAngle(double value);
+};
