@@ -7,6 +7,7 @@
 
 #include "Commands/Aligner.h"
 #include "Robot.h"
+#include <SmartDashboard/SmartDashboard.h>
 
 Aligner::Aligner() {
   Requires(&Robot::m_drivetrain);
@@ -23,7 +24,20 @@ void Aligner::Execute() {
 
   angle = table->GetEntry("angle").GetDouble(0);
 
-  Robot::m_drivetrain.TankDrive(0,0); //si angle>90 tourner a gauche (moteur droit), si angle<90 tourner droite (moteur gauche)
+  SmartDashboard::PutNumber("angleLigne",angle);
+
+  if (angle<90)
+  {
+    Robot::m_drivetrain.TankDrive(0,0.4); //si angle>90 tourner a gauche (moteur droit), si angle<90 tourner droite (moteur gauche)
+  }
+  else if(angle==90)
+  {
+    Robot::m_drivetrain.TankDrive(0.4,0.4);
+  }
+  else
+  {
+    Robot::m_drivetrain.TankDrive(0.4,0);
+  }
 
 }
 
