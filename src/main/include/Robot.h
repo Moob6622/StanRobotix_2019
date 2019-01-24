@@ -15,7 +15,6 @@
 #include "networktables/NetworkTable.h"
 #include "networktables/NetworkTableEntry.h"
 #include "networktables/NetworkTableInstance.h"
-//#include "DetectLines.h"
 #include <cscore_oo.h>
 
 class Robot : public frc::TimedRobot 

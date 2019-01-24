@@ -12,6 +12,7 @@
 #include <SmartDashboard/SmartDashboard.h>
 
 
+
 DriveTrain Robot::m_drivetrain;
 OI Robot::m_oi;
 CameraServer* Robot::m_cameraServer;
@@ -59,12 +60,12 @@ void Robot::RobotPeriodic() {
   xEntry = table->GetEntry("x1");
   yEntry = table->GetEntry("y1");
   
-  //xEntry.SetDouble(xEntry.GetDouble(0)+1);
-  //yEntry.SetDouble(yEntry.GetDouble(0)+1);
-  
   SmartDashboard::PutNumber("x1", xEntry.GetDoubleArray(0)[0]);
   SmartDashboard::PutNumber("y1", yEntry.GetDoubleArray(0)[0]);
 
+  //xEntry.SetDouble(xEntry.GetDouble(0)+1);
+  //yEntry.SetDouble(yEntry.GetDouble(0)+1);
+  
 }
 
 /**
