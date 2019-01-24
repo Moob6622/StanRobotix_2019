@@ -21,6 +21,7 @@ void Turn::Initialize()
 {
   //mPidPtr = new RotationPID(Robot::PIDSettingsPtr[0], Robot::PIDSettingsPtr[1], Robot::PIDSettingsPtr[2]);
   mPidPtr = new RotationPID(Robot::PIDP,Robot::PIDI,Robot::PIDD);
+  Robot::mPid = mPidPtr;
   
   if (mDynamicAngle)
   {
