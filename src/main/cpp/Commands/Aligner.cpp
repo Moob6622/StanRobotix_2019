@@ -42,7 +42,11 @@ void Aligner::Execute() {
 }
 
 // Make this return true when this Command no longer needs to run execute()
-bool Aligner::IsFinished() { return false; }
+bool Aligner::IsFinished() 
+{
+  //// IL FAUT METTRE UNE TOUCHE SUR LE JOYSTICK QUI ARRETE LA COMMANDE!
+  return false; 
+}
 
 // Called once after isFinished returns true
 void Aligner::End() {}
