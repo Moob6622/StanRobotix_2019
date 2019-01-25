@@ -13,8 +13,8 @@
 
 constexpr int kMotorLeft1 = 8;
 constexpr int kMotorLeft2 = 9;
-constexpr int kMotorRight1 = 6;
-constexpr int kMotorRight2 = 7;
+constexpr int kMotorRight1 = 4;
+constexpr int kMotorRight2 = 5;
 
 constexpr int kJoystick1 = 0;
 
