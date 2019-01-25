@@ -32,7 +32,6 @@ class DriveTrain : public frc::Subsystem
 
   DifferentialDrive Drive{leftSide, rightSide};
 
-
   TankDrive_Joystick * mDefaultDrivePtr;
 
   double mPIDOutput;        
@@ -44,8 +43,11 @@ class DriveTrain : public frc::Subsystem
   DriveTrain();
   void InitDefaultCommand() override;
   void TankDrive(double iLeft, double iRight);
+<<<<<<< HEAD
 
   void SetPIDOutput(double iPID);
   double GetPIDOutput();
 
+=======
+>>>>>>> 8c8f951b51f75809a0c4a114e652def46fb0ea94
 };

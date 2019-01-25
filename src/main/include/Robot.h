@@ -11,6 +11,7 @@
 #include "Subsystems/DriveTrain.h"
 #include "Subsystems/GPS.h"
 #include "Subsystems/RotationPID.h"
+#include "Subsystems/StraightPID.h"
 #include <SmartDashboard/SendableChooser.h>
 #include <TimedRobot.h>
 #include "Preferences.h"
@@ -26,7 +27,12 @@ class Robot : public frc::TimedRobot
   static double PIDI;
   static double PIDD;
 
+<<<<<<< HEAD
   static RotationPID* mPid;
+=======
+  static RotationPID mPid;
+  static StraightPID mS_Pid;
+>>>>>>> 8c8f951b51f75809a0c4a114e652def46fb0ea94
 
   void RobotInit() override;
   void RobotPeriodic() override;

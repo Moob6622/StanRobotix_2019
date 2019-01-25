@@ -49,5 +49,9 @@ double GPS::GetAcceleration()
   return sqrt(pow(mAcceleroPtr->GetX(),2)   //formule pour calculer
             + pow(mAcceleroPtr->GetY(),2)   // lacceleration totale
             + pow(mAcceleroPtr->GetZ(),2));
-          
+}
+
+double GPS::GetDistance()
+{
+  return mLeftEncoder->GetRaw();
 }

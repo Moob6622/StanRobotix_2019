@@ -8,6 +8,7 @@
 #include "OI.h"
 #include <RobotMap.h>
 #include "Commands/Turn.h"
+#include "Commands/Advance.h"
 #include <iostream>
 #include <SmartDashboard/SmartDashboard.h>
 
@@ -27,9 +28,15 @@ OI::OI()
   //car le OI est utilise dans le DriveTrain.cpp qui est utilise
   //dans le Turn.cpp
   
+<<<<<<< HEAD
   Turn * mYButtonCommandPtr = new Turn(0.0, Robot::mPid, true);
+=======
+  Turn * mYButtonCommandPtr = new Turn(0.0, &Robot::mPid, true);
+  Advance * mAButtonCommandPtr = new Advance(1000, &Robot::mS_Pid, false);
+>>>>>>> 8c8f951b51f75809a0c4a114e652def46fb0ea94
 
   mYButtonPtr->WhenPressed(mYButtonCommandPtr);
+  mAButtonPtr->WhenPressed(mAButtonCommandPtr);
 
 }
 

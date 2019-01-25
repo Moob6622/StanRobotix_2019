@@ -5,40 +5,51 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-#include "Subsystems/EncoderPID.h"
+#include "Subsystems\RotationPID.h"
 
-#include "LiveWindow/LiveWindow.h"
+#include "LiveWindow\LiveWindow.h"
 #include <SmartDashboard/SmartDashboard.h>
 #include <Robot.h>
+#include <iostream>
 
-EncoderPID::EncoderPID()
-    : PIDSubsystem("EncoderPID", 1.0, 0.01, 0.01) 
-  {
-    SetOutputRange(-1, 1);
-    SetPercentTolerance(0.005);
-    Enable();  
-  // Use these to get going:
-  // SetSetpoint() -  Sets where the PID controller should move the system
-  //                  to
-  // Enable() - Enables the PID controller.
+//RotationPID::RotationPID() : PIDSubsystem("RotationPID", Robot::PIDSettingsPtr[0], Robot::PIDSettingsPtr[1], Robot::PIDSettingsPtr[2]) 
+RotationPID::RotationPID() : PIDSubsystem("RotationPID", 1 ,1, 1) 
+{
+  SetOutputRange(-0.3,0.3);
+  SetAbsoluteTolerance(1);
+  Enable();    
 }
 
-//
+RotationPID::RotationPID(double p, double i, double d) : PIDSubsystem("RotationPID", p,i,d) 
+{
+  SetOutputRange(-0.3,0.3);
+  SetAbsoluteTolerance(1);
+  Enable();    
+}
 
-double EncoderPID::ReturnPIDInput() {
 
+
+
+double RotationPID::ReturnPIDInput() {
   // Return your input value for the PID loop
   // e.g. a sensor, like a potentiometer:
   // yourPot->SetAverageVoltage() / kYourMaxVoltage;
-  return (encL->GetRaw());
+  return Robot::m_gps.GetAngle();
 }
 
-void EncoderPID::UsePIDOutput(double output) {
+void RotationPID::UsePIDOutput(double output) 
+{
+  mPIDOutput = output;
   // Use output to drive your system, like a motor
   // e.g. yourMotor->Set(output);
 }
 
-void EncoderPID::InitDefaultCommand() {
-  // Set the default command for a subsystem here.
-  // SetDefaultCommand(new MySpecialCommand());
+double RotationPID::GetPIDOutput()
+{
+  return mPIDOutput; 
+}
+
+void RotationPID::InitDefaultCommand() 
+{
+
 }

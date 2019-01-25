@@ -14,6 +14,8 @@
 #include <ADXRS450_Gyro.h>
 #include <BuiltInAccelerometer.h>
 
+#include <Encoder.h>
+
 #include <Math.h>
 
 class GPS : public frc::Subsystem 
@@ -22,6 +24,9 @@ class GPS : public frc::Subsystem
   
   frc::ADXRS450_Gyro * mGyroPtr;
   frc::BuiltInAccelerometer * mAcceleroPtr;
+
+  Encoder *mRightEncoder = new Encoder(0,1,false);
+  Encoder *mLeftEncoder = new Encoder(2,3,false);
 
  public:
   GPS();
@@ -35,4 +40,6 @@ class GPS : public frc::Subsystem
   double GetYAcceleration();
   double GetZAcceleration();
   double GetAcceleration();
+
+  double GetDistance();
 };
