@@ -7,6 +7,7 @@
 
 #include "Commands/Advance.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 Advance::Advance() {
   Requires(&Robot::m_drivetrain);
@@ -27,6 +28,8 @@ void Advance::End() {}
 // Called when another command which requires one or more of the same
 // subsystems is scheduled to run
 =======
+=======
+>>>>>>> dec28e4c938ba7fe61bb13a7be40f0f4bf893979
 #include <iostream>
 
 Advance::Advance(double iDistance, StraightPID *iPid, bool dynamicDistance) 
@@ -47,7 +50,7 @@ void Advance::Execute()
 {
   std::cout<<mTargetDistance - Robot::m_gps.GetDistance()<<std::endl;
   double wPower = mPidPtr->GetPIDOutput();
-  Robot::m_drivetrain.TankDrive(-wPower, -wPower); 
+  Robot::m_drivetrain.TankDrive(wPower, wPower); 
 }
 
 bool Advance::IsFinished() 
@@ -59,7 +62,19 @@ bool Advance::IsFinished()
   else return false; 
 }
 
+<<<<<<< HEAD
 void Advance::End() {}
 
 >>>>>>> 8c8f951b51f75809a0c4a114e652def46fb0ea94
 void Advance::Interrupted() {}
+=======
+void Advance::End() 
+{
+  Robot::m_drivetrain.TankDrive(0,0);
+}
+
+void Advance::Interrupted() 
+{
+  Robot::m_drivetrain.TankDrive(0,0);
+}
+>>>>>>> dec28e4c938ba7fe61bb13a7be40f0f4bf893979

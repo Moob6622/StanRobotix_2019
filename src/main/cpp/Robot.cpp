@@ -14,6 +14,7 @@
 
 
 DriveTrain Robot::m_drivetrain;
+Actuator Robot::m_Actuator;
 GPS Robot::m_gps;
 OI Robot::m_oi;
 double Robot::PIDVal;
@@ -22,11 +23,16 @@ double Robot::PIDI;
 double Robot::PIDD;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 RotationPID* Robot::mPid; 
 =======
 RotationPID Robot::mPid;
 StraightPID Robot::mS_Pid;
 >>>>>>> 8c8f951b51f75809a0c4a114e652def46fb0ea94
+=======
+RotationPID *Robot::mPid;
+StraightPID *Robot::mS_Pid;
+>>>>>>> dec28e4c938ba7fe61bb13a7be40f0f4bf893979
 
 /**
 RotationPID * Robot::mPidPtr = new RotationPID(SmartDashboard::GetNumber("DB/Slider 0",0.0),
@@ -53,7 +59,8 @@ void Robot::RobotInit()
  * <p> This runs after the mode specific periodic functions, but before
  * LiveWindow and SmartDashboard integrated updating.
  */
-void Robot::RobotPeriodic() {
+void Robot::RobotPeriodic() 
+{
   prefs = Preferences::GetInstance();
 	PIDVal = prefs->GetDouble("PIDVal", 40.0);
   PIDP = prefs->GetDouble("PIDP", 1.0);
@@ -99,11 +106,15 @@ void Robot::TeleopPeriodic()
 { 
   frc::Scheduler::GetInstance()->Run();
 <<<<<<< HEAD
+<<<<<<< HEAD
   SmartDashboard::PutNumber("PID", mPid->GetPIDOutput());
   SmartDashboard::PutNumber("Error", mPid->GetPIDError());
 =======
   SmartDashboard::PutNumber("PID", mPid.GetPIDOutput());
 >>>>>>> 8c8f951b51f75809a0c4a114e652def46fb0ea94
+=======
+  SmartDashboard::PutNumber("PID", mPid->GetPIDOutput());
+>>>>>>> dec28e4c938ba7fe61bb13a7be40f0f4bf893979
 }
 
 void Robot::TestPeriodic() 
