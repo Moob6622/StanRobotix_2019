@@ -39,7 +39,7 @@ void Robot::RobotInit() {
   m_cameraServer->GetInstance()->AddAxisCamera("Axis Cam",kCameraIP);
   m_cameraServer->GetInstance()->PutVideo("Camera MS",480,360);
 
-  cs::CvSink sink = m_cameraServer->GetInstance()->GetVideo();
+  //cs::CvSink sink = m_cameraServer->GetInstance()->GetVideo();
   //m_cameraServer->GetInstance()->GetVideo();
   //detectLines.Process();
 }
