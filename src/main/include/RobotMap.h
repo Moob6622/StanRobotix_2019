@@ -11,10 +11,10 @@
  * Les ports sont au hasard. A changer quand on aura le materiel.
  */
 
-constexpr int kMotorLeft1 = 1;
-constexpr int kMotorLeft2 = 2;
-constexpr int kMotorRight1 = 3;
-constexpr int kMotorRight2 = 0;
+constexpr int kMotorLeft1 = 8;
+constexpr int kMotorLeft2 = 9;
+constexpr int kMotorRight1 = 6;
+constexpr int kMotorRight2 = 7;
 
 constexpr int kJoystick1 = 0;
 
