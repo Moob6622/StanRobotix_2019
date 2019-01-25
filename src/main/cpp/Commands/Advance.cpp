@@ -6,27 +6,6 @@
 /*----------------------------------------------------------------------------*/
 
 #include "Commands/Advance.h"
-<<<<<<< HEAD
-
-Advance::Advance() {
-  Requires(&Robot::m_drivetrain);
-}
-
-// Called just before this Command runs the first time
-void Advance::Initialize() {}
-
-// Called repeatedly when this Command is scheduled to run
-void Advance::Execute() {}
-
-// Make this return true when this Command no longer needs to run execute()
-bool Advance::IsFinished() { return false; }
-
-// Called once after isFinished returns true
-void Advance::End() {}
-
-// Called when another command which requires one or more of the same
-// subsystems is scheduled to run
-=======
 #include <iostream>
 
 Advance::Advance(double iDistance, StraightPID *iPid, bool dynamicDistance) 
@@ -61,5 +40,4 @@ bool Advance::IsFinished()
 
 void Advance::End() {}
 
->>>>>>> 8c8f951b51f75809a0c4a114e652def46fb0ea94
 void Advance::Interrupted() {}
