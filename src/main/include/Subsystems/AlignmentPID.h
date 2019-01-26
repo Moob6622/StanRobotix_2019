@@ -8,29 +8,15 @@
 #pragma once
 
 #include "Commands/Subsystem.h"
-#include <CameraServer.h>
-#include "RobotMap.h"
+#include "Commands/PIDSubsystem.h"
 
-#include "networktables/NetworkTable.h"
-#include "networktables/NetworkTableEntry.h"
-#include "networktables/NetworkTableInstance.h"
-
-#include <SmartDashboard/SmartDashboard.h>
-
-class Vision : public frc::Subsystem {
- private:
-  frc::CameraServer* m_cameraServer;
-  nt::NetworkTableInstance mInst; 
-
+class AlignmentPID : public frc::PIDSubsystem {
  public:
-  Vision();
-
-  void Initialization(); 
-
-  double * GetLine();
-  double GetLineAngle();
-
-  void DisplayData(); 
-
+  AlignmentPID();
+  double ReturnPIDInput() override;
+  void UsePIDOutput(double output) override;
   void InitDefaultCommand() override;
+  double GetPIDOutput();
+ private:
+  double mPIDOutput;
 };

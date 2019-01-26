@@ -40,13 +40,19 @@ double * Vision::GetLine()
       oLine[1] = table->GetEntry("y1").GetDoubleArray(0)[i];
       oLine[2] = table->GetEntry("x2").GetDoubleArray(0)[i];
       oLine[3] = table->GetEntry("y2").GetDoubleArray(0)[i];
-      oLine[4] = table->GetEntry("angle").GetDoubleArray(0)[i];
+      oLine[4] = table->GetEntry("angle").GetDoubleArray(90)[i];
       break;
     }
   }
 
   return oLine;
 }
+
+double Vision::GetLineAngle()
+{
+  return GetLine()[4];
+}
+
 
 void Vision::DisplayData() 
 {

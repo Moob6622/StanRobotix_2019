@@ -9,40 +9,32 @@
 #include "Robot.h"
 #include <SmartDashboard/SmartDashboard.h>
 
-Aligner::Aligner() {
+Aligner::Aligner(AlignmentPID * iPid) 
+{
   Requires(&Robot::m_drivetrain);
   Requires(&Robot::m_vision);
+  mPidPtr = iPid; 
 }
 
 // Called just before this Command runs the first time
-void Aligner::Initialize() {}
+void Aligner::Initialize() 
+{
+  mPidPtr->SetSetpoint(90);
+}
 
 // Called repeatedly when this Command is scheduled to run
-void Aligner::Execute() {
+void Aligner::Execute()
+{
+  double wPower = mPidPtr->GetPIDOutput();
 
- 
-  double wAngle = Robot::m_vision.GetLine()[4];
-
-  if (wAngle<90)
-  {
-    Robot::m_drivetrain.TankDrive(0,0.4); //si angle>90 tourner a gauche (moteur droit), si angle<90 tourner droite (moteur gauche)
-  }
-  else if(wAngle==90)
-  {
-    Robot::m_drivetrain.TankDrive(0.4,0.4);
-  }
-  else
-  {
-    Robot::m_drivetrain.TankDrive(0.4,0);
-  }
-
+  Robot::m_drivetrain.TankDrive(wPower,-wPower);
 }
 
 // Make this return true when this Command no longer needs to run execute()
 bool Aligner::IsFinished() 
 {
-  //// IL FAUT METTRE UNE TOUCHE SUR LE JOYSTICK QUI ARRETE LA COMMANDE!
-  return false; 
+  return mPidPtr->OnTarget();
+
 }
 
 // Called once after isFinished returns true
