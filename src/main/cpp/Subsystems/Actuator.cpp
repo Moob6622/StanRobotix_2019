@@ -16,13 +16,15 @@ void Actuator::InitDefaultCommand() {
   // SetDefaultCommand(new MySpecialCommand());
 }
 
-void Actuator::Set(double value){
+void Actuator::Set(double value)
+{
   mActuator.Set(value);
   std::cout<<"ha "<<mActuator.Get()<<std::endl;
 }
 
 
-void Actuator::SetAngle(double value){
+void Actuator::SetAngle(double value)
+{
   mActuator.SetAngle(value);
   std::cout<<"ha "<<mActuator.GetAngle()<<std::endl;
 }
