@@ -14,33 +14,13 @@
 
 DriveTrain Robot::m_drivetrain;
 OI Robot::m_oi;
-CameraServer* Robot::m_cameraServer;
 // DetectLines grip::detectLines;
 
 
-void Robot::RobotInit() {
-  
-  // std::shared_ptr<NetworkTable> table;
-  // table = NetworkTable::GetTable("GRIP");
+void Robot::RobotInit() 
+{ 
+  m_vision.Initialization(); 
 
-  // std::vector<double> arr = table->GetNumberArray("test",llvm::ArrayRef<double>());
-  // SmartDashboard::PutNumberArray("number array",arr);
-
-  auto inst = nt::NetworkTableInstance::GetDefault();
-  auto table = inst.GetTable("GRIP/myLinesReport");
-  //xEntry = table->GetEntry("x1");
-  //yEntry = table->GetEntry("y1");
-  //std::cout<<"xentry = "<<xEntry.GetString("ERR")<<std::endl;
-  //std::cout<<"yentry = "<<yEntry.GetString("ERR")<<std::endl;
-
-
-  // m_cameraServer->GetInstance()->StartAutomaticCapture();
-  m_cameraServer->GetInstance()->AddAxisCamera("Axis Cam",kCameraIP);
-  m_cameraServer->GetInstance()->PutVideo("Camera MS",480,360);
-
-  cs::CvSink sink = m_cameraServer->GetInstance()->GetVideo();
-  //m_cameraServer->GetInstance()->GetVideo();
-  //detectLines.Process();
 }
 
 /**
@@ -51,19 +31,9 @@ void Robot::RobotInit() {
  * <p> This runs after the mode specific periodic functions, but before
  * LiveWindow and SmartDashboard integrated updating.
  */
-void Robot::RobotPeriodic() {
-  auto inst = nt::NetworkTableInstance::GetDefault();
-  auto table = inst.GetTable("GRIP/myLinesReport");
-
-
-  xEntry = table->GetEntry("x1");
-  yEntry = table->GetEntry("y1");
+void Robot::RobotPeriodic() 
+{
   
-  //xEntry.SetDouble(xEntry.GetDouble(0)+1);
-  //yEntry.SetDouble(yEntry.GetDouble(0)+1);
-  
-  SmartDashboard::PutNumber("x1", xEntry.GetDoubleArray(0)[0]);
-  SmartDashboard::PutNumber("y1", yEntry.GetDoubleArray(0)[0]);
 
 }
 
