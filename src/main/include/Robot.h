@@ -30,18 +30,8 @@ class Robot : public frc::TimedRobot
   static double PIDI;
   static double PIDD;
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-  static RotationPID* mPid;
-=======
-  static RotationPID mPid;
-  static StraightPID mS_Pid;
->>>>>>> 8c8f951b51f75809a0c4a114e652def46fb0ea94
-=======
-
   static RotationPID *mPid;
   static StraightPID *mS_Pid;
->>>>>>> dec28e4c938ba7fe61bb13a7be40f0f4bf893979
 
   void RobotInit() override;
   void RobotPeriodic() override;

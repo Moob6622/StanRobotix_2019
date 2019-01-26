@@ -7,31 +7,21 @@
 
 #pragma once
 
-<<<<<<< HEAD
-#include <frc/commands/Command.h>
-
-class Advance : public frc::Command {
- public:
-  Advance();
-=======
 #include <Commands/Command.h>
 #include "Robot.h"
 
 class Advance : public frc::Command {
  public:
   Advance(double iDistance, StraightPID *iPid, bool dynamicDistance = false);
->>>>>>> dec28e4c938ba7fe61bb13a7be40f0f4bf893979
   void Initialize() override;
   void Execute() override;
   bool IsFinished() override;
   void End() override;
   void Interrupted() override;
-<<<<<<< HEAD
-=======
- private:
-  double mDistanceIncrement;
+
   double mTargetDistance;
+  double mDistanceIncrement;
   bool mDynamicDistance;
+
   StraightPID * mPidPtr;
->>>>>>> dec28e4c938ba7fe61bb13a7be40f0f4bf893979
 };
