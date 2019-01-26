@@ -7,24 +7,29 @@
 
 #pragma once
 
-#include <commands/Command.h>
+#include "Commands/Subsystem.h"
+#include <CameraServer.h>
+#include "RobotMap.h"
+
 #include "networktables/NetworkTable.h"
 #include "networktables/NetworkTableEntry.h"
 #include "networktables/NetworkTableInstance.h"
 
-class Aligner : public frc::Command {
- public:
-  Aligner();
-  void Initialize() override;
-  void Execute() override;
-  bool IsFinished() override;
-  void End() override;
-  void Interrupted() override;
-  
+#include <SmartDashboard/SmartDashboard.h>
 
-
+class Vision : public frc::Subsystem {
  private:
- 
-  double * mPidPtr;
-  
+  frc::CameraServer* m_cameraServer;
+  nt::NetworkTableInstance mInst; 
+
+ public:
+  Vision();
+
+  void Initialization(); 
+
+  double * GetLine();
+
+  void DisplayData(); 
+
+  void InitDefaultCommand() override;
 };

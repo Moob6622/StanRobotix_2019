@@ -6,6 +6,7 @@
 /*----------------------------------------------------------------------------*/
 
 #include "Subsystems\DriveTrain.h"
+#include <math.h>
 
 DriveTrain::DriveTrain() : frc::Subsystem("DriveTrain"), mDefaultDrivePtr(nullptr) 
 {

@@ -11,6 +11,7 @@
 
 Aligner::Aligner() {
   Requires(&Robot::m_drivetrain);
+  Requires(&Robot::m_vision);
 }
 
 // Called just before this Command runs the first time
@@ -19,18 +20,14 @@ void Aligner::Initialize() {}
 // Called repeatedly when this Command is scheduled to run
 void Aligner::Execute() {
 
-  auto inst = nt::NetworkTableInstance::GetDefault();
-  auto table = inst.GetTable("GRIP/myLinesReport");
+ 
+  double wAngle = Robot::m_vision.GetLine()[4];
 
-  angle = table->GetEntry("angle").GetDouble(0);
-
-  SmartDashboard::PutNumber("angleLigne",angle);
-
-  if (angle<90)
+  if (wAngle<90)
   {
     Robot::m_drivetrain.TankDrive(0,0.4); //si angle>90 tourner a gauche (moteur droit), si angle<90 tourner droite (moteur gauche)
   }
-  else if(angle==90)
+  else if(wAngle==90)
   {
     Robot::m_drivetrain.TankDrive(0.4,0.4);
   }
