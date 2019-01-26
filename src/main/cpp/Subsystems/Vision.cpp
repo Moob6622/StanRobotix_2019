@@ -7,7 +7,7 @@
 
 #include "Subsystems\Vision.h"
 
-Vision::Vision() : Subsystem("Vision") {}
+Vision::Vision() : Subsystem("Vision"), m_cameraServer(nullptr) {}
 
 void Vision::InitDefaultCommand() 
 {
@@ -19,24 +19,30 @@ void Vision::Initialization()
 {
   
   //m_cameraServer->GetInstance()->StartAutomaticCapture("USBCamera");
-  m_cameraServer->GetInstance()->AddAxisCamera("Axis Cam",kCameraIP);
-  m_cameraServer->GetInstance()->PutVideo("Camera MS",480,360);
+  if (m_cameraServer != nullptr)
+  {
+    m_cameraServer->GetInstance()->AddAxisCamera("Axis Cam",kCameraIP);
+    m_cameraServer->GetInstance()->PutVideo("Camera MS",480,360);
+  }
 
-  mInst = nt::NetworkTableInstance::GetDefault();
+  mNetworkTableInstanceInst = nt::NetworkTableInstance::GetDefault();
 }
 
 double * Vision::GetLine()
 {
   double oLine[5];
   //auto inst = nt::NetworkTableInstance::GetDefault();
-  auto table = mInst.GetTable("GRIP/myLinesReport");
+  auto table = mNetworkTableInstanceInst.GetTable("GRIP/myLinesReport");
 
-  for(int i = 0; i < sizeof( table->GetEntry("y1").GetDoubleArray(0) ) ; i++ )
+  double * wCoordX1 = table->GetEntry("x1").GetDoubleArray(0); 
+
+  int wTaille =  sizeof( table->GetEntry("y1").GetDoubleArray(0) );
+  for(int i = 0; i < wTaille ; i++ )
   {
     if(table->GetEntry("y1").GetDoubleArray(0)[i]<kLineDetectionVerticalThreshold
       && table->GetEntry("y2").GetDoubleArray(0)[i]<kLineDetectionVerticalThreshold)
     {
-      oLine[0] = table->GetEntry("x1").GetDoubleArray(0)[i];
+      oLine[0] = table->GetEntry("x1").GetDoubleArray(0)[i]; // oLine[0] = wCoordX1[i];
       oLine[1] = table->GetEntry("y1").GetDoubleArray(0)[i];
       oLine[2] = table->GetEntry("x2").GetDoubleArray(0)[i];
       oLine[3] = table->GetEntry("y2").GetDoubleArray(0)[i];

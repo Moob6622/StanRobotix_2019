@@ -20,7 +20,7 @@
 class Vision : public frc::Subsystem {
  private:
   frc::CameraServer* m_cameraServer;
-  nt::NetworkTableInstance mInst; 
+  nt::NetworkTableInstance mNetworkTableInstanceInst; 
 
  public:
   Vision();
