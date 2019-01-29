@@ -20,7 +20,14 @@ Turn::Turn(double iAngle, RotationPID* ipid, bool dynamicAngle)
 void Turn::Initialize() 
 {
   //mPidPtr = new RotationPID(Robot::PIDSettingsPtr[0], Robot::PIDSettingsPtr[1], Robot::PIDSettingsPtr[2]);
+  if (mPidPtr != nullptr)
+  {
+    delete mPidPtr;
+    mPidPtr = nullptr;
+  }
+
   mPidPtr = new RotationPID(Robot::PIDP,Robot::PIDI,Robot::PIDD);
+
   Robot::mPid = mPidPtr;
   
   if (mDynamicAngle)
@@ -33,17 +40,23 @@ void Turn::Initialize()
 
 void Turn::Execute() 
 {
-  double wPower = mPidPtr->GetPIDOutput();
-  Robot::m_drivetrain.TankDrive(wPower, -wPower);
+  double wPower = 0;
+  
+  if(mPidPtr != nullptr) 
+  {
+    wPower = mPidPtr->GetPIDOutput();
+  }
+
+  Robot::m_drivetrain.TankDrive(wPower, -wPower); 
 }
 
 bool Turn::IsFinished() 
 { 
-  if (mPidPtr->OnTarget())
-  {
-    return true;
+  if(mPidPtr != nullptr) 
+  { 
+    return mPidPtr->OnTarget();
   }
-  else return false;
+  else return false; 
 }
 
 void Turn::End() 

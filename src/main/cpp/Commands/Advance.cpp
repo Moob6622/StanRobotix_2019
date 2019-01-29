@@ -19,21 +19,29 @@ Advance::Advance(double iDistance, StraightPID *iPid, bool dynamicDistance)
 void Advance::Initialize() 
 {
   mTargetDistance = mDistanceIncrement + Robot::m_gps.GetDistance();
-  mPidPtr->SetSetpoint(mTargetDistance);
+  if(mPidPtr != nullptr) 
+  {
+    mPidPtr->SetSetpoint(mTargetDistance);
+  }
 }
 
 void Advance::Execute() 
 {
-  std::cout<<mTargetDistance - Robot::m_gps.GetDistance()<<std::endl;
-  double wPower = mPidPtr->GetPIDOutput();
+  double wPower = 0;
+
+  if(mPidPtr != nullptr) 
+  {
+    wPower = mPidPtr->GetPIDOutput();
+  }
+  
   Robot::m_drivetrain.TankDrive(wPower, wPower); 
 }
 
 bool Advance::IsFinished() 
 { 
-  if (mPidPtr->OnTarget())
-  {
-    return true;
+  if(mPidPtr != nullptr) 
+  { 
+    return mPidPtr->OnTarget();
   }
   else return false; 
 }

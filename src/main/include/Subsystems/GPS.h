@@ -25,8 +25,8 @@ class GPS : public frc::Subsystem
   frc::ADXRS450_Gyro * mGyroPtr;
   frc::BuiltInAccelerometer * mAcceleroPtr;
 
-  Encoder *mRightEncoder = new Encoder(0,1,false);
-  Encoder *mLeftEncoder = new Encoder(2,3,false);
+  Encoder * mRightEncoder;
+  Encoder * mLeftEncoder;
 
  public:
   GPS();

@@ -19,4 +19,5 @@ class RotationPID : public frc::PIDSubsystem {
   double GetPIDOutput();
  private:
   double mPIDOutput;
+  void EnableWithSettings(); 
 };

@@ -15,16 +15,12 @@
 //RotationPID::RotationPID() : PIDSubsystem("RotationPID", Robot::PIDSettingsPtr[0], Robot::PIDSettingsPtr[1], Robot::PIDSettingsPtr[2]) 
 RotationPID::RotationPID() : PIDSubsystem("RotationPID", 1 ,1, 1) 
 {
-  SetOutputRange(-0.3,0.3);
-  SetAbsoluteTolerance(1);
-  Enable();    
+  EnableWithSettings();
 }
 
 RotationPID::RotationPID(double p, double i, double d) : PIDSubsystem("RotationPID", p,i,d) 
 {
-  SetOutputRange(-0.3,0.3);
-  SetAbsoluteTolerance(1);
-  Enable();    
+  EnableWithSettings();
 }
 
 
@@ -52,4 +48,11 @@ double RotationPID::GetPIDOutput()
 void RotationPID::InitDefaultCommand() 
 {
 
+}
+
+void RotationPID::EnableWithSettings()
+{
+  SetOutputRange(-0.3,0.3);
+  SetAbsoluteTolerance(1);
+  Enable();  
 }

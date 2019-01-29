@@ -8,20 +8,23 @@
 #include "Commands/MoveServo.h"
 #include "Robot.h"
 
-MoveServo::MoveServo(double value) {
+MoveServo::MoveServo(double value) 
+{
   moveValue = value;
   // Use Requires() here to declare subsystem dependencies
   // eg. Requires(Robot::chassis.get());
 }
 
 // Called just before this Command runs the first time
-void MoveServo::Initialize() {
+void MoveServo::Initialize() 
+{
 }
 
 // Called repeatedly when this Command is scheduled to run
-void MoveServo::Execute() {
-    Robot::m_Actuator.Set(moveValue);
-  }
+void MoveServo::Execute() 
+{
+  Robot::m_Actuator.Set(moveValue);
+}
 
 // Make this return true when this Command no longer needs to run execute()
 bool MoveServo::IsFinished() { return true; }
