@@ -5,24 +5,23 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-#include "Subsystems\DriveTrain.h"
-#include "Commands/MoveServo.h"
+#pragma once
 
-DriveTrain::DriveTrain() : frc::Subsystem("DriveTrain"), mDefaultDrivePtr(nullptr) 
-{
-  mDefaultDrivePtr = new TankDrive_Joystick();
-}
+#include <Commands/Command.h>
+#include "Robot.h"
 
-void DriveTrain::InitDefaultCommand() 
-{
-  SetDefaultCommand(mDefaultDrivePtr);
-}
+class Advance : public frc::Command {
+ public:
+  Advance(double iDistance, StraightPID *iPid, bool dynamicDistance = false);
+  void Initialize() override;
+  void Execute() override;
+  bool IsFinished() override;
+  void End() override;
+  void Interrupted() override;
 
-void DriveTrain::TankDrive(double iLeft, double iRight) 
-{
-  Drive.TankDrive(iLeft, iRight, false);
-}
+  double mTargetDistance;
+  double mDistanceIncrement;
+  bool mDynamicDistance;
 
-
-
-
+  StraightPID * mPidPtr;
+};

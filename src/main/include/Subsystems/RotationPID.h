@@ -5,24 +5,19 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-#include "Subsystems\DriveTrain.h"
-#include "Commands/MoveServo.h"
+#pragma once
 
-DriveTrain::DriveTrain() : frc::Subsystem("DriveTrain"), mDefaultDrivePtr(nullptr) 
-{
-  mDefaultDrivePtr = new TankDrive_Joystick();
-}
+#include "Commands/PIDSubsystem.h"
 
-void DriveTrain::InitDefaultCommand() 
-{
-  SetDefaultCommand(mDefaultDrivePtr);
-}
-
-void DriveTrain::TankDrive(double iLeft, double iRight) 
-{
-  Drive.TankDrive(iLeft, iRight, false);
-}
-
-
-
-
+class RotationPID : public frc::PIDSubsystem {
+ public:
+  RotationPID();
+  RotationPID(double p, double i, double d);
+  double ReturnPIDInput() override;
+  void UsePIDOutput(double output) override;
+  void InitDefaultCommand() override;
+  double GetPIDOutput();
+ private:
+  double mPIDOutput;
+  void EnableWithSettings(); 
+};

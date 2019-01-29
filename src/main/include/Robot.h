@@ -9,14 +9,29 @@
 
 #include "OI.h"
 #include "Subsystems/DriveTrain.h"
+#include "Subsystems/GPS.h"
+#include "Subsystems/RotationPID.h"
+#include "Subsystems/StraightPID.h"
 #include <SmartDashboard/SendableChooser.h>
 #include <TimedRobot.h>
+#include "Preferences.h"
+#include <Servo.h>
+#include "Subsystems/Actuator.h"
 
 class Robot : public frc::TimedRobot 
 {
  public:
   static DriveTrain m_drivetrain;
+  static Actuator m_Actuator;
+  static GPS m_gps; 
   static OI m_oi;
+  static double PIDVal;
+  static double PIDP;
+  static double PIDI;
+  static double PIDD;
+
+  static RotationPID *mPid;
+  static StraightPID *mS_Pid;
 
   void RobotInit() override;
   void RobotPeriodic() override;
@@ -29,9 +44,5 @@ class Robot : public frc::TimedRobot
   void TestPeriodic() override;
 
  private:
-  // Have it null by default so that if testing teleop it
-  // doesn't have undefined behavior and potentially crash.
-  frc::Command* m_autonomousCommand = nullptr;
-
-  frc::SendableChooser<frc::Command*> m_chooser;
+  Preferences* prefs;
 };

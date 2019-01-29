@@ -18,7 +18,15 @@ constexpr int kMotorRight2 = 0;
 
 constexpr int kJoystick1 = 0;
 
-constexpr int kGyro = 1;
+constexpr int kYButton = 4; 
+constexpr int kXButton = 1;
+constexpr int kBButton = 3; 
+constexpr int kAButton = 2; 
+
+constexpr int kGyro = 0;  
+constexpr int kGyroSensitivity = 3;
+
+constexpr double kCircumference = 18.8495559; 
 
 /**
  * The RobotMap is a mapping from the ports sensors and actuators are wired into

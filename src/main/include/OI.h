@@ -8,8 +8,11 @@
 #pragma once
 
 #include <Joystick.h>
+#include <Buttons/JoystickButton.h>
+#include "Preferences.h"
 
 
+//#include <JoystickButton.h>
 
 class OI 
 {
@@ -19,5 +22,19 @@ class OI
     double GetRightJoystick();
 
   private:
-    Joystick* joystick;
+    Joystick * mJoystickPtr;
+
+    JoystickButton * mYButtonPtr;
+    JoystickButton * mXButtonPtr;
+    JoystickButton * mBButtonPtr;
+    JoystickButton * mAButtonPtr;
+
+    JoystickButton * mFrontLeftTriggerPtr;
+    JoystickButton * mBackLeftTriggerPtr;
+    JoystickButton * mFrontRightTriggerPtr;
+    JoystickButton * mBackRightTriggerPtr;
+
+    
+    
+
 };
