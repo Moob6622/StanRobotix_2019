@@ -7,7 +7,7 @@
 
 #pragma once
 
-#include <frc/commands/Subsystem.h>
+#include <Commands/Subsystem.h>
 #include <Servo.h>
 
 class Actuator : public frc::Subsystem {
@@ -15,11 +15,10 @@ class Actuator : public frc::Subsystem {
   // It's desirable that everything possible under private except
   // for methods that implement subsystem capabilities
 
-  Servo actuator;
+  Servo * actuator;
 
  public:
   Actuator();
   void InitDefaultCommand() override;
-  void Retract();
-  void Extend();
+  void MoveDelta(double distance);
 };

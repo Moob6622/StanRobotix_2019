@@ -5,42 +5,33 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-#include "Commands/TankDrive_Joystick.h"
-#include "Robot.h"
+#include "Commands/PrepareActuate.h"
 
-TankDrive_Joystick::TankDrive_Joystick() 
-{
-  Requires(&Robot::m_drivetrain);
+PrepareActuate::PrepareActuate(double distance) {
+  mDistance = distance;
+  // Use Requires() here to declare subsystem dependencies
+  // eg. Requires(Robot::chassis.get());
 }
 
 // Called just before this Command runs the first time
-void TankDrive_Joystick::Initialize() 
-{
-
+void PrepareActuate::Initialize() {
+  frc::Scheduler::GetInstance();
 }
 
 // Called repeatedly when this Command is scheduled to run
-void TankDrive_Joystick::Execute() 
-{
-  Robot::m_drivetrain.TankDrive(Robot::m_oi.GetLeftJoystick(), 
-                                Robot::m_oi.GetRightJoystick());
+void PrepareActuate::Execute() {
+  Actuate * mActuate = new Actuate(mDistance);
+  if (!(mActuate->isRunning)){
+    frc::Scheduler::AddCommand(mActuate);
+  }
 }
 
 // Make this return true when this Command no longer needs to run execute()
-bool TankDrive_Joystick::IsFinished() 
-{ 
-  return false; 
-}
+bool PrepareActuate::IsFinished() { return false; }
 
 // Called once after isFinished returns true
-void TankDrive_Joystick::End() 
-{
-  Robot::m_drivetrain.TankDrive(0,0);
-}
+void PrepareActuate::End() {}
 
 // Called when another command which requires one or more of the same
 // subsystems is scheduled to run
-void TankDrive_Joystick::Interrupted() 
-{
-  Robot::m_drivetrain.TankDrive(0,0);
-}
+void PrepareActuate::Interrupted() {}

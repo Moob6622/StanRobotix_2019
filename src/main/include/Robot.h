@@ -8,11 +8,8 @@
 #pragma once
 
 #include "OI.h"
-#include "Subsystems/DriveTrain.h"
 #include "Subsystems/GPS.h"
 #include "Subsystems/Actuator.h"
-#include "Subsystems/RotationPID.h"
-#include "Subsystems/StraightPID.h"
 #include <SmartDashboard/SendableChooser.h>
 #include <TimedRobot.h>
 #include "Preferences.h"
@@ -20,7 +17,6 @@
 class Robot : public frc::TimedRobot 
 {
  public:
-  static DriveTrain m_drivetrain;
   static GPS m_gps; 
   static OI m_oi;
   static Actuator m_actuator;
@@ -29,8 +25,6 @@ class Robot : public frc::TimedRobot
   static double PIDI;
   static double PIDD;
 
-  static RotationPID mPid;
-  static StraightPID mS_Pid;
 
   void RobotInit() override;
   void RobotPeriodic() override;

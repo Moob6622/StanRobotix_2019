@@ -6,8 +6,13 @@
 /*----------------------------------------------------------------------------*/
 
 #include "Subsystems/Actuator.h"
+#include <math.h>
+#include <iostream>
+#include "Commands/Actuate.h"
 
-Actuator::Actuator() : Subsystem("ExampleSubsystem") {}
+Actuator::Actuator() : Subsystem("Actuator") {
+  actuator = new Servo{0};
+}
 
 void Actuator::InitDefaultCommand() {
   // Set the default command for a subsystem here.
@@ -17,11 +22,8 @@ void Actuator::InitDefaultCommand() {
 // Put methods for controlling this subsystem
 // here. Call these from Commands.
 
-void Actuator::Recract()
+void Actuator::MoveDelta(double distance)
 {
-  actuator.Set(0);
-}
-void Actuator::Extend()
-{
-  actuator.Set(1);
+  std::cout<<"t'as cru! "<<distance<<std::endl;
+  actuator->Set(std::max(std::min(actuator->Get()+distance, 0.999), 0.001));
 }

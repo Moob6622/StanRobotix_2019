@@ -7,36 +7,32 @@
 
 #include "OI.h"
 #include <RobotMap.h>
-#include "Commands/Turn.h"
-#include "Commands/Advance.h"
+#include "Commands/Actuate.h"
 #include <iostream>
 #include <SmartDashboard/SmartDashboard.h>
+#include <Commands/PrepareActuate.h>
 
 OI::OI() 
 {
   // Process operator interface input here.
-  std::cout<<"bool :"<<Robot::PIDVal<<std::endl;
 
   mJoystickPtr = new Joystick(kJoystick1);
 
   mYButtonPtr = new JoystickButton(mJoystickPtr, kYButton);
   mAButtonPtr = new JoystickButton(mJoystickPtr, kAButton);
-  mBButtonPtr = new JoystickButton(mJoystickPtr, kBButton);
-  mXButtonPtr = new JoystickButton(mJoystickPtr, kXButton);
+  mBButtonPtr = new JoystickButton(mJoystickPtr, 3);
+  mXButtonPtr = new JoystickButton(mJoystickPtr, 4);
 
   //impossible de declarer le mButtonPtr dans le OI.h,
   //car le OI est utilise dans le DriveTrain.cpp qui est utilise
   //dans le Turn.cpp
-  
-<<<<<<< HEAD
-  Turn * mYButtonCommandPtr = new Turn(0.0, Robot::mPid, true);
-=======
-  Turn * mYButtonCommandPtr = new Turn(0.0, &Robot::mPid, true);
-  Advance * mAButtonCommandPtr = new Advance(1000, &Robot::mS_Pid, false);
->>>>>>> 8c8f951b51f75809a0c4a114e652def46fb0ea94
 
-  mYButtonPtr->WhenPressed(mYButtonCommandPtr);
-  mAButtonPtr->WhenPressed(mAButtonCommandPtr);
+
+  PrepareActuate * mBButtonCommandPtr = new PrepareActuate(-0.01);
+  PrepareActuate * mXButtonCommandPtr = new PrepareActuate(0.01);
+
+  mBButtonPtr->WhileHeld(mBButtonCommandPtr);
+  mXButtonPtr->WhileHeld(mXButtonCommandPtr);
 
 }
 

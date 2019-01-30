@@ -7,27 +7,40 @@
 
 #include "Commands/Actuate.h"
 
-Actuate::Actuate() {
+Actuate::Actuate(double distance) {
+  mDistance = distance;
   // Use Requires() here to declare subsystem dependencies
   // eg. Requires(Robot::chassis.get());
   Requires(&Robot::m_actuator);
 }
 
 // Called just before this Command runs the first time
-void Actuate::Initialize() {}
+void Actuate::Initialize() {
+  isRunning = false;
+}
 
 // Called repeatedly when this Command is scheduled to run
 void Actuate::Execute() {
-  Robot::m_actuator.Extend();
+  
+  if(!isRunning)
+  {
+    isRunning = true;
+    Robot::m_actuator.MoveDelta(mDistance);
+  }
   
 }
 
 // Make this return true when this Command no longer needs to run execute()
-bool Actuate::IsFinished() { return false; }
+bool Actuate::IsFinished() {
+  return true;
+  }
 
 // Called once after isFinished returns true
-void Actuate::End() {}
+void Actuate::End() {
+  isRunning = false;
+}
 
 // Called when another command which requires one or more of the same
 // subsystems is scheduled to run
-void Actuate::Interrupted() {}
+void Actuate::Interrupted() {
+}

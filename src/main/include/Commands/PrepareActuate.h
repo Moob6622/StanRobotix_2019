@@ -5,23 +5,19 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-#include "Subsystems\DriveTrain.h"
+#pragma once
 
-DriveTrain::DriveTrain() : frc::Subsystem("DriveTrain"), mDefaultDrivePtr(nullptr) 
-{
-  mDefaultDrivePtr = new TankDrive_Joystick();
-}
+#include <Commands/Command.h>
+#include <Commands/Actuate.h>
 
-void DriveTrain::InitDefaultCommand() 
-{
-  SetDefaultCommand(mDefaultDrivePtr);
-}
-
-void DriveTrain::TankDrive(double iLeft, double iRight) 
-{
-  Drive.TankDrive(iLeft, iRight, false);
-}
-
-
-
-
+class PrepareActuate : public frc::Command {
+ private:
+  double mDistance;
+ public:
+  PrepareActuate(double distance);
+  void Initialize() override;
+  void Execute() override;
+  bool IsFinished() override;
+  void End() override;
+  void Interrupted() override;
+};
