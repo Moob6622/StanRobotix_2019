@@ -14,6 +14,8 @@
 #include <TimedRobot.h>
 #include "Preferences.h"
 
+#include <solenoid.h>
+
 class Robot : public frc::TimedRobot 
 {
  public:

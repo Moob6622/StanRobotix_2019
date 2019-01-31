@@ -15,8 +15,9 @@ class Actuator : public frc::Subsystem {
   // It's desirable that everything possible under private except
   // for methods that implement subsystem capabilities
 
-  Servo * actuator;
-
+  Servo * mActuator;
+  double realActuatorGet;
+  static double lastSetPoint;
  public:
   Actuator();
   void InitDefaultCommand() override;

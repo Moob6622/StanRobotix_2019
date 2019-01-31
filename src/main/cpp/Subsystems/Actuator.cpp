@@ -8,13 +8,24 @@
 #include "Subsystems/Actuator.h"
 #include <math.h>
 #include <iostream>
-#include "Commands/Actuate.h"
+#include <RobotMap.h>
+#include <Commands/Actuate.h>
 
-Actuator::Actuator() : Subsystem("Actuator") {
-  actuator = new Servo{0};
+double Actuator::lastSetPoint;
+
+Actuator::Actuator() : Subsystem("Actuator"), mActuator(nullptr) 
+{
+  mActuator = new Servo{kActuator};
+  
+  lastSetPoint = 0;
+  mActuator->Set(0);
+  realActuatorGet = 0;
+
 }
 
-void Actuator::InitDefaultCommand() {
+void Actuator::InitDefaultCommand() 
+{
+  SetDefaultCommand(new Actuate());
   // Set the default command for a subsystem here.
   // SetDefaultCommand(new MySpecialCommand());
 }
@@ -22,8 +33,18 @@ void Actuator::InitDefaultCommand() {
 // Put methods for controlling this subsystem
 // here. Call these from Commands.
 
-void Actuator::MoveDelta(double distance)
+void Actuator::MoveDelta(double iDistance)
 {
-  std::cout<<"t'as cru! "<<distance<<std::endl;
-  actuator->Set(std::max(std::min(actuator->Get()+distance, 0.999), 0.001));
+  if(mActuator != nullptr)
+  {
+
+    // //assure que la valeur soit comprise entre le minimum et le maximum
+    if (fabs(mActuator->Get() - realActuatorGet) <= 0.01 && iDistance != 0)
+    {
+      double wDistance = std::max(std::min(realActuatorGet + iDistance * 0.01, 1.0), 0.0);
+      std::cout<<"Stacking command "<<iDistance<<std::endl;
+      mActuator->Set(wDistance);
+    }
+  realActuatorGet = std::max(std::min(realActuatorGet + iDistance * 0.008, 1.0), 0.0);
+  }
 }

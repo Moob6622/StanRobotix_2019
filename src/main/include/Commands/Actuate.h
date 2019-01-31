@@ -8,15 +8,14 @@
 #pragma once
 
 #include <Commands/Command.h>
-#include "Robot.h"
 
 class Actuate : public frc::Command {
  private:
   double mDistance;
-
- public:
   static bool isRunning;
-  Actuate(double distance);
+  
+ public:
+  Actuate();
   void Initialize() override;
   void Execute() override;
   bool IsFinished() override;

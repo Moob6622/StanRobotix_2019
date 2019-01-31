@@ -9,6 +9,7 @@
 
 #include <Commands/Scheduler.h>
 #include <SmartDashboard/SmartDashboard.h>
+#include "Commands/Actuate.h"
 
 #include <iostream>
 
@@ -86,6 +87,8 @@ void Robot::AutonomousPeriodic()
 
 void Robot::TeleopInit() 
 {
+  Scheduler* scheduler = frc::Scheduler::GetInstance();
+  scheduler->AddCommand(new Actuate());
 }
 
 void Robot::TeleopPeriodic() 

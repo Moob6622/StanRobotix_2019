@@ -7,10 +7,8 @@
 
 #include "OI.h"
 #include <RobotMap.h>
-#include "Commands/Actuate.h"
 #include <iostream>
 #include <SmartDashboard/SmartDashboard.h>
-#include <Commands/PrepareActuate.h>
 
 OI::OI() 
 {
@@ -20,30 +18,44 @@ OI::OI()
 
   mYButtonPtr = new JoystickButton(mJoystickPtr, kYButton);
   mAButtonPtr = new JoystickButton(mJoystickPtr, kAButton);
-  mBButtonPtr = new JoystickButton(mJoystickPtr, 3);
-  mXButtonPtr = new JoystickButton(mJoystickPtr, 4);
+  mBButtonPtr = new JoystickButton(mJoystickPtr, kBButton);
+  mXButtonPtr = new JoystickButton(mJoystickPtr, kXButton);
+  
+  m3ButtonPtr = new JoystickButton(mJoystickPtr, k3Button);
+  m4ButtonPtr = new JoystickButton(mJoystickPtr, k4Button);
 
   //impossible de declarer le mButtonPtr dans le OI.h,
   //car le OI est utilise dans le DriveTrain.cpp qui est utilise
   //dans le Turn.cpp
 
 
-  PrepareActuate * mBButtonCommandPtr = new PrepareActuate(-0.01);
-  PrepareActuate * mXButtonCommandPtr = new PrepareActuate(0.01);
 
-  mBButtonPtr->WhileHeld(mBButtonCommandPtr);
-  mXButtonPtr->WhileHeld(mXButtonCommandPtr);
+
 
 }
 
 double OI::GetLeftJoystick() 
 {
   return -mJoystickPtr->GetRawAxis(1); //signe << - >> devant la valeur des joysticks car 
-                                   // leur orientation est inversee par rapport au tank drive
+                                       // leur orientation est inversee par rapport au tank drive
 }
 
 double OI::GetRightJoystick() 
 {
   return -mJoystickPtr->GetRawAxis(3); //signe << - >> devant la valeur des joysticks car 
-                                   //leur orientation est inversee par rapport au tank drive
+                                       //leur orientation est inversee par rapport au tank drive
+}
+
+double OI::GetActuatorInput()
+{
+  if (m4ButtonPtr->Get() && !m3ButtonPtr->Get())
+  {
+    return 1;
+  }
+  
+  if (!m4ButtonPtr->Get() && m3ButtonPtr->Get())
+  {
+    return -1;
+  }
+  return 0.0;
 }
