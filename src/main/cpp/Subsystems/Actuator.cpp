@@ -11,16 +11,16 @@
 #include <RobotMap.h>
 #include <Commands/Actuate.h>
 
-double Actuator::lastSetPoint;
+double Actuator::counter;
 
 Actuator::Actuator() : Subsystem("Actuator"), mActuator(nullptr) 
 {
   mActuator = new Servo{kActuator};
   
-  lastSetPoint = 0;
+  
   mActuator->Set(0);
   realActuatorGet = 0;
-
+  
 }
 
 void Actuator::InitDefaultCommand() 
@@ -35,16 +35,23 @@ void Actuator::InitDefaultCommand()
 
 void Actuator::MoveDelta(double iDistance)
 {
+  
+  
   if(mActuator != nullptr)
   {
-
+    
     // //assure que la valeur soit comprise entre le minimum et le maximum
-    if (fabs(mActuator->Get() - realActuatorGet) <= 0.01 && iDistance != 0)
+    if (iDistance != 0)
     {
-      double wDistance = std::max(std::min(realActuatorGet + iDistance * 0.01, 1.0), 0.0);
-      std::cout<<"Stacking command "<<iDistance<<std::endl;
-      mActuator->Set(wDistance);
+      counter++;
+      while(counter > 5)
+      {
+        double wDistance = std::max(std::min(mActuator->Get() + iDistance * 0.01, 0.8), 0.2);
+        std::cout<<"Stacking command "<<iDistance<<std::endl<<" new set distance is : "<< wDistance << std::endl;
+        mActuator->Set(wDistance);
+        counter =0;
+      }
     }
-  realActuatorGet = std::max(std::min(realActuatorGet + iDistance * 0.008, 1.0), 0.0);
+  
   }
 }

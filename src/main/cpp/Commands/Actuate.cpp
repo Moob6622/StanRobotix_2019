@@ -9,6 +9,7 @@
 #include "Robot.h"
 #include <iostream>
 
+
 bool Actuate::isRunning;
 
 Actuate::Actuate() 
