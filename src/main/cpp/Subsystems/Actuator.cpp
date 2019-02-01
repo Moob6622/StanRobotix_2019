@@ -15,7 +15,6 @@ Actuator::Actuator() : Subsystem("Actuator"), mActuator(nullptr)
 {
   mActuator = new Servo{kActuator};
   mActuator->Set(0.5);
-  realActuatorGet = 0;
   
 }
 

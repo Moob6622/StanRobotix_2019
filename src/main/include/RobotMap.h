@@ -6,6 +6,25 @@
 /*----------------------------------------------------------------------------*/
 
 #pragma once
+#include <string>
+
+/**
+ * Les ports sont au hasard. A changer quand on aura le materiel.
+ */
+
+constexpr int kMotorLeft1 = 9;
+constexpr int kMotorLeft2 = 8;
+constexpr int kMotorRight1 = 4;
+constexpr int kMotorRight2 = 5;
+
+constexpr int kJoystick1 = 0;
+
+constexpr int kGyro = 1;
+
+constexpr int kLineDetectionVerticalThreshold = 400;
+
+static std::string kCameraIP = "10.66.22.21";
+static std::string kCameraName = "camera0";
 
 /**
  * Les ports sont au hasard. A changer quand on aura le materiel.

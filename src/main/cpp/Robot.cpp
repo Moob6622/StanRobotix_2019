@@ -6,6 +6,7 @@
 /*----------------------------------------------------------------------------*/
 
 #include "Robot.h"
+#include <iostream>
 
 #include <Commands/Scheduler.h>
 #include <SmartDashboard/SmartDashboard.h>
@@ -22,6 +23,12 @@ double Robot::PIDP;
 double Robot::PIDI;
 double Robot::PIDD;
 
+DriveTrain Robot::m_drivetrain;
+Vision Robot::m_vision; 
+// DetectLines grip::detectLines;
+
+AlignmentPID* Robot::m_AlignPID;
+
 
 /**
 RotationPID * Robot::mPidPtr = new RotationPID(SmartDashboard::GetNumber("DB/Slider 0",0.0),
@@ -37,6 +44,10 @@ void Robot::RobotInit()
 	PIDI = prefs->GetDouble("PIDI", 1.0);
 	PIDD = prefs->GetDouble("PIDD", 1.0);
   m_gps.ResetSensors();
+
+
+  m_vision.Initialization(); 
+
 }
 
 /**
@@ -63,7 +74,9 @@ void Robot::RobotPeriodic() {
  */
 void Robot::DisabledInit() {}
 
-void Robot::DisabledPeriodic() { frc::Scheduler::GetInstance()->Run(); }
+void Robot::DisabledPeriodic() {
+  frc::Scheduler::GetInstance()->Run();
+}
 
 /**
  * This autonomous (along with the chooser code above) shows how to select
@@ -77,7 +90,6 @@ void Robot::DisabledPeriodic() { frc::Scheduler::GetInstance()->Run(); }
  * the if-else structure below with additional strings & commands.
  */
 void Robot::AutonomousInit() {
-
 }
 
 void Robot::AutonomousPeriodic() 
@@ -87,7 +99,6 @@ void Robot::AutonomousPeriodic()
 
 void Robot::TeleopInit() 
 {
-  Scheduler* scheduler = frc::Scheduler::GetInstance();
 }
 
 void Robot::TeleopPeriodic() 

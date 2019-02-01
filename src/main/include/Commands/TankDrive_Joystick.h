@@ -6,19 +6,17 @@
 /*----------------------------------------------------------------------------*/
 
 #pragma once
+#include <Commands/Command.h>
 
-#include <Commands/Subsystem.h>
-#include <Servo.h>
 
-class Actuator : public frc::Subsystem {
- private:
-
-  // It's desirable that everything possible under private except
-  // for methods that implement subsystem capabilities
-
-  Servo * mActuator;
+class TankDrive_Joystick : public frc::Command 
+{
  public:
-  Actuator();
-  void InitDefaultCommand() override;
-  void MoveDelta(double distance);
+  TankDrive_Joystick();
+  
+  void Initialize() override;
+  void Execute() override;
+  bool IsFinished() override;
+  void End() override;
+  void Interrupted() override;
 };

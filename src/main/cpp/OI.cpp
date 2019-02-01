@@ -9,6 +9,8 @@
 #include <RobotMap.h>
 #include <iostream>
 #include <SmartDashboard/SmartDashboard.h>
+#include "Commands/Aligner.h"
+#include "Robot.h"
 
 OI::OI() 
 {
@@ -29,8 +31,9 @@ OI::OI()
   //dans le Turn.cpp
 
 
+  Aligner* k3ButtonCommand = new Aligner(Robot::m_AlignPID);
 
-
+  m3ButtonPtr->WhenPressed(k3ButtonCommand);
 
 }
 
@@ -50,12 +53,12 @@ double OI::GetActuatorInput()
 {
   if (m4ButtonPtr->Get() && !m3ButtonPtr->Get())
   {
-    return 1;
+    return 1.0;
   }
   
   if (!m4ButtonPtr->Get() && m3ButtonPtr->Get())
   {
-    return -1;
+    return -1.0;
   }
   return 0.0;
 }

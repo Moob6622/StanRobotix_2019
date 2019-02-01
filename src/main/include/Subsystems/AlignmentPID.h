@@ -7,18 +7,16 @@
 
 #pragma once
 
-#include <Commands/Subsystem.h>
-#include <Servo.h>
+#include "Commands/Subsystem.h"
+#include "Commands/PIDSubsystem.h"
 
-class Actuator : public frc::Subsystem {
- private:
-
-  // It's desirable that everything possible under private except
-  // for methods that implement subsystem capabilities
-
-  Servo * mActuator;
+class AlignmentPID : public frc::PIDSubsystem {
  public:
-  Actuator();
+  AlignmentPID();
+  double ReturnPIDInput() override;
+  void UsePIDOutput(double output) override;
   void InitDefaultCommand() override;
-  void MoveDelta(double distance);
+  double GetPIDOutput();
+ private:
+  double mPIDOutput;
 };

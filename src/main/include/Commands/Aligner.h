@@ -7,18 +7,23 @@
 
 #pragma once
 
-#include <Commands/Subsystem.h>
-#include <Servo.h>
+#include <Commands/Command.h>
+#include "Networktables/NetworkTable.h"
+#include "Networktables/NetworkTableEntry.h"
+#include "Networktables/NetworkTableInstance.h"
 
-class Actuator : public frc::Subsystem {
- private:
+#include "Subsystems/AlignmentPID.h"
 
-  // It's desirable that everything possible under private except
-  // for methods that implement subsystem capabilities
-
-  Servo * mActuator;
+class Aligner : public frc::Command {
  public:
-  Actuator();
-  void InitDefaultCommand() override;
-  void MoveDelta(double distance);
+  Aligner(AlignmentPID * iPid);
+  void Initialize() override;
+  void Execute() override;
+  bool IsFinished() override;
+  void End() override;
+  void Interrupted() override;
+
+ private:
+  AlignmentPID * mPidPtr;
+  
 };

@@ -15,6 +15,17 @@
 #include "Preferences.h"
 
 #include <solenoid.h>
+#include "Subsystems/DriveTrain.h"
+#include "Subsystems/Vision.h"
+#include <SmartDashboard/SendableChooser.h>
+#include <CameraServer.h>
+
+#include "networktables/NetworkTable.h"
+#include "networktables/NetworkTableEntry.h"
+#include "networktables/NetworkTableInstance.h"
+#include <cscore_oo.h>
+#include "Timer.h"
+#include <Subsystems/AlignmentPID.h>
 
 class Robot : public frc::TimedRobot 
 {
@@ -27,6 +38,17 @@ class Robot : public frc::TimedRobot
   static double PIDI;
   static double PIDD;
 
+
+  // double oldTime;
+  // double deltaTime;
+  // double countdown;
+
+  static DriveTrain m_drivetrain;
+  static OI m_oi;
+  static Vision m_vision;
+
+  static AlignmentPID* m_AlignPID;
+  //static grip::DetectLines detectLines;
 
   void RobotInit() override;
   void RobotPeriodic() override;
