@@ -17,7 +17,6 @@ class Actuator : public frc::Subsystem {
 
   Servo * mActuator;
   double realActuatorGet;
-  static double counter;
  public:
   Actuator();
   void InitDefaultCommand() override;

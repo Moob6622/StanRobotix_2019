@@ -88,7 +88,6 @@ void Robot::AutonomousPeriodic()
 void Robot::TeleopInit() 
 {
   Scheduler* scheduler = frc::Scheduler::GetInstance();
-  scheduler->AddCommand(new Actuate());
 }
 
 void Robot::TeleopPeriodic() 

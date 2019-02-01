@@ -9,11 +9,9 @@
 #include "Robot.h"
 #include <iostream>
 
-
-bool Actuate::isRunning;
-
 Actuate::Actuate() 
 {
+  Requires(&Robot::m_actuator);
   // Use Requires() here to declare subsystem dependencies
   // eg. Requires(Robot::chassis.get());
 }
@@ -21,20 +19,12 @@ Actuate::Actuate()
 // Called just before this Command runs the first time
 void Actuate::Initialize() 
 {
-  isRunning = false;
-
 }
 
 // Called repeatedly when this Command is scheduled to run
 void Actuate::Execute() 
 { 
-  if(!isRunning)
-  {
-  isRunning = true;
   Robot::m_actuator.MoveDelta(Robot::m_oi.GetActuatorInput());
-  isRunning = false;
-  }
- 
 }
 
 // Make this return true when this Command no longer needs to run execute()

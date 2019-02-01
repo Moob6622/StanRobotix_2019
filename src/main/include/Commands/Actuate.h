@@ -12,7 +12,6 @@
 class Actuate : public frc::Command {
  private:
   double mDistance;
-  static bool isRunning;
   
  public:
   Actuate();
