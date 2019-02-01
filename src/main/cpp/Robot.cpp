@@ -10,20 +10,42 @@
 
 #include <Commands/Scheduler.h>
 #include <SmartDashboard/SmartDashboard.h>
+#include "Commands/Actuate.h"
+
+#include <iostream>
 
 
+GPS Robot::m_gps;
+OI Robot::m_oi;
+Actuator Robot::m_actuator;
+double Robot::PIDVal;
+double Robot::PIDP;
+double Robot::PIDI;
+double Robot::PIDD;
 
 DriveTrain Robot::m_drivetrain;
-OI Robot::m_oi;
 Vision Robot::m_vision; 
 // DetectLines grip::detectLines;
 
 AlignmentPID* Robot::m_AlignPID;
 
 
+/**
+RotationPID * Robot::mPidPtr = new RotationPID(SmartDashboard::GetNumber("DB/Slider 0",0.0),
+                                               SmartDashboard::GetNumber("DB/Slider 1",0.0)*0.05, 
+                                               SmartDashboard::GetNumber("DB/Slider 2",0.0)*0.05);
+**/
 
 void Robot::RobotInit() 
-{ 
+{
+  prefs = Preferences::GetInstance();
+	PIDVal = prefs->GetDouble("PIDVal", 40.0);
+	PIDP = prefs->GetDouble("PIDP", 1.0);
+	PIDI = prefs->GetDouble("PIDI", 1.0);
+	PIDD = prefs->GetDouble("PIDD", 1.0);
+  m_gps.ResetSensors();
+
+
   m_vision.Initialization(); 
 
 }
@@ -36,11 +58,15 @@ void Robot::RobotInit()
  * <p> This runs after the mode specific periodic functions, but before
  * LiveWindow and SmartDashboard integrated updating.
  */
-void Robot::RobotPeriodic() 
-{
+void Robot::RobotPeriodic() {
+  prefs = Preferences::GetInstance();
+	PIDVal = prefs->GetDouble("PIDVal", 40.0);
+  PIDP = prefs->GetDouble("PIDP", 1.0);
+  PIDI = prefs->GetDouble("PIDI", 1.0);
+  PIDD = prefs->GetDouble("PIDD", 1.0);
   
-}
-
+  //std::cout<<Robot::PIDSettingsPtr[0]<<" "<<Robot::PIDSettingsPtr[1]<<" "<<Robot::PIDSettingsPtr[2]<<std::endl;
+  }
 /**
  * This function is called once each time the robot enters Disabled mode. You
  * can use it to reset any subsystem information you want to clear when the
@@ -64,20 +90,6 @@ void Robot::DisabledPeriodic() {
  * the if-else structure below with additional strings & commands.
  */
 void Robot::AutonomousInit() {
-  // std::string autoSelected = frc::SmartDashboard::GetString(
-  //     "Auto Selector", "Default");
-  // if (autoSelected == "My Auto") {
-  //   m_autonomousCommand = &m_myAuto;
-  // } else {
-  //   m_autonomousCommand = &m_defaultAuto;
-  // }
-
-  m_autonomousCommand = m_chooser.GetSelected();
-
-  if (m_autonomousCommand != nullptr) 
-  {
-    m_autonomousCommand->Start();
-  }
 }
 
 void Robot::AutonomousPeriodic() 
@@ -87,45 +99,17 @@ void Robot::AutonomousPeriodic()
 
 void Robot::TeleopInit() 
 {
-  countdown = 1000;
-  // This makes sure that the autonomous stops running when
-  // teleop starts running. If you want the autonomous to
-  // continue until interrupted by another command, remove
-  // this line or comment it out.
-  if (m_autonomousCommand != nullptr) // CYRIL: investiguer si un delete est necessaire. 
-  {
-    m_autonomousCommand->Cancel();
-    m_autonomousCommand = nullptr;
-  }
-
 }
 
-void Robot::TeleopPeriodic() {
+void Robot::TeleopPeriodic() 
+{ 
   frc::Scheduler::GetInstance()->Run();
+}
 
-  //m_vision.GetLine();
-  //m_vision.GetLineAngle();
-  //m_vision.DisplayData();
-  /*m_drivetrain.TankDrive(1, 1);
-		deltaTime = timer.Get() - oldTime;
-    countdown -= deltaTime; 
-		oldTime = timer.Get();
-  if(countdown < 0)
-  {
-    double wCoordLine[5];
-    m_vision.GetLine(wCoordLine);
-    m_drivetrain.TankDrive(0, m_vision.AlignerRobotLigne(wCoordLine));
-  } */
-  
+void Robot::TestPeriodic() 
+{
 
-  }
-
-  void Robot::TestPeriodic()
-  {
-    
-  }
-
-
+}
 
 #ifndef RUNNING_FRC_TESTS
 START_ROBOT_CLASS(Robot)

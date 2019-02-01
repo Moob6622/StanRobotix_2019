@@ -9,8 +9,7 @@
 
 #include <Joystick.h>
 #include <Buttons/JoystickButton.h>
-
-
+#include "Preferences.h"
 
 class OI 
 {
@@ -18,8 +17,21 @@ class OI
     OI();
     double GetLeftJoystick();
     double GetRightJoystick();
+    double GetActuatorInput();
 
   private:
-    Joystick* joystick;
-    JoystickButton* k3Button;
+    Joystick * mJoystickPtr;
+
+    JoystickButton * mYButtonPtr;
+    JoystickButton * mXButtonPtr;
+    JoystickButton * mBButtonPtr;
+    JoystickButton * mAButtonPtr;
+    
+    JoystickButton * m3ButtonPtr;
+    JoystickButton * m4ButtonPtr;
+
+    JoystickButton * mFrontLeftTriggerPtr;
+    JoystickButton * mBackLeftTriggerPtr;
+    JoystickButton * mFrontRightTriggerPtr;
+    JoystickButton * mBackRightTriggerPtr;
 };

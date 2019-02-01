@@ -8,10 +8,16 @@
 #pragma once
 
 #include "OI.h"
+#include "Subsystems/GPS.h"
+#include "Subsystems/Actuator.h"
+#include <SmartDashboard/SendableChooser.h>
+#include <TimedRobot.h>
+#include "Preferences.h"
+
+#include <solenoid.h>
 #include "Subsystems/DriveTrain.h"
 #include "Subsystems/Vision.h"
 #include <SmartDashboard/SendableChooser.h>
-#include <TimedRobot.h>
 #include <CameraServer.h>
 
 #include "networktables/NetworkTable.h"
@@ -20,16 +26,22 @@
 #include <cscore_oo.h>
 #include "Timer.h"
 #include <Subsystems/AlignmentPID.h>
-class Vision;
-class TankDrive_Joystick;
 
 class Robot : public frc::TimedRobot 
 {
  public:
+  static GPS m_gps; 
+  static OI m_oi;
+  static Actuator m_actuator;
+  static double PIDVal;
+  static double PIDP;
+  static double PIDI;
+  static double PIDD;
 
-  double oldTime;
-  double deltaTime;
-  double countdown;
+
+  // double oldTime;
+  // double deltaTime;
+  // double countdown;
 
   static DriveTrain m_drivetrain;
   static OI m_oi;
@@ -49,10 +61,5 @@ class Robot : public frc::TimedRobot
   void TestPeriodic() override;
 
  private:
-  // Have it null by default so that if testing teleop it
-  // doesn't have undefined behavior and potentially crash.
-  frc::Command* m_autonomousCommand = nullptr;
-
-  frc::SendableChooser<frc::Command*> m_chooser;
-
+  Preferences* prefs;
 };
