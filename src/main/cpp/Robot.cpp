@@ -18,18 +18,16 @@
 GPS Robot::m_gps;
 OI Robot::m_oi;
 Actuator Robot::m_actuator;
+DriveTrain Robot::m_drivetrain;
+Vision Robot::m_vision; 
 double Robot::PIDVal;
 double Robot::PIDP;
 double Robot::PIDI;
 double Robot::PIDD;
 
-DriveTrain Robot::m_drivetrain;
-Vision Robot::m_vision; 
 // DetectLines grip::detectLines;
 
 AlignmentPID* Robot::m_AlignPID;
-
-
 /**
 RotationPID * Robot::mPidPtr = new RotationPID(SmartDashboard::GetNumber("DB/Slider 0",0.0),
                                                SmartDashboard::GetNumber("DB/Slider 1",0.0)*0.05, 

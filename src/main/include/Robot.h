@@ -27,12 +27,15 @@
 #include "Timer.h"
 #include <Subsystems/AlignmentPID.h>
 
+//class Vision;
+
 class Robot : public frc::TimedRobot 
 {
  public:
   static GPS m_gps; 
   static OI m_oi;
   static Actuator m_actuator;
+  static Vision m_vision;
   static double PIDVal;
   static double PIDP;
   static double PIDI;
@@ -44,8 +47,6 @@ class Robot : public frc::TimedRobot
   // double countdown;
 
   static DriveTrain m_drivetrain;
-  static OI m_oi;
-  static Vision m_vision;
 
   static AlignmentPID* m_AlignPID;
   //static grip::DetectLines detectLines;
