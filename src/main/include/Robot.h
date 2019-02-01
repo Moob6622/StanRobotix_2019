@@ -18,14 +18,24 @@
 #include "networktables/NetworkTableEntry.h"
 #include "networktables/NetworkTableInstance.h"
 #include <cscore_oo.h>
+#include "Timer.h"
+#include <Subsystems/AlignmentPID.h>
+class Vision;
+class TankDrive_Joystick;
 
 class Robot : public frc::TimedRobot 
 {
  public:
+
+  double oldTime;
+  double deltaTime;
+  double countdown;
+
   static DriveTrain m_drivetrain;
   static OI m_oi;
   static Vision m_vision;
 
+  static AlignmentPID* m_AlignPID;
   //static grip::DetectLines detectLines;
 
   void RobotInit() override;

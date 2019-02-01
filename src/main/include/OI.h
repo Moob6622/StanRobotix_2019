@@ -8,6 +8,7 @@
 #pragma once
 
 #include <Joystick.h>
+#include <Buttons/JoystickButton.h>
 
 
 
@@ -20,4 +21,5 @@ class OI
 
   private:
     Joystick* joystick;
+    JoystickButton* k3Button;
 };

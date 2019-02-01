@@ -18,6 +18,9 @@ OI Robot::m_oi;
 Vision Robot::m_vision; 
 // DetectLines grip::detectLines;
 
+AlignmentPID* Robot::m_AlignPID;
+
+
 
 void Robot::RobotInit() 
 { 
@@ -84,6 +87,7 @@ void Robot::AutonomousPeriodic()
 
 void Robot::TeleopInit() 
 {
+  countdown = 1000;
   // This makes sure that the autonomous stops running when
   // teleop starts running. If you want the autonomous to
   // continue until interrupted by another command, remove
@@ -93,11 +97,26 @@ void Robot::TeleopInit()
     m_autonomousCommand->Cancel();
     m_autonomousCommand = nullptr;
   }
+
 }
 
 void Robot::TeleopPeriodic() {
   frc::Scheduler::GetInstance()->Run();
 
+  //m_vision.GetLine();
+  //m_vision.GetLineAngle();
+  //m_vision.DisplayData();
+  /*m_drivetrain.TankDrive(1, 1);
+		deltaTime = timer.Get() - oldTime;
+    countdown -= deltaTime; 
+		oldTime = timer.Get();
+  if(countdown < 0)
+  {
+    double wCoordLine[5];
+    m_vision.GetLine(wCoordLine);
+    m_drivetrain.TankDrive(0, m_vision.AlignerRobotLigne(wCoordLine));
+  } */
+  
 
   }
 

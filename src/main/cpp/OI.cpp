@@ -6,12 +6,20 @@
 /*----------------------------------------------------------------------------*/
 
 #include "OI.h"
-#include <RobotMap.h>
+#include "RobotMap.h"
+#include "Commands/Aligner.h"
+#include "Robot.h"
 
 OI::OI() 
 {
   // Process operator interface input here.
   joystick = new Joystick(kJoystick1);
+  k3Button = new JoystickButton(joystick, 3);
+
+  Aligner* k3ButtonCommand = new Aligner(Robot::m_AlignPID);
+
+  k3Button->WhenPressed(k3ButtonCommand);
+
 }
 
 double OI::GetLeftJoystick() 

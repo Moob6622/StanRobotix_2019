@@ -7,10 +7,10 @@
 
 #pragma once
 
-#include <commands/Command.h>
-#include "networktables/NetworkTable.h"
-#include "networktables/NetworkTableEntry.h"
-#include "networktables/NetworkTableInstance.h"
+#include <Commands/Command.h>
+#include "Networktables/NetworkTable.h"
+#include "Networktables/NetworkTableEntry.h"
+#include "Networktables/NetworkTableInstance.h"
 
 #include "Subsystems/AlignmentPID.h"
 
