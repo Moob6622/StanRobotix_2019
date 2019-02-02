@@ -10,13 +10,13 @@
 #include "Commands/Subsystem.h"
 #include "Commands/PIDSubsystem.h"
 
-class AlignmentPID : public frc::PIDSubsystem {
+class LineLengthPID : public frc::PIDSubsystem {
  public:
-  AlignmentPID();
+  LineLengthPID();
   double ReturnPIDInput() override;
   void UsePIDOutput(double output) override;
   void InitDefaultCommand() override;
   double GetPIDOutput();
  private:
-  double mPIDOutput;
+  double mPIDOutput = 0.0;
 };

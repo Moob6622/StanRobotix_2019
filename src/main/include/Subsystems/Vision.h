@@ -32,11 +32,20 @@ class Vision : public frc::Subsystem {
 
   void GetLine(double * oLine);
 
+  bool FoundContour();
+  bool FoundLine();
+
   double GetLineAngle();
+  double GetContoursCentreX();
 
   double AlignerRobotLigne(const double iTableau[5]); //Aligne le robot avec une ligne
 
   void DisplayData(); 
 
   void InitDefaultCommand() override;
+
+  private:
+  bool foundContour;
+  double lastAngle;
+  bool foundLine;
 };

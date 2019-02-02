@@ -12,11 +12,12 @@
 #include "Networktables/NetworkTableEntry.h"
 #include "Networktables/NetworkTableInstance.h"
 
-#include "Subsystems/AlignmentPID.h"
+#include "Subsystems/AnglePID.h"
+#include "Subsystems/CentrePID.h"
 
 class Aligner : public frc::Command {
  public:
-  Aligner(AlignmentPID * iPid);
+  Aligner(AnglePID * iAPid, CentrePID * iCPid);
   void Initialize() override;
   void Execute() override;
   bool IsFinished() override;
@@ -24,6 +25,8 @@ class Aligner : public frc::Command {
   void Interrupted() override;
 
  private:
-  AlignmentPID * mPidPtr;
+  AnglePID * mAPidPtr;
+  CentrePID * mCPidPtr;
+  bool aligned;
   
 };

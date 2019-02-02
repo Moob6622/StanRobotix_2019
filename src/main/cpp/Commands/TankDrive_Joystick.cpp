@@ -25,9 +25,6 @@ void TankDrive_Joystick::Execute()
 {
   Robot::m_drivetrain.TankDrive(Robot::m_oi.GetLeftJoystick(), 
                                 Robot::m_oi.GetRightJoystick());
-  std::cout<<"TDJ works"<<std::endl;
-  std::cout<<Robot::m_oi.GetLeftJoystick()<<std::endl;
-  std::cout<<Robot::m_oi.GetRightJoystick()<<std::endl;
 }
 
 // Make this return true when this Command no longer needs to run execute()

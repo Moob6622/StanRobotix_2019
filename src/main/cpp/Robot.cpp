@@ -27,7 +27,8 @@ double Robot::PIDD;
 
 // DetectLines grip::detectLines;
 
-AlignmentPID* Robot::m_AlignPID;
+AnglePID* Robot::m_AnglePID;
+CentrePID* Robot::m_CentrePID;
 /**
 RotationPID * Robot::mPidPtr = new RotationPID(SmartDashboard::GetNumber("DB/Slider 0",0.0),
                                                SmartDashboard::GetNumber("DB/Slider 1",0.0)*0.05, 
@@ -97,6 +98,8 @@ void Robot::AutonomousPeriodic()
 
 void Robot::TeleopInit() 
 {
+  m_AnglePID = new AnglePID();
+  m_CentrePID = new CentrePID();
 }
 
 void Robot::TeleopPeriodic() 

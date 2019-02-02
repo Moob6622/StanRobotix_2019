@@ -20,41 +20,39 @@ void Vision::InitDefaultCommand()
 
 void Vision::Initialization()
 {
-  
+  foundLine = true;
+  foundContour = true;
   //m_cameraServer->GetInstance()->StartAutomaticCapture("USBCamera");
   if (m_cameraServer != nullptr)
   {
     m_cameraServer->GetInstance()->AddAxisCamera("Axis Cam",kCameraIP);
-    m_cameraServer->GetInstance()->PutVideo("Camera MS",480,360);
+    m_cameraServer->GetInstance()->PutVideo("Camera MS",axisCamWidth,axisCamHeight);
   }
 
   mNetworkTableInstanceInst = nt::NetworkTableInstance::GetDefault();
+  lastAngle=90;
 }
 
 void Vision::GetLine(double * oLine)
 {
-
-  std::cout<<"before table call"<<std::endl;
   //auto inst = nt::NetworkTableInstance::GetDefault();
   auto table = mNetworkTableInstanceInst.GetTable("GRIP/myLinesReport");
-  std::cout<<"after table call"<<std::endl;
 
   auto wCoordX1 = table->GetEntry("x1").GetDoubleArray(0); 
   auto wCoordY1 = table->GetEntry("y1").GetDoubleArray(0);
   auto wCoordX2 = table->GetEntry("x2").GetDoubleArray(0);
   auto wCoordY2 = table->GetEntry("y2").GetDoubleArray(0);
   auto wAngle = table->GetEntry("angle").GetDoubleArray(90); 
-  std::cout<<"after entry calls"<<std::endl;
 
   int wTaille = 2;
   // Attention : sizeof() est une taille en octets, pas la longueur du array
   //int wTaille =  sizeof( table->GetEntry("y1").GetDoubleArray(0) );
+  
   for(int i = 0; i < wTaille ; i++ )
   {
     if(wCoordY1[i]<kLineDetectionVerticalThreshold
       && wCoordY2[i]<kLineDetectionVerticalThreshold)
     {
-      std::cout<<"in for loop"<<std::endl;
       oLine[0] = wCoordX1[i];
       oLine[1] = wCoordY1[i];
       oLine[2] = wCoordX2[i];
@@ -67,11 +65,29 @@ void Vision::GetLine(double * oLine)
 
 double Vision::GetLineAngle()
 {
-  std::cout<<"before array creation"<<std::endl;
-  double *wLine = new double(5);
-  GetLine(wLine);
-
-  return wLine[4];
+  //double *wLine = new double(5);
+  //GetLine(wLine);
+  
+  //return wLine[4];
+//
+  auto table = mNetworkTableInstanceInst.GetTable("GRIP/myLinesReport");
+  auto wAngle = table->GetEntry("angle").GetDoubleArray(0);
+  if(wAngle.empty())
+  {
+    foundLine = false;
+    return lastAngle;
+  } 
+  else
+  {
+    foundLine = true;
+    if(wAngle[0]<0)
+    {
+      wAngle[0]+=180;
+    }
+    lastAngle = wAngle[0];
+    return wAngle[0];
+  }
+//
 }
 
 // Fonction: AlignerRobotLigne
@@ -80,6 +96,31 @@ double Vision::GetLineAngle()
 // Sert pour un parametre de la methode TankDrive
 // L'autre prend un 0
 // Rend par defaut un 0 si le robot est aligne avec la ligne
+bool Vision::FoundLine(){
+  return foundLine;
+}
+bool Vision::FoundContour(){
+  return foundContour;
+}
+
+double Vision::GetContoursCentreX(){
+  auto table = mNetworkTableInstanceInst.GetTable("GRIP/myContoursReport");
+
+  auto wCoordX = table->GetEntry("centerX").GetDoubleArray(0);
+  
+  if (!wCoordX.empty())
+  {
+    std::cout<<std::size(wCoordX)<<std::endl;
+    if (sizeof(wCoordX)/sizeof(wCoordX[0]) == 2)
+    {
+      foundContour = true;
+      return (wCoordX[0]+wCoordX[1])/2.0;
+    }
+  }
+  foundContour = false;
+  return -1;
+}
+
 double Vision::AlignerRobotLigne(const double iTableau[5])
 {
   double angle = iTableau[4];

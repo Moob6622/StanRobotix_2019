@@ -23,6 +23,7 @@ OI::OI()
   mBButtonPtr = new JoystickButton(mJoystickPtr, kBButton);
   mXButtonPtr = new JoystickButton(mJoystickPtr, kXButton);
   
+  m1ButtonPtr = new JoystickButton(mJoystickPtr, k1Button);
   m3ButtonPtr = new JoystickButton(mJoystickPtr, k3Button);
   m4ButtonPtr = new JoystickButton(mJoystickPtr, k4Button);
 
@@ -31,9 +32,9 @@ OI::OI()
   //dans le Turn.cpp
 
 
-  Aligner* k3ButtonCommand = new Aligner(Robot::m_AlignPID);
+  Aligner* k1ButtonCommand = new Aligner(Robot::m_AnglePID, Robot::m_CentrePID);
 
-  m3ButtonPtr->WhenPressed(k3ButtonCommand);
+  m1ButtonPtr->WhenPressed(k1ButtonCommand);
 
 }
 
@@ -45,7 +46,8 @@ double OI::GetLeftJoystick()
 
 double OI::GetRightJoystick() 
 {
-  return -mJoystickPtr->GetRawAxis(3); //signe << - >> devant la valeur des joysticks car 
+  return -mJoystickPtr->GetRawAxis(0);
+  //return -mJoystickPtr->GetRawAxis(3); //signe << - >> devant la valeur des joysticks car 
                                        //leur orientation est inversee par rapport au tank drive
 }
 

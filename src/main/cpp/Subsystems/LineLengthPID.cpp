@@ -5,36 +5,46 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-#include "Subsystems/AlignmentPID.h"
+#include "Subsystems/LineLengthPID.h"
 
 #include <livewindow/LiveWindow.h>
 #include <smartdashboard/SmartDashboard.h>
 #include "Robot.h"
+#include <iostream>
 
-AlignmentPID::AlignmentPID()
-    : PIDSubsystem("AlignmentPID", 1.0, 0.0, 0.0) 
+LineLengthPID::LineLengthPID()
+    : PIDSubsystem("LineLengthPID", 1.0, 1.0, 1.0) 
 {
-  SetOutputRange(-0.3,0.3);
+  SetOutputRange(-0.4,0.4);
+  SetAbsoluteTolerance(0.1);
   Enable();
+  //mPIDOutput = 0.0;
 }
 
-double AlignmentPID::ReturnPIDInput() 
+double LineLengthPID::ReturnPIDInput() 
 {
   return Robot::m_vision.GetLineAngle();
 }
 
-void AlignmentPID::UsePIDOutput(double output) 
+void LineLengthPID::UsePIDOutput(double output) 
 {
   mPIDOutput = output;
 } 
 
-void AlignmentPID::InitDefaultCommand() 
+void LineLengthPID::InitDefaultCommand() 
 {
   // Set the default command for a subsystem here.
   // SetDefaultCommand(new MySpecialCommand());
 }
 
-double AlignmentPID::GetPIDOutput() 
+double LineLengthPID::GetPIDOutput() 
 {
-  return mPIDOutput; 
+  if (Robot::m_vision.FoundLine())
+  {
+  return mPIDOutput;
+  }
+  else
+  {
+    return 0;
+  }
 }

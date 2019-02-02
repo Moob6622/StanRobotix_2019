@@ -25,7 +25,8 @@
 #include "networktables/NetworkTableInstance.h"
 #include <cscore_oo.h>
 #include "Timer.h"
-#include <Subsystems/AlignmentPID.h>
+#include <Subsystems/AnglePID.h>
+#include <Subsystems/CentrePID.h>
 
 //class Vision;
 
@@ -48,7 +49,8 @@ class Robot : public frc::TimedRobot
 
   static DriveTrain m_drivetrain;
 
-  static AlignmentPID* m_AlignPID;
+  static AnglePID* m_AnglePID;
+  static CentrePID* m_CentrePID;
   //static grip::DetectLines detectLines;
 
   void RobotInit() override;

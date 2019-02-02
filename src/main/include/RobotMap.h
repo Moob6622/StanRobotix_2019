@@ -14,13 +14,15 @@
 
 constexpr int kLineDetectionVerticalThreshold = 400;
 
-static std::string kCameraIP = "10.66.22.21";
+static std::string kCameraIP = "10.66.22.20";
 static std::string kCameraName = "camera0";
+constexpr int axisCamWidth = 480;
+constexpr int axisCamHeight = 360;
 
-constexpr int kMotorLeft1 = 1;
-constexpr int kMotorLeft2 = 2;
-constexpr int kMotorRight1 = 3;
-constexpr int kMotorRight2 = 0;
+constexpr int kMotorLeft1 = 8;
+constexpr int kMotorLeft2 = 9;
+constexpr int kMotorRight1 = 4;
+constexpr int kMotorRight2 = 5;
 
 constexpr int kJoystick1 = 0;
 
@@ -29,6 +31,7 @@ constexpr int kXButton = 1;
 constexpr int kBButton = 3; 
 constexpr int kAButton = 2; 
 
+constexpr int k1Button = 1;
 constexpr int k3Button = 3;
 constexpr int k4Button = 4;
 
