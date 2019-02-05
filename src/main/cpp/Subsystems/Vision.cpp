@@ -110,8 +110,7 @@ double Vision::GetContoursCentreX(){
   
   if (!wCoordX.empty())
   {
-    std::cout<<std::size(wCoordX)<<std::endl;
-    if (sizeof(wCoordX)/sizeof(wCoordX[0]) == 2)
+    if (wCoordX.size() == 2)
     {
       foundContour = true;
       return (wCoordX[0]+wCoordX[1])/2.0;

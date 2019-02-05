@@ -40,7 +40,7 @@ void Aligner::Execute()
   // std::cout<<"Execute() apres TANKDRIVE : "<<std::fixed<<mCPidPtr->GetPIDOutput()<<std::endl;
   double xCentre = Robot::m_vision.GetContoursCentreX();
   std::cout<<xCentre<<std::endl;
-  if (fabs(xCentre-axisCamWidth/2) <10 && xCentre!=-1)
+  if (fabs(xCentre-axisCamWidth/2) <10 && xCentre !=-1)
   {
     aligned = true;
   }
