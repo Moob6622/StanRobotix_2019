@@ -10,7 +10,6 @@
 #include "Commands/Subsystem.h"
 #include <CameraServer.h>
 #include "RobotMap.h"
-//#include "Robot.h"
 
 #include "networktables/NetworkTable.h"
 #include "networktables/NetworkTableEntry.h"
@@ -22,7 +21,7 @@
 
 class Vision : public frc::Subsystem {
  private:
-  frc::CameraServer* m_cameraServer;
+  frc::CameraServer* mCameraServer;
   nt::NetworkTableInstance mNetworkTableInstanceInst; 
 
  public:
@@ -30,22 +29,25 @@ class Vision : public frc::Subsystem {
 
   void Initialization(); 
 
-  void GetLine(double * oLine);
+  void InitDefaultCommand() override;
+
+
+  double GetContoursCentreX();
+  double GetLineAngle();
 
   bool FoundContour();
   bool FoundLine();
 
-  double GetLineAngle();
-  double GetContoursCentreX();
+  void GetLine(double * oLine);
+
+  void DisplayData(); 
+  
 
   double AlignerRobotLigne(const double iTableau[5]); //Aligne le robot avec une ligne
 
-  void DisplayData(); 
-
-  void InitDefaultCommand() override;
-
   private:
   bool foundContour;
-  double lastAngle;
   bool foundLine;
+
+  double lastAngle;
 };
