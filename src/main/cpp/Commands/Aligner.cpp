@@ -31,22 +31,23 @@ void Aligner::Initialize()
 // Called repeatedly when this Command is scheduled to run
 void Aligner::Execute()
 {
-  
-  //double wPower = mAPidPtr->GetPIDOutput();
-  //Robot::m_drivetrain.TankDrive(-wPower,wPower);
-  // double wPower = mCPidPtr->GetPIDOutput();
-  // Robot::m_drivetrain.TankDrive(-wPower,wPower);
-  // std::cout.precision(17);
-  // std::cout<<"Execute() apres TANKDRIVE : "<<std::fixed<<mCPidPtr->GetPIDOutput()<<std::endl;
+  std::cout<<Robot::m_gps.GetDistCaptDist()<<std::endl;
   double xCentre = Robot::m_vision.GetContoursCentreX();
-  std::cout<<xCentre<<std::endl;
+  
   if (fabs(xCentre-axisCamWidth/2) <10 && xCentre!=-1)
   {
     aligned = true;
   }
   if (aligned)
   {
-    Robot::m_drivetrain.TankDrive(0.4,0.4);
+    if (Robot::m_gps.GetDistCaptDist()>5)
+    {
+      Robot::m_drivetrain.TankDrive(0.4,0.4);
+    }
+    else
+    {
+      Robot::m_drivetrain.TankDrive(0.0,0.0);
+    }
   }
   else
   {
