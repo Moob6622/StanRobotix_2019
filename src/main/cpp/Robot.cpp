@@ -29,6 +29,7 @@ double Robot::PIDD;
 
 AnglePID* Robot::m_AnglePID;
 CentrePID* Robot::m_CentrePID;
+StraightPID* Robot::m_StraightPID;
 /**
 RotationPID * Robot::mPidPtr = new RotationPID(SmartDashboard::GetNumber("DB/Slider 0",0.0),
                                                SmartDashboard::GetNumber("DB/Slider 1",0.0)*0.05, 
@@ -100,6 +101,7 @@ void Robot::TeleopInit()
 {
   m_AnglePID = new AnglePID();
   m_CentrePID = new CentrePID();
+  m_StraightPID = new StraightPID();
 }
 
 void Robot::TeleopPeriodic() 

@@ -44,14 +44,7 @@ void Aligner::Execute()
   {
     aligned = true;
   }
-  if (aligned)
-  {
-    Robot::m_drivetrain.TankDrive(0.4,0.4);
-  }
-  else
-  {
     Robot::m_drivetrain.TankDrive(Robot::m_oi.GetLeftJoystick(), Robot::m_oi.GetRightJoystick());
-  }
 }
 
 // Make this return true when this Command no longer needs to run execute()
@@ -60,13 +53,14 @@ bool Aligner::IsFinished()
 
   //return mAPidPtr->OnTarget() || Robot::m_oi.GetActuatorInput()==1;
   //return mCPidPtr->OnTarget() || Robot::m_oi.GetActuatorInput()==1;
-  return Robot::m_oi.GetActuatorInput()==1;
+  //return Robot::m_oi.GetActuatorInput()==1;
+  return aligned;
 }
 
 // Called once after isFinished returns true
 void Aligner::End()
 {
-  std::cout<<"ALIGNER FIIIIIIIIIIIIIIIIIIIIIIINNNNNIIIIII"<<std::endl;
+
 }
 
 // Called when another command which requires one or more of the same

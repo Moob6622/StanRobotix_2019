@@ -27,6 +27,7 @@
 #include "Timer.h"
 #include <Subsystems/AnglePID.h>
 #include <Subsystems/CentrePID.h>
+#include <Subsystems/StraightPID.h>
 
 //class Vision;
 
@@ -51,6 +52,7 @@ class Robot : public frc::TimedRobot
 
   static AnglePID* m_AnglePID;
   static CentrePID* m_CentrePID;
+  static StraightPID* m_StraightPID;
   //static grip::DetectLines detectLines;
 
   void RobotInit() override;

@@ -65,11 +65,6 @@ void Vision::GetLine(double * oLine)
 
 double Vision::GetLineAngle()
 {
-  //double *wLine = new double(5);
-  //GetLine(wLine);
-  
-  //return wLine[4];
-//
   auto table = mNetworkTableInstanceInst.GetTable("GRIP/myLinesReport");
   auto wAngle = table->GetEntry("angle").GetDoubleArray(0);
   if(wAngle.empty())

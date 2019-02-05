@@ -18,6 +18,8 @@
 
 #include <Math.h>
 
+#include <AnalogInput.h>
+
 class GPS : public frc::Subsystem 
 {
  private:
@@ -25,8 +27,10 @@ class GPS : public frc::Subsystem
   frc::ADXRS450_Gyro * mGyroPtr;
   frc::BuiltInAccelerometer * mAcceleroPtr;
 
-  Encoder *mRightEncoder = new Encoder(0,1,false);
-  Encoder *mLeftEncoder = new Encoder(2,3,false);
+  Encoder *mRightEncoder;
+  Encoder *mLeftEncoder;
+
+  AnalogInput* mDistCaptPtr;
 
  public:
   GPS();
@@ -41,5 +45,6 @@ class GPS : public frc::Subsystem
   double GetZAcceleration();
   double GetAcceleration();
 
-  double GetDistance();
+  double GetEncoderDistance();
+  double GetCapteurDistance();
 };
