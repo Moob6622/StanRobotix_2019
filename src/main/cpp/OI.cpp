@@ -25,6 +25,7 @@ OI::OI()
   mXButtonPtr = new JoystickButton(mJoystickPtr, kXButton);
   
   m1ButtonPtr = new JoystickButton(mJoystickPtr, k1Button);
+  m2ButtonPtr = new JoystickButton(mJoystickPtr, k2Button);
   m3ButtonPtr = new JoystickButton(mJoystickPtr, k3Button);
   m4ButtonPtr = new JoystickButton(mJoystickPtr, k4Button);
 
@@ -36,7 +37,7 @@ OI::OI()
   HatchAlign* k1ButtonCommand = new HatchAlign();
 
   m1ButtonPtr->WhenPressed(k1ButtonCommand);
-  m3ButtonPtr->WhenPressed(new Advance(72, Robot::m_StraightPID, false));
+  m2ButtonPtr->WhenPressed(new Advance(72, Robot::m_StraightPID, false));
 
 }
 

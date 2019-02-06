@@ -36,6 +36,7 @@ constexpr int kGyroSensitivity = 3;
 
 constexpr double kCircumference = 18.8495559; 
 constexpr int k1Button = 1;
+constexpr int k2Button = 2;
 constexpr int k3Button = 3;
 constexpr int k4Button = 4;
 
