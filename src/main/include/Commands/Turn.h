@@ -15,7 +15,7 @@ class Turn : public frc::Command {
  private:
   double mTargetAngle;
   double mAngleIncrement;
-  RotationPID* mPidPtr;
+  RotationPID* mRPidPtr;
   bool mDynamicAngle;
 
  public:

@@ -13,38 +13,30 @@ Turn::Turn(double iAngle, RotationPID* ipid, bool dynamicAngle)
 {
   Requires(&Robot::m_drivetrain);
   mAngleIncrement = iAngle;
-  mPidPtr = ipid;
+  mRPidPtr = ipid;
   mDynamicAngle = dynamicAngle;
 }
 
 void Turn::Initialize() 
 {
-  //mPidPtr = new RotationPID(Robot::PIDSettingsPtr[0], Robot::PIDSettingsPtr[1], Robot::PIDSettingsPtr[2]);
-  if (mPidPtr != nullptr)
-  {
-    delete mPidPtr;
-    mPidPtr = nullptr;
-  }
-
-  mPidPtr = new RotationPID(Robot::PIDP,Robot::PIDI,Robot::PIDD);
-
-  Robot::mPid = mPidPtr;
+  mRPidPtr = new RotationPID(Robot::PIDP,Robot::PIDI,Robot::PIDD);
+  Robot::m_RotationPID = mRPidPtr;
   
   if (mDynamicAngle)
   {
     mAngleIncrement = Robot::PIDVal;
   }
   mTargetAngle = mAngleIncrement + Robot::m_gps.GetAngle();
-  mPidPtr->SetSetpoint(mTargetAngle);
+  mRPidPtr->SetSetpoint(mTargetAngle);
 }
 
 void Turn::Execute() 
 {
   double wPower = 0;
   
-  if(mPidPtr != nullptr) 
+  if(mRPidPtr != nullptr) 
   {
-    wPower = mPidPtr->GetPIDOutput();
+    wPower = mRPidPtr->GetPIDOutput();
   }
 
   Robot::m_drivetrain.TankDrive(wPower, -wPower); 
@@ -52,9 +44,9 @@ void Turn::Execute()
 
 bool Turn::IsFinished() 
 { 
-  if(mPidPtr != nullptr) 
+  if(mRPidPtr != nullptr) 
   { 
-    return mPidPtr->OnTarget();
+    return mRPidPtr->OnTarget();
   }
   else return false; 
 }

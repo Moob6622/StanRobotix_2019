@@ -22,17 +22,10 @@ double Robot::PIDP;
 double Robot::PIDI;
 double Robot::PIDD;
 
-RotationPID *Robot::m_RotationPID;
-StraightPID *Robot::m_StraightPID;
-
 AnglePID* Robot::m_AnglePID;
 CentrePID* Robot::m_CentrePID;
 StraightPID* Robot::m_StraightPID;
-/**
-RotationPID * Robot::mPidPtr = new RotationPID(SmartDashboard::GetNumber("DB/Slider 0",0.0),
-                                               SmartDashboard::GetNumber("DB/Slider 1",0.0)*0.05, 
-                                               SmartDashboard::GetNumber("DB/Slider 2",0.0)*0.05);
-**/
+RotationPID* Robot::m_RotationPID;
 
 void Robot::RobotInit() 
 {
@@ -63,6 +56,7 @@ void Robot::RobotPeriodic()
   PIDP = prefs->GetDouble("PIDP", 1.0);
   PIDI = prefs->GetDouble("PIDI", 1.0);
   PIDD = prefs->GetDouble("PIDD", 1.0);
+  std::cout<<"distance en pouces : "<<m_gps.GetCapteurDistance()<<std::endl;
   //std::cout<<Robot::PIDSettingsPtr[0]<<" "<<Robot::PIDSettingsPtr[1]<<" "<<Robot::PIDSettingsPtr[2]<<std::endl;
 }
 /**

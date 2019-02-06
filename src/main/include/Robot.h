@@ -44,18 +44,10 @@ class Robot : public frc::TimedRobot
   static double PIDI;
   static double PIDD;
 
-
-  // double oldTime;
-  // double deltaTime;
-  // double countdown;
-
-  static DriveTrain m_drivetrain;
-
   static AnglePID* m_AnglePID;
   static CentrePID* m_CentrePID;
   static StraightPID* m_StraightPID;
   static RotationPID* m_RotationPID;
-  //static grip::DetectLines detectLines;
 
   void RobotInit() override;
   void RobotPeriodic() override;

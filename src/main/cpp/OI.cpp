@@ -10,6 +10,7 @@
 #include <iostream>
 #include <SmartDashboard/SmartDashboard.h>
 #include "Commands/HatchAlign.h"
+#include "Commands/Advance.h"
 #include "Robot.h"
 
 OI::OI() 
@@ -35,6 +36,7 @@ OI::OI()
   HatchAlign* k1ButtonCommand = new HatchAlign();
 
   m1ButtonPtr->WhenPressed(k1ButtonCommand);
+  m3ButtonPtr->WhenPressed(new Advance(72, Robot::m_StraightPID, false));
 
 }
 

@@ -6,6 +6,7 @@
 /*----------------------------------------------------------------------------*/
 
 #include "Subsystems\GPS.h"
+#include <iostream>
 
 GPS::GPS() : frc::Subsystem("GPS"), mGyroPtr(nullptr), mAcceleroPtr(nullptr), mRightEncoder(nullptr), mLeftEncoder(nullptr)
 {
@@ -81,8 +82,10 @@ double GPS::GetAcceleration()
 
 double GPS::GetEncoderDistance()
 {
+  std::cout.precision(17);
   if(mRightEncoder != nullptr)
   {
+    std::cout<<mRightEncoder->GetRaw()/1430*kCircumference<<std::endl;
     return mRightEncoder->GetRaw()/1430*kCircumference;
   }
   else return 0;
@@ -90,6 +93,6 @@ double GPS::GetEncoderDistance()
 
 double GPS::GetCapteurDistance()
 {
-  // Dans quelle unite ?
-  return mDistCaptPtr->GetVoltage();
+  // en pouces
+  return (mDistCaptPtr->GetVoltage()*VoltToFootDistCapt*12);
 }

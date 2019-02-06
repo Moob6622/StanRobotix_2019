@@ -34,17 +34,16 @@ constexpr int kAButton = 2;
 constexpr int kGyro = 0;  
 constexpr int kGyroSensitivity = 3;
 
-//constexpr double kCircumference = 18.8495559; 
+constexpr double kCircumference = 18.8495559; 
 constexpr int k1Button = 1;
 constexpr int k3Button = 3;
 constexpr int k4Button = 4;
 
-constexpr int kGyro = 0;
-constexpr int kGyroSensitivity = 3;
-
 constexpr int kActuator = 0;
 
-constexpr double kCircumference = 0.4787787204060999; 
+constexpr double VoltToFootDistCapt = 3.5606;
+
+//constexpr double kCircumference = 0.4787787204060999; 
 
 /**
  * The RobotMap is a mapping from the ports sensors and actuators are wired into

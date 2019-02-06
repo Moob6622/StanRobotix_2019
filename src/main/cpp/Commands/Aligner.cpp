@@ -24,6 +24,8 @@ void Aligner::Initialize()
   aligned = false;
   mAPidPtr = new AnglePID();
   mCPidPtr = new CentrePID();
+  Robot::m_AnglePID = mAPidPtr;
+  Robot::m_CentrePID = mCPidPtr;
   mAPidPtr->SetSetpoint(90);
   mCPidPtr->SetSetpoint(axisCamWidth/2);
 }

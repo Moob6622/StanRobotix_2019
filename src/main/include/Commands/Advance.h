@@ -24,5 +24,5 @@ class Advance : public frc::Command {
   double mDistanceIncrement;
   bool mDynamicDistance;
 
-  StraightPID * mPidPtr;
+  StraightPID * mSPidPtr;
 };
