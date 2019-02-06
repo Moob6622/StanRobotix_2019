@@ -37,8 +37,6 @@ class DriveTrain : public frc::Subsystem
 
   DifferentialDrive Drive{leftSide, rightSide};
 
-  frc::AnalogGyro gyro{kGyro};
-
   TankDrive_Joystick * mDefaultDrivePtr;
 
   // It's desirable that everything possible under private except
@@ -47,8 +45,6 @@ class DriveTrain : public frc::Subsystem
  public:
   DriveTrain();
 
-  void ResetSensors(); 
   void InitDefaultCommand() override;
   void TankDrive(double iLeft, double iRight);
-  double GetAngle();
 };

@@ -7,7 +7,7 @@
 
 #include "Subsystems\GPS.h"
 
-GPS::GPS() : frc::Subsystem("GPS"), mGyroPtr(nullptr), mAcceleroPtr(nullptr)
+GPS::GPS() : frc::Subsystem("GPS"), mGyroPtr(nullptr), mAcceleroPtr(nullptr), mRightEncoder(nullptr), mLeftEncoder(nullptr)
 {
   mGyroPtr = new ADXRS450_Gyro();
   mAcceleroPtr = new frc::BuiltInAccelerometer();
@@ -26,40 +26,66 @@ void GPS::InitDefaultCommand()
 
 void GPS::ResetSensors() 
 {
-  mGyroPtr->Calibrate();
+  if(mGyroPtr != nullptr)
+  {
+    mGyroPtr->Calibrate();
+  }
 }
 
 double GPS::GetAngle() 
 {
-  return mGyroPtr->GetAngle();
+  if(mGyroPtr != nullptr)
+  {
+    return mGyroPtr->GetAngle();
+  }
+  else return 0;
 }
 
 double GPS::GetXAcceleration() 
 {
-  return mAcceleroPtr->GetX();
+  if(mAcceleroPtr != nullptr)
+  {
+    return mAcceleroPtr->GetX();
+  }
+  else return 0;
 }
 
 double GPS::GetYAcceleration() 
 {
-  return mAcceleroPtr->GetY();
+  if(mAcceleroPtr != nullptr)
+  {
+    return mAcceleroPtr->GetY();
+  }
+  else return 0;
 }
 
 double GPS::GetZAcceleration() 
 {
-  return mAcceleroPtr->GetZ();
+  if(mAcceleroPtr != nullptr)
+  {
+    return mAcceleroPtr->GetZ();
+  }
+  else return 0;
 }
 
 double GPS::GetAcceleration()
 {
-  return sqrt(pow(mAcceleroPtr->GetX(),2)   //formule pour calculer
-            + pow(mAcceleroPtr->GetY(),2)   // lacceleration totale
-            + pow(mAcceleroPtr->GetZ(),2));
+  if(mAcceleroPtr != nullptr)
+  {
+    return sqrt(pow(mAcceleroPtr->GetX(),2)   //formule pour calculer
+              + pow(mAcceleroPtr->GetY(),2)   // l'acceleration totale
+              + pow(mAcceleroPtr->GetZ(),2));
+  }
+  else return 0;
 }
 
 double GPS::GetEncoderDistance()
 {
-  // Dans quelle unite ?
-  return mLeftEncoder->GetRaw();
+  if(mRightEncoder != nullptr)
+  {
+    return mRightEncoder->GetRaw()/1430*kCircumference;
+  }
+  else return 0;
 }
 
 double GPS::GetCapteurDistance()

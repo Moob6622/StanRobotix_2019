@@ -31,6 +31,10 @@ constexpr int kXButton = 1;
 constexpr int kBButton = 3; 
 constexpr int kAButton = 2; 
 
+constexpr int kGyro = 0;  
+constexpr int kGyroSensitivity = 3;
+
+//constexpr double kCircumference = 18.8495559; 
 constexpr int k1Button = 1;
 constexpr int k3Button = 3;
 constexpr int k4Button = 4;

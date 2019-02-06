@@ -10,9 +10,6 @@
 
 #include <Commands/Scheduler.h>
 #include <SmartDashboard/SmartDashboard.h>
-#include "Commands/Actuate.h"
-
-#include <iostream>
 
 
 GPS Robot::m_gps;
@@ -25,7 +22,8 @@ double Robot::PIDP;
 double Robot::PIDI;
 double Robot::PIDD;
 
-// DetectLines grip::detectLines;
+RotationPID *Robot::m_RotationPID;
+StraightPID *Robot::m_StraightPID;
 
 AnglePID* Robot::m_AnglePID;
 CentrePID* Robot::m_CentrePID;
@@ -58,15 +56,15 @@ void Robot::RobotInit()
  * <p> This runs after the mode specific periodic functions, but before
  * LiveWindow and SmartDashboard integrated updating.
  */
-void Robot::RobotPeriodic() {
+void Robot::RobotPeriodic() 
+{
   prefs = Preferences::GetInstance();
 	PIDVal = prefs->GetDouble("PIDVal", 40.0);
   PIDP = prefs->GetDouble("PIDP", 1.0);
   PIDI = prefs->GetDouble("PIDI", 1.0);
   PIDD = prefs->GetDouble("PIDD", 1.0);
-  
   //std::cout<<Robot::PIDSettingsPtr[0]<<" "<<Robot::PIDSettingsPtr[1]<<" "<<Robot::PIDSettingsPtr[2]<<std::endl;
-  }
+}
 /**
  * This function is called once each time the robot enters Disabled mode. You
  * can use it to reset any subsystem information you want to clear when the
@@ -102,6 +100,7 @@ void Robot::TeleopInit()
   m_AnglePID = new AnglePID();
   m_CentrePID = new CentrePID();
   m_StraightPID = new StraightPID();
+  m_RotationPID = new RotationPID();
 }
 
 void Robot::TeleopPeriodic() 

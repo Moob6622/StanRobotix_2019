@@ -5,22 +5,24 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-#include "Subsystems\DriveTrain.h"
+#pragma once
 
-DriveTrain::DriveTrain() : frc::Subsystem("DriveTrain"), mDefaultDrivePtr(nullptr) 
-{
-  mDefaultDrivePtr = new TankDrive_Joystick();
-}
+#include <Commands/Command.h>
+#include <RobotMap.h>
+#include "Robot.h"
 
-void DriveTrain::InitDefaultCommand() 
-{
-  SetDefaultCommand(mDefaultDrivePtr);
-}
+class Turn : public frc::Command {
+ private:
+  double mTargetAngle;
+  double mAngleIncrement;
+  RotationPID* mPidPtr;
+  bool mDynamicAngle;
 
-void DriveTrain::TankDrive(double iLeft, double iRight) 
-{
-  Drive.TankDrive(iLeft, iRight, false);
-}
-
-// Put methods for controlling this subsystem
-// here. Call these from Commands.
+ public:
+  Turn(double iAngle, RotationPID *pid, bool dynamicAngle = false);
+  void Initialize() override;
+  void Execute() override;
+  bool IsFinished() override;
+  void End() override;
+  void Interrupted() override;
+};

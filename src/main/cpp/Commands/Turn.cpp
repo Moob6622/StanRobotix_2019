@@ -5,40 +5,52 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-#include "Commands/Advance.h"
+#include "Commands/Turn.h"
+
 #include <iostream>
 
-Advance::Advance(double iDistance, StraightPID *iPid, bool dynamicDistance) 
+Turn::Turn(double iAngle, RotationPID* ipid, bool dynamicAngle)
 {
   Requires(&Robot::m_drivetrain);
-  mPidPtr = iPid;
-  mDistanceIncrement = iDistance;
-  mDynamicDistance = dynamicDistance;
+  mAngleIncrement = iAngle;
+  mPidPtr = ipid;
+  mDynamicAngle = dynamicAngle;
 }
 
-void Advance::Initialize() 
+void Turn::Initialize() 
 {
-  mPidPtr = new StraightPID();
-  mTargetDistance = mDistanceIncrement + Robot::m_gps.GetEncoderDistance();
-  if(mPidPtr != nullptr) 
+  //mPidPtr = new RotationPID(Robot::PIDSettingsPtr[0], Robot::PIDSettingsPtr[1], Robot::PIDSettingsPtr[2]);
+  if (mPidPtr != nullptr)
   {
-    mPidPtr->SetSetpoint(mTargetDistance);
+    delete mPidPtr;
+    mPidPtr = nullptr;
   }
+
+  mPidPtr = new RotationPID(Robot::PIDP,Robot::PIDI,Robot::PIDD);
+
+  Robot::mPid = mPidPtr;
+  
+  if (mDynamicAngle)
+  {
+    mAngleIncrement = Robot::PIDVal;
+  }
+  mTargetAngle = mAngleIncrement + Robot::m_gps.GetAngle();
+  mPidPtr->SetSetpoint(mTargetAngle);
 }
 
-void Advance::Execute() 
+void Turn::Execute() 
 {
   double wPower = 0;
-
+  
   if(mPidPtr != nullptr) 
   {
     wPower = mPidPtr->GetPIDOutput();
   }
-  
-  Robot::m_drivetrain.TankDrive(wPower, wPower); 
+
+  Robot::m_drivetrain.TankDrive(wPower, -wPower); 
 }
 
-bool Advance::IsFinished() 
+bool Turn::IsFinished() 
 { 
   if(mPidPtr != nullptr) 
   { 
@@ -47,12 +59,12 @@ bool Advance::IsFinished()
   else return false; 
 }
 
-void Advance::End() 
+void Turn::End() 
 {
   Robot::m_drivetrain.TankDrive(0,0);
 }
 
-void Advance::Interrupted() 
+void Turn::Interrupted() 
 {
   Robot::m_drivetrain.TankDrive(0,0);
 }

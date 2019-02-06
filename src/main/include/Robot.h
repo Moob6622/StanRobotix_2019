@@ -8,16 +8,11 @@
 #pragma once
 
 #include "OI.h"
-#include "Subsystems/GPS.h"
-#include "Subsystems/Actuator.h"
 #include <SmartDashboard/SendableChooser.h>
 #include <TimedRobot.h>
 #include "Preferences.h"
+#include <Servo.h>
 
-#include <solenoid.h>
-#include "Subsystems/DriveTrain.h"
-#include "Subsystems/Vision.h"
-#include <SmartDashboard/SendableChooser.h>
 #include <CameraServer.h>
 
 #include "networktables/NetworkTable.h"
@@ -25,15 +20,21 @@
 #include "networktables/NetworkTableInstance.h"
 #include <cscore_oo.h>
 #include "Timer.h"
+#include <Subsystems/GPS.h>
+#include <Subsystems/Actuator.h>
 #include <Subsystems/AnglePID.h>
 #include <Subsystems/CentrePID.h>
 #include <Subsystems/StraightPID.h>
+#include <Subsystems/RotationPID.h>
+#include <Subsystems/DriveTrain.h>
+#include <Subsystems/Vision.h>
 
 //class Vision;
 
 class Robot : public frc::TimedRobot 
 {
  public:
+  static DriveTrain m_drivetrain;
   static GPS m_gps; 
   static OI m_oi;
   static Actuator m_actuator;
@@ -53,6 +54,7 @@ class Robot : public frc::TimedRobot
   static AnglePID* m_AnglePID;
   static CentrePID* m_CentrePID;
   static StraightPID* m_StraightPID;
+  static RotationPID* m_RotationPID;
   //static grip::DetectLines detectLines;
 
   void RobotInit() override;
