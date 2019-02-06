@@ -5,20 +5,13 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-#pragma once
+#include "Commands/HatchAlign.h"
+#include <Robot.h>
 
-#include <Commands/Subsystem.h>
-#include <Servo.h>
-
-class Actuator : public frc::Subsystem {
- private:
-
-  // It's desirable that everything possible under private except
-  // for methods that implement subsystem capabilities
-
-  Servo * mActuator;
- public:
-  Actuator();
-  void InitDefaultCommand() override;
-  void MoveDelta(double distance);
-};
+HatchAlign::HatchAlign() {
+  Requires(&Robot::m_drivetrain);
+  Requires(&Robot::m_vision);
+  AddSequential(new Aligner(Robot::m_AnglePID, Robot::m_CentrePID));
+  //Il faudra smooth out toutes les questions d'unites (cm, inch, unite arbitraire, ...)
+  AddSequential(new Advance(Robot::m_gps.GetCapteurDistance()-1, Robot::m_StraightPID, false));
+}

@@ -18,7 +18,8 @@ Advance::Advance(double iDistance, StraightPID *iPid, bool dynamicDistance)
 
 void Advance::Initialize() 
 {
-  mTargetDistance = mDistanceIncrement + Robot::m_gps.GetDistance();
+  mPidPtr = new StraightPID();
+  mTargetDistance = mDistanceIncrement + Robot::m_gps.GetEncoderDistance();
   if(mPidPtr != nullptr) 
   {
     mPidPtr->SetSetpoint(mTargetDistance);

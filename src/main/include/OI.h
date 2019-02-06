@@ -11,15 +11,13 @@
 #include <Buttons/JoystickButton.h>
 #include "Preferences.h"
 
-
-//#include <JoystickButton.h>
-
 class OI 
 {
   public:
     OI();
     double GetLeftJoystick();
     double GetRightJoystick();
+    double GetActuatorInput();
 
   private:
     Joystick * mJoystickPtr;
@@ -28,13 +26,13 @@ class OI
     JoystickButton * mXButtonPtr;
     JoystickButton * mBButtonPtr;
     JoystickButton * mAButtonPtr;
+    
+    JoystickButton * m1ButtonPtr;
+    JoystickButton * m3ButtonPtr;
+    JoystickButton * m4ButtonPtr;
 
     JoystickButton * mFrontLeftTriggerPtr;
     JoystickButton * mBackLeftTriggerPtr;
     JoystickButton * mFrontRightTriggerPtr;
     JoystickButton * mBackRightTriggerPtr;
-
-    
-    
-
 };

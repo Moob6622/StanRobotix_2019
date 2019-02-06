@@ -7,16 +7,14 @@
 
 #include "OI.h"
 #include <RobotMap.h>
-#include "Commands/Turn.h"
-#include "Commands/Advance.h"
 #include <iostream>
 #include <SmartDashboard/SmartDashboard.h>
-#include "Commands/MoveServo.h"
+#include "Commands/HatchAlign.h"
+#include "Robot.h"
 
 OI::OI() 
 {
   // Process operator interface input here.
-  std::cout<<"bool :"<<Robot::PIDVal<<std::endl;
 
   mJoystickPtr = new Joystick(kJoystick1);
 
@@ -24,30 +22,45 @@ OI::OI()
   mAButtonPtr = new JoystickButton(mJoystickPtr, kAButton);
   mBButtonPtr = new JoystickButton(mJoystickPtr, kBButton);
   mXButtonPtr = new JoystickButton(mJoystickPtr, kXButton);
+  
+  m1ButtonPtr = new JoystickButton(mJoystickPtr, k1Button);
+  m3ButtonPtr = new JoystickButton(mJoystickPtr, k3Button);
+  m4ButtonPtr = new JoystickButton(mJoystickPtr, k4Button);
 
   //impossible de declarer le mButtonPtr dans le OI.h,
   //car le OI est utilise dans le DriveTrain.cpp qui est utilise
   //dans le Turn.cpp
-  
-  Turn * mYButtonCommandPtr = new Turn(0.0, Robot::mPid, true);
-  Advance * mAButtonCommandPtr = new Advance(72, Robot::mS_Pid, false);
 
-  //mYButtonPtr->WhenPressed(mYButtonCommandPtr);
-  //mAButtonPtr->WhenPressed(mAButtonCommandPtr);
-  MoveServo* Retracter = new MoveServo(0.2);
-  MoveServo* Etendre = new MoveServo(0.9);
-  mYButtonPtr->WhenPressed(Etendre);
-  mAButtonPtr->WhenPressed(Retracter);
+
+  HatchAlign* k1ButtonCommand = new HatchAlign();
+
+  m1ButtonPtr->WhenPressed(k1ButtonCommand);
+
 }
 
 double OI::GetLeftJoystick() 
 {
   return -mJoystickPtr->GetRawAxis(1); //signe << - >> devant la valeur des joysticks car 
-                                   // leur orientation est inversee par rapport au tank drive
+                                       // leur orientation est inversee par rapport au tank drive
 }
 
 double OI::GetRightJoystick() 
 {
-  return -mJoystickPtr->GetRawAxis(3); //signe << - >> devant la valeur des joysticks car 
-                                   //leur orientation est inversee par rapport au tank drive
+  return -mJoystickPtr->GetRawAxis(0);
+  //return -mJoystickPtr->GetRawAxis(3); //signe << - >> devant la valeur des joysticks car 
+                                       //leur orientation est inversee par rapport au tank drive
+}
+
+double OI::GetActuatorInput()
+{
+  if (m4ButtonPtr->Get() && !m3ButtonPtr->Get())
+  {
+    return 1.0;
+  }
+  
+  if (!m4ButtonPtr->Get() && m3ButtonPtr->Get())
+  {
+    return -1.0;
+  }
+  return 0.0;
 }

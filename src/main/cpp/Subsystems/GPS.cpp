@@ -11,8 +11,11 @@ GPS::GPS() : frc::Subsystem("GPS"), mGyroPtr(nullptr), mAcceleroPtr(nullptr), mR
 {
   mGyroPtr = new ADXRS450_Gyro();
   mAcceleroPtr = new frc::BuiltInAccelerometer();
+
   mRightEncoder = new Encoder(0,1,false);
   mLeftEncoder = new Encoder(2,3,false);
+
+  mDistCaptPtr = new AnalogInput(0);
 }
 
 void GPS::InitDefaultCommand() 
@@ -76,11 +79,17 @@ double GPS::GetAcceleration()
   else return 0;
 }
 
-double GPS::GetDistance()
+double GPS::GetEncoderDistance()
 {
   if(mRightEncoder != nullptr)
   {
     return mRightEncoder->GetRaw()/1430*kCircumference;
   }
   else return 0;
+}
+
+double GPS::GetCapteurDistance()
+{
+  // Dans quelle unite ?
+  return mDistCaptPtr->GetVoltage();
 }

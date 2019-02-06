@@ -5,33 +5,34 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-#include "Commands/MoveServo.h"
+#include "Commands/Actuate.h"
 #include "Robot.h"
+#include <iostream>
 
-MoveServo::MoveServo(double value) 
+Actuate::Actuate() 
 {
-  moveValue = value;
+  Requires(&Robot::m_actuator);
   // Use Requires() here to declare subsystem dependencies
   // eg. Requires(Robot::chassis.get());
 }
 
 // Called just before this Command runs the first time
-void MoveServo::Initialize() 
+void Actuate::Initialize() 
 {
 }
 
 // Called repeatedly when this Command is scheduled to run
-void MoveServo::Execute() 
-{
-  Robot::m_Actuator.Set(moveValue);
+void Actuate::Execute() 
+{ 
+  Robot::m_actuator.MoveDelta(Robot::m_oi.GetActuatorInput());
 }
 
 // Make this return true when this Command no longer needs to run execute()
-bool MoveServo::IsFinished() { return true; }
+bool Actuate::IsFinished() { return false; }
 
 // Called once after isFinished returns true
-void MoveServo::End() {}
+void Actuate::End() {}
 
 // Called when another command which requires one or more of the same
 // subsystems is scheduled to run
-void MoveServo::Interrupted() {}
+void Actuate::Interrupted() {}

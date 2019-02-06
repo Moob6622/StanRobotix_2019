@@ -5,37 +5,46 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-#include "Subsystems\StraightPID.h"
+#include "Subsystems/LineLengthPID.h"
 
-#include "LiveWindow\LiveWindow.h"
-#include <SmartDashboard/SmartDashboard.h>
-#include <Robot.h>
+#include <livewindow/LiveWindow.h>
+#include <smartdashboard/SmartDashboard.h>
+#include "Robot.h"
 #include <iostream>
 
-StraightPID::StraightPID(): PIDSubsystem("StraightPID", 0.1, 0.0, 0.1)
+LineLengthPID::LineLengthPID()
+    : PIDSubsystem("LineLengthPID", 1.0, 1.0, 1.0) 
 {
-  SetOutputRange(-0.3,0.3);
-  SetAbsoluteTolerance(2);
+  SetOutputRange(-0.4,0.4);
+  SetAbsoluteTolerance(0.1);
   Enable();
+  //mPIDOutput = 0.0;
 }
 
-double StraightPID::ReturnPIDInput() 
+double LineLengthPID::ReturnPIDInput() 
 {
-  return Robot::m_gps.GetEncoderDistance();
+  return Robot::m_vision.GetLineAngle();
 }
 
-void StraightPID::UsePIDOutput(double output) 
+void LineLengthPID::UsePIDOutput(double output) 
 {
-  mPIDOutput = output; 
-}
+  mPIDOutput = output;
+} 
 
-void StraightPID::InitDefaultCommand() 
+void LineLengthPID::InitDefaultCommand() 
 {
   // Set the default command for a subsystem here.
   // SetDefaultCommand(new MySpecialCommand());
 }
 
-double StraightPID::GetPIDOutput() 
+double LineLengthPID::GetPIDOutput() 
 {
+  if (Robot::m_vision.FoundLine())
+  {
   return mPIDOutput;
+  }
+  else
+  {
+    return 0;
+  }
 }

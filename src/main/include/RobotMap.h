@@ -6,15 +6,23 @@
 /*----------------------------------------------------------------------------*/
 
 #pragma once
+#include <string>
 
 /**
  * Les ports sont au hasard. A changer quand on aura le materiel.
  */
 
-constexpr int kMotorLeft1 = 1;
-constexpr int kMotorLeft2 = 2;
-constexpr int kMotorRight1 = 3;
-constexpr int kMotorRight2 = 0;
+constexpr int kLineDetectionVerticalThreshold = 400;
+
+static std::string kCameraIP = "10.66.22.20";
+static std::string kCameraName = "camera0";
+constexpr int axisCamWidth = 480;
+constexpr int axisCamHeight = 360;
+
+constexpr int kMotorLeft1 = 8;
+constexpr int kMotorLeft2 = 9;
+constexpr int kMotorRight1 = 4;
+constexpr int kMotorRight2 = 5;
 
 constexpr int kJoystick1 = 0;
 
@@ -26,7 +34,17 @@ constexpr int kAButton = 2;
 constexpr int kGyro = 0;  
 constexpr int kGyroSensitivity = 3;
 
-constexpr double kCircumference = 18.8495559; 
+//constexpr double kCircumference = 18.8495559; 
+constexpr int k1Button = 1;
+constexpr int k3Button = 3;
+constexpr int k4Button = 4;
+
+constexpr int kGyro = 0;
+constexpr int kGyroSensitivity = 3;
+
+constexpr int kActuator = 0;
+
+constexpr double kCircumference = 0.4787787204060999; 
 
 /**
  * The RobotMap is a mapping from the ports sensors and actuators are wired into

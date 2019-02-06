@@ -8,21 +8,25 @@
 #pragma once
 
 #include <Commands/Command.h>
-#include <Subsystems/StraightPID.h>
-#include "Robot.h"
+#include "Networktables/NetworkTable.h"
+#include "Networktables/NetworkTableEntry.h"
+#include "Networktables/NetworkTableInstance.h"
 
-class Advance : public frc::Command {
+#include "Subsystems/AnglePID.h"
+#include "Subsystems/CentrePID.h"
+
+class Aligner : public frc::Command {
  public:
-  Advance(double iDistance, StraightPID *iPid, bool dynamicDistance = false);
+  Aligner(AnglePID * iAPid, CentrePID * iCPid);
   void Initialize() override;
   void Execute() override;
   bool IsFinished() override;
   void End() override;
   void Interrupted() override;
 
-  double mTargetDistance;
-  double mDistanceIncrement;
-  bool mDynamicDistance;
-
-  StraightPID * mPidPtr;
+ private:
+  AnglePID * mAPidPtr;
+  CentrePID * mCPidPtr;
+  bool aligned;
+  
 };
