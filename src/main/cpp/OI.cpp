@@ -10,6 +10,7 @@
 #include <iostream>
 #include <SmartDashboard/SmartDashboard.h>
 #include "Commands/Aligner.h"
+#include <Commands/ToggleVentouse.h>
 #include "Robot.h"
 
 OI::OI() 
@@ -24,6 +25,7 @@ OI::OI()
   mXButtonPtr = new JoystickButton(mJoystickPtr, kXButton);
   
   m1ButtonPtr = new JoystickButton(mJoystickPtr, k1Button);
+  m2ButtonPtr = new JoystickButton(mJoystickPtr, k2Button);
   m3ButtonPtr = new JoystickButton(mJoystickPtr, k3Button);
   m4ButtonPtr = new JoystickButton(mJoystickPtr, k4Button);
 
@@ -31,10 +33,11 @@ OI::OI()
   //car le OI est utilise dans le DriveTrain.cpp qui est utilise
   //dans le Turn.cpp
 
-  // COMMENTAIRE TEMPORAIRE
-  //Aligner* k1ButtonCommand = new Aligner(Robot::m_AnglePID, Robot::m_CentrePID);
+  ToggleVentouse* k1ButtonCommand = new ToggleVentouse();
+  Aligner* k2ButtonCommand = new Aligner(Robot::m_AnglePID, Robot::m_CentrePID);
 
-  //m1ButtonPtr->WhenPressed(k1ButtonCommand);
+  m1ButtonPtr->WhenPressed(k1ButtonCommand);
+  m2ButtonPtr->WhenPressed(k2ButtonCommand);
 }
 
 double OI::GetLeftJoystick() 

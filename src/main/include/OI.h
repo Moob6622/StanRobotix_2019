@@ -30,6 +30,7 @@ class OI
     JoystickButton * mAButtonPtr;
     
     JoystickButton * m1ButtonPtr;
+    JoystickButton * m2ButtonPtr;
     JoystickButton * m3ButtonPtr;
     JoystickButton * m4ButtonPtr;
 

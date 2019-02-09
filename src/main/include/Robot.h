@@ -14,7 +14,7 @@
 #include <TimedRobot.h>
 #include "Preferences.h"
 
-#include <solenoid.h>
+#include <Solenoid.h>
 #include "Subsystems/DriveTrain.h"
 #include "Subsystems/Vision.h"
 #include <SmartDashboard/SendableChooser.h>
@@ -27,8 +27,8 @@
 #include "Timer.h"
 #include <Subsystems/AnglePID.h>
 #include <Subsystems/CentrePID.h>
+#include <Subsystems/Ventouse.h>
 
-#include <Solenoid.h>
 
 //class Vision;
 
@@ -39,6 +39,7 @@ class Robot : public frc::TimedRobot
   static OI m_oi;
   static Actuator m_actuator;
   static Vision m_vision;
+  static Ventouse m_ventouse;
   static double PIDVal;
   static double PIDP;
   static double PIDI;
@@ -67,9 +68,5 @@ class Robot : public frc::TimedRobot
 
  private:
   Preferences* prefs;
-  Solenoid* piston0;
-  Solenoid* piston1;
-
-  bool lastm1Button;
 
 };
