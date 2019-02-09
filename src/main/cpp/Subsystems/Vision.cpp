@@ -8,6 +8,7 @@
 #include "Subsystems\Vision.h"
 #include "Subsystems\DriveTrain.h"
 #include "Timer.h"
+#include <math.h>
 #include <iostream>
 
 Vision::Vision() : Subsystem("Vision"), mCameraServer(nullptr) {}
@@ -48,6 +49,43 @@ double Vision::GetContoursCentreX(){
   }
   foundContour = false;
   return -1;
+}
+
+double Vision::GetContourAngle()
+{
+  //angle forme entre avant du robot et hatch (entre -90 a 90)
+  auto table = mNetworkTableInstanceInst.GetTable("GRIP/myContoursReport");
+
+  auto wCoordX = table->GetEntry("centerX").GetDoubleArray(0);
+  auto wArea = table->GetEntry("area").GetDoubleArray(0);
+  if (!wArea.empty())
+  {
+    if (wArea.size() == 2)
+    {
+      foundContour = true;
+      double absoluteAngle = (std::min(wArea[0],wArea[1])/std::max(wArea[0],wArea[1])-1)/-0.0088;
+      
+      // en face du hatch, si bande à ma droite est plus proche :
+      if(wCoordX[0]>wCoordX[1])
+      {
+        if (wArea[0]>wArea[1])
+        {
+        return -absoluteAngle;
+        }
+      }
+      else
+      {
+        if (wArea[0]<wArea[1])
+        {
+        return -absoluteAngle;
+        }
+      }
+      return absoluteAngle;
+      //return angle orienté de (arrière-avant du robot) et (arrière-avant du hatch) en degrés
+    }
+  }
+  foundContour = false;
+  return 0;
 }
 
 double Vision::GetLineAngle()

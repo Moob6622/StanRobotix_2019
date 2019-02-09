@@ -56,8 +56,6 @@ void Robot::RobotPeriodic()
   PIDP = prefs->GetDouble("PIDP", 1.0);
   PIDI = prefs->GetDouble("PIDI", 1.0);
   PIDD = prefs->GetDouble("PIDD", 1.0);
-  std::cout<<"distance en pouces : "<<m_gps.GetCapteurDistance()<<std::endl;
-  //std::cout<<Robot::PIDSettingsPtr[0]<<" "<<Robot::PIDSettingsPtr[1]<<" "<<Robot::PIDSettingsPtr[2]<<std::endl;
 }
 /**
  * This function is called once each time the robot enters Disabled mode. You

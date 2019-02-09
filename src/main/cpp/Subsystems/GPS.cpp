@@ -82,10 +82,8 @@ double GPS::GetAcceleration()
 
 double GPS::GetEncoderDistance()
 {
-  std::cout.precision(17);
   if(mRightEncoder != nullptr)
   {
-    std::cout<<mRightEncoder->GetRaw()/1430*kCircumference<<std::endl;
     return mRightEncoder->GetRaw()/1430*kCircumference;
   }
   else return 0;

@@ -33,6 +33,9 @@ class Vision : public frc::Subsystem {
 
 
   double GetContoursCentreX();
+
+  double GetContourAngle();
+
   double GetLineAngle();
 
   bool FoundContour();
