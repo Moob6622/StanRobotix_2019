@@ -12,6 +12,7 @@
 #include "Subsystems/GPS.h"
 #include "Subsystems/RotationPID.h"
 #include "Subsystems/StraightPID.h"
+#include <Subsystems/CordeMoteur.h>
 #include <SmartDashboard/SendableChooser.h>
 #include <TimedRobot.h>
 #include "Preferences.h"
@@ -29,6 +30,7 @@ class Robot : public frc::TimedRobot
   static double PIDP;
   static double PIDI;
   static double PIDD;
+  static CordeMoteur m_CordeMoteur;
 
   static RotationPID *mPid;
   static StraightPID *mS_Pid;

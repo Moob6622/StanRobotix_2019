@@ -17,6 +17,7 @@ DriveTrain Robot::m_drivetrain;
 Actuator Robot::m_Actuator;
 GPS Robot::m_gps;
 OI Robot::m_oi;
+CordeMoteur Robot::m_CordeMoteur;
 double Robot::PIDVal;
 double Robot::PIDP;
 double Robot::PIDI;
