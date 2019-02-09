@@ -31,11 +31,10 @@ OI::OI()
   //car le OI est utilise dans le DriveTrain.cpp qui est utilise
   //dans le Turn.cpp
 
+  // COMMENTAIRE TEMPORAIRE
+  //Aligner* k1ButtonCommand = new Aligner(Robot::m_AnglePID, Robot::m_CentrePID);
 
-  Aligner* k1ButtonCommand = new Aligner(Robot::m_AnglePID, Robot::m_CentrePID);
-
-  m1ButtonPtr->WhenPressed(k1ButtonCommand);
-
+  //m1ButtonPtr->WhenPressed(k1ButtonCommand);
 }
 
 double OI::GetLeftJoystick() 
@@ -63,4 +62,9 @@ double OI::GetActuatorInput()
     return -1.0;
   }
   return 0.0;
+}
+
+bool OI::Getm1Button()
+{
+  return m1ButtonPtr->Get();
 }

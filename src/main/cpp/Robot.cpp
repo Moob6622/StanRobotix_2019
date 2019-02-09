@@ -35,6 +35,8 @@ RotationPID * Robot::mPidPtr = new RotationPID(SmartDashboard::GetNumber("DB/Sli
                                                SmartDashboard::GetNumber("DB/Slider 2",0.0)*0.05);
 **/
 
+  bool suction = false;
+
 void Robot::RobotInit() 
 {
   prefs = Preferences::GetInstance();
@@ -47,6 +49,10 @@ void Robot::RobotInit()
 
   m_vision.Initialization(); 
 
+  piston0 = new Solenoid(0);
+  piston1 = new Solenoid(1);
+  
+  lastm1Button = false;
 }
 
 /**
@@ -100,11 +106,22 @@ void Robot::TeleopInit()
 {
   m_AnglePID = new AnglePID();
   m_CentrePID = new CentrePID();
+
+  piston0->Set(false);
+  piston1->Set(true);
 }
 
 void Robot::TeleopPeriodic() 
 { 
   frc::Scheduler::GetInstance()->Run();
+
+  if(m_oi.Getm1Button() && !lastm1Button)
+  {
+    suction = !suction;
+    piston0->Set(suction);
+    piston1->Set(!suction);
+  }
+  lastm1Button = m_oi.Getm1Button();
 }
 
 void Robot::TestPeriodic() 

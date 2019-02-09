@@ -28,6 +28,8 @@
 #include <Subsystems/AnglePID.h>
 #include <Subsystems/CentrePID.h>
 
+#include <Solenoid.h>
+
 //class Vision;
 
 class Robot : public frc::TimedRobot 
@@ -65,4 +67,9 @@ class Robot : public frc::TimedRobot
 
  private:
   Preferences* prefs;
+  Solenoid* piston0;
+  Solenoid* piston1;
+
+  bool lastm1Button;
+
 };

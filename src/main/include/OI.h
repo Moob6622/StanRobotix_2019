@@ -19,6 +19,8 @@ class OI
     double GetRightJoystick();
     double GetActuatorInput();
 
+    bool Getm1Button();
+
   private:
     Joystick * mJoystickPtr;
 
