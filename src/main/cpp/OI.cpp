@@ -25,19 +25,12 @@ OI::OI()
   mBButtonPtr = new JoystickButton(mJoystickPtr, kBButton);
   mXButtonPtr = new JoystickButton(mJoystickPtr, kXButton);
 
+  m3ButtonPtr = new JoystickButton(mJoystickPtr, k3Button);
+  m4ButtonPtr = new JoystickButton(mJoystickPtr, k4Button);
+
   //impossible de declarer le mButtonPtr dans le OI.h,
   //car le OI est utilise dans le DriveTrain.cpp qui est utilise
   //dans le Turn.cpp
-  
-  Turn * mYButtonCommandPtr = new Turn(0.0, Robot::mPid, true);
-  Advance * mAButtonCommandPtr = new Advance(72, Robot::mS_Pid, false);
-
-  //mYButtonPtr->WhenPressed(mYButtonCommandPtr);
-  //mAButtonPtr->WhenPressed(mAButtonCommandPtr);
-  MoveServo* Retracter = new MoveServo(0.2);
-  MoveServo* Etendre = new MoveServo(0.9);
-  mYButtonPtr->WhenPressed(Etendre);
-  mAButtonPtr->WhenPressed(Retracter);
 }
 
 double OI::GetLeftJoystick() 
@@ -50,4 +43,24 @@ double OI::GetRightJoystick()
 {
   return -mJoystickPtr->GetRawAxis(3); //signe << - >> devant la valeur des joysticks car 
                                    //leur orientation est inversee par rapport au tank drive
+}
+
+double OI::GetM3(){
+  if (m3ButtonPtr->Get())
+  {
+    return -1.0;
+  }
+  else{
+    return 0.0;
+  }
+}
+
+double OI::GetM4(){
+  if (m4ButtonPtr->Get())
+  {
+    return 1.0;
+  }
+  else{
+    return 0.0;
+  }
 }

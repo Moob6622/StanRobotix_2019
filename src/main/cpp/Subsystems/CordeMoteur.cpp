@@ -13,7 +13,7 @@ CordeMoteur::CordeMoteur() : Subsystem("CordeMoteur") {
 }
 
 void CordeMoteur::InitDefaultCommand() {
-  SetDefaultCommand(new CordeMove(0.0));
+  SetDefaultCommand(new CordeMove());
   // Set the default command for a subsystem here.
   // SetDefaultCommand(new MySpecialCommand());
 }

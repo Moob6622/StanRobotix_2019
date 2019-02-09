@@ -11,12 +11,10 @@
 
 class CordeMove : public frc::Command {
  public:
-  CordeMove(double value);
+  CordeMove();
   void Initialize() override;
   void Execute() override;
   bool IsFinished() override;
   void End() override;
   void Interrupted() override;
- private:
-  double mPower;
 };

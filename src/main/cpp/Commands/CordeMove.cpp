@@ -8,8 +8,7 @@
 #include "Commands/CordeMove.h"
 #include <Robot.h>
 
-CordeMove::CordeMove(double value) {
-  mPower = value;
+CordeMove::CordeMove() {
   Requires(&Robot::m_CordeMoteur);
   // Use Requires() here to declare subsystem dependencies
   // eg. Requires(Robot::chassis.get());
@@ -20,7 +19,7 @@ void CordeMove::Initialize() {}
 
 // Called repeatedly when this Command is scheduled to run
 void CordeMove::Execute() {
-  Robot::m_CordeMoteur.Set(mPower);
+  Robot::m_CordeMoteur.Set(Robot::m_oi.GetM3()+Robot::m_oi.GetM4());
 }
 
 // Make this return true when this Command no longer needs to run execute()
