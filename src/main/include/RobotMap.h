@@ -8,11 +8,11 @@
 #pragma once
 #include <string>
 
-/**
- * Les ports sont au hasard. A changer quand on aura le materiel.
- */
 
 constexpr int kLineDetectionVerticalThreshold = 400;
+
+// en pouces
+constexpr double RobotLargeur = 28.25;
 
 static std::string kCameraIP = "10.66.22.20";
 static std::string kCameraName = "camera0";
