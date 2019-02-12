@@ -12,7 +12,9 @@
 constexpr int kLineDetectionVerticalThreshold = 400;
 
 // en pouces
-constexpr double RobotLargeur = 28.25;
+constexpr double kRobotLargeur = 28.25;
+constexpr double kLongeurDiagonaleRobot = 0;
+constexpr double kAngleDiagonaleRobot = 0;
 
 static std::string kCameraIP = "10.66.22.20";
 static std::string kCameraName = "camera0";

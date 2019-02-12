@@ -35,8 +35,7 @@ OI::OI()
   //dans le Turn.cpp
 
 
-  //HatchAlign* k1ButtonCommand = new HatchAlign();
-  Aligner* k1ButtonCommand = new Aligner(Robot::m_AnglePID, Robot::m_CentrePID);
+  HatchAlign* k1ButtonCommand = new HatchAlign();
 
   m1ButtonPtr->WhenPressed(k1ButtonCommand);
   m2ButtonPtr->WhenPressed(new Advance(72, Robot::m_StraightPID, false));

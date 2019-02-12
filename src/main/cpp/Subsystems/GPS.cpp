@@ -94,3 +94,9 @@ double GPS::GetCapteurDistance()
   // en pouces
   return (mDistCaptPtr->GetVoltage()*VoltToFootDistCapt*12);
 }
+
+double GPS::ComputeDistance(double iX1, double iY1, double iX2, double iY2)
+{
+  return sqrt(  pow(iX1 - iX2, 2) 
+              + pow(iY1 - iY2, 2));
+}

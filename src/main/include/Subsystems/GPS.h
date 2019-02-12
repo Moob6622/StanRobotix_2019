@@ -47,4 +47,6 @@ class GPS : public frc::Subsystem
 
   double GetEncoderDistance();
   double GetCapteurDistance();
+
+  double ComputeDistance(double iX1, double iY1, double iX2, double iY2);
 };
