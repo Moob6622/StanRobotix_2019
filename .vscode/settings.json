@@ -80,6 +80,8 @@
     "xloctime": "cpp",
     "xmemory": "cpp",
     "xtree": "cpp",
-    "xcomplex": "cpp"
+    "xcomplex": "cpp",
+    "chrono": "cpp",
+    "ratio": "cpp"
   }
 }

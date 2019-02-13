@@ -9,7 +9,7 @@
 #include <RobotMap.h>
 #include <iostream>
 #include <SmartDashboard/SmartDashboard.h>
-#include "Commands/HatchAlign.h"
+#include "Commands/PrepHatchAlign.h"
 #include "Commands/Aligner.h"
 #include "Commands/Advance.h"
 #include "Robot.h"
@@ -35,11 +35,11 @@ OI::OI()
   //dans le Turn.cpp
 
 
-  HatchAlign* k1ButtonCommand = new HatchAlign();
+  PrepHatchAlign* k1ButtonCommand = new PrepHatchAlign();
 
   m1ButtonPtr->WhenPressed(k1ButtonCommand);
-  m2ButtonPtr->WhenPressed(new Advance(72, Robot::m_StraightPID, false));
-
+  m2ButtonPtr->WhenPressed(new Advance(60, Robot::m_StraightPID, false));
+  //m2ButtonPtr->WhenPressed(new Turn(30.0, Robot::m_RotationPID));
 }
 
 double OI::GetLeftJoystick() 

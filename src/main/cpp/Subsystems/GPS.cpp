@@ -8,7 +8,7 @@
 #include "Subsystems\GPS.h"
 #include <iostream>
 
-GPS::GPS() : frc::Subsystem("GPS"), mGyroPtr(nullptr), mAcceleroPtr(nullptr), mRightEncoder(nullptr), mLeftEncoder(nullptr)
+GPS::GPS() : frc::Subsystem("GPS"), mGyroPtr(nullptr), mAcceleroPtr(nullptr), mRightEncoder(nullptr), mLeftEncoder(nullptr), mTimer(nullptr)
 {
   mGyroPtr = new ADXRS450_Gyro();
   mAcceleroPtr = new frc::BuiltInAccelerometer();
@@ -17,6 +17,10 @@ GPS::GPS() : frc::Subsystem("GPS"), mGyroPtr(nullptr), mAcceleroPtr(nullptr), mR
   mLeftEncoder = new Encoder(2,3,false);
 
   mDistCaptPtr = new AnalogInput(0);
+
+  mTimer = new frc::Timer();
+  mSpeed = 0;
+  mPosition = 0;
 }
 
 void GPS::InitDefaultCommand() 
@@ -31,6 +35,8 @@ void GPS::ResetSensors()
   {
     mGyroPtr->Calibrate();
   }
+  mTimer->Reset();
+  mTimer->Start();
 }
 
 double GPS::GetAngle() 
@@ -46,7 +52,7 @@ double GPS::GetXAcceleration()
 {
   if(mAcceleroPtr != nullptr)
   {
-    return mAcceleroPtr->GetX();
+    return mAcceleroPtr->GetX() - kAccelerometerBias;
   }
   else return 0;
 }
@@ -99,4 +105,39 @@ double GPS::ComputeDistance(double iX1, double iY1, double iX2, double iY2)
 {
   return sqrt(  pow(iX1 - iX2, 2) 
               + pow(iY1 - iY2, 2));
+}
+
+void GPS::UpdateGPS()
+{
+  double wDeltaTime = mTimer->Get();
+  UpdateSpeed(wDeltaTime);
+  UpdatePosition(wDeltaTime);
+  mTimer->Reset();
+}
+
+void GPS::UpdateSpeed(double iDeltaTime)
+{
+  //std::cout<<"DeltaTime : "<<iDeltaTime<<std::endl;
+  //std::cout<<"Acceleration : "<<GetXAcceleration()<<std::endl;
+  mSpeed = mSpeed + GetXAcceleration() * kConversionAccelerometer * iDeltaTime;
+}
+
+void GPS::UpdatePosition(double iDeltaTime)
+{
+  mPosition = mPosition + GetSpeed() * iDeltaTime;
+}
+
+void GPS::SetPosition(double iPos)
+{
+  mPosition = iPos; 
+}
+
+double GPS::GetSpeed() 
+{
+  return mSpeed;
+}
+
+double GPS::GetPosition()
+{
+  return mPosition;
 }

@@ -17,6 +17,7 @@
 #include <Encoder.h>
 
 #include <Math.h>
+#include <Timer.h>
 
 #include <AnalogInput.h>
 
@@ -31,6 +32,10 @@ class GPS : public frc::Subsystem
   Encoder *mLeftEncoder;
 
   AnalogInput* mDistCaptPtr;
+
+  double mSpeed;
+  double mPosition;
+  frc::Timer * mTimer;
 
  public:
   GPS();
@@ -47,6 +52,13 @@ class GPS : public frc::Subsystem
 
   double GetEncoderDistance();
   double GetCapteurDistance();
+
+  double GetSpeed();
+  double GetPosition();
+  void UpdateGPS();
+  void UpdateSpeed(double iDeltaTime);
+  void UpdatePosition(double iDeltaTime);
+  void SetPosition(double iPosition);
 
   double ComputeDistance(double iX1, double iY1, double iX2, double iY2);
 };

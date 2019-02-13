@@ -15,10 +15,12 @@ Turn::Turn(double iAngle, RotationPID* ipid, bool dynamicAngle)
   mAngleIncrement = iAngle;
   mRPidPtr = ipid;
   mDynamicAngle = dynamicAngle;
+  std::cout<<"angle constr :"<<iAngle<<std::endl;
 }
 
 void Turn::Initialize() 
 {
+  std::cout<<"angle init :"<<mAngleIncrement<<std::endl;
   mRPidPtr = new RotationPID(Robot::PIDP,Robot::PIDI,Robot::PIDD);
   Robot::m_RotationPID = mRPidPtr;
   

@@ -34,7 +34,6 @@ void Robot::RobotInit()
 	PIDP = prefs->GetDouble("PIDP", 1.0);
 	PIDI = prefs->GetDouble("PIDI", 1.0);
 	PIDD = prefs->GetDouble("PIDD", 1.0);
-  m_gps.ResetSensors();
 
 
   m_vision.Initialization(); 
@@ -93,11 +92,17 @@ void Robot::TeleopInit()
   m_CentrePID = new CentrePID();
   m_StraightPID = new StraightPID();
   m_RotationPID = new RotationPID();
+  m_gps.ResetSensors();
+
 }
 
 void Robot::TeleopPeriodic() 
 { 
   frc::Scheduler::GetInstance()->Run();
+  m_gps.UpdateGPS();
+  //std::cout<<"Accel : "<< m_gps.GetXAcceleration()<<std::endl;
+  //std::cout<<"Vitesse : "<< m_gps.GetSpeed()<<std::endl;
+  std::cout<<"Position : "<< m_gps.GetPosition()<<std::endl;
 }
 
 void Robot::TestPeriodic() 
