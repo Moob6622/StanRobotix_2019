@@ -16,7 +16,7 @@ constexpr int kMotorLeft2 = 2;
 constexpr int kMotorRight1 = 3;
 constexpr int kMotorRight2 = 0;
 
-constexpr int SparkMotor = 0;
+constexpr int SparkMotor = 5;
 
 constexpr int kJoystick1 = 0;
 
@@ -25,6 +25,7 @@ constexpr int kXButton = 1;
 constexpr int kBButton = 3; 
 constexpr int kAButton = 2; 
 
+constexpr int k1Button = 1; 
 constexpr int k3Button = 3; 
 constexpr int k4Button = 4; 
 

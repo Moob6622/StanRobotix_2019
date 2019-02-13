@@ -12,6 +12,7 @@
 #include <iostream>
 #include <SmartDashboard/SmartDashboard.h>
 #include "Commands/MoveServo.h"
+#include "Commands/RobotWiggle.h"
 
 OI::OI() 
 {
@@ -27,6 +28,9 @@ OI::OI()
 
   m3ButtonPtr = new JoystickButton(mJoystickPtr, k3Button);
   m4ButtonPtr = new JoystickButton(mJoystickPtr, k4Button);
+  m1ButtonPtr = new JoystickButton(mJoystickPtr, k1Button);
+
+  m1ButtonPtr->WhenPressed(new RobotWiggle());
 
   //impossible de declarer le mButtonPtr dans le OI.h,
   //car le OI est utilise dans le DriveTrain.cpp qui est utilise
@@ -41,7 +45,7 @@ double OI::GetLeftJoystick()
 
 double OI::GetRightJoystick() 
 {
-  return -mJoystickPtr->GetRawAxis(3); //signe << - >> devant la valeur des joysticks car 
+  return -mJoystickPtr->GetRawAxis(0); //signe << - >> devant la valeur des joysticks car 
                                    //leur orientation est inversee par rapport au tank drive
 }
 

@@ -7,9 +7,17 @@
 
 #include "Subsystems/CordeMoteur.h"
 #include <Commands/CordeMove.h>
+#include <iostream>
 
 CordeMoteur::CordeMoteur() : Subsystem("CordeMoteur") {
   moteur = new Spark(SparkMotor);
+  moteur->SetInverted(false);
+  cordeProg = 0;
+  //cordeMin = 0;
+  cordeMin = -900;
+  //cordeMax = 324;
+  cordeMax = 900;
+  // 0 correspond a la corde retractee, et ... a la corde etendue
 }
 
 void CordeMoteur::InitDefaultCommand() {
@@ -20,7 +28,16 @@ void CordeMoteur::InitDefaultCommand() {
 
 void CordeMoteur::Set(double value)
 {
+  if((value == -1 && cordeProg <= cordeMax) || (value == 1 && cordeProg >= cordeMin))
+  {
   moteur->Set(value);
+  cordeProg -= value;
+  }
+  else
+  {
+    moteur->Set(0.0);
+  }
+  std::cout<<cordeProg<<std::endl;
 }
 
 // Put methods for controlling this subsystem

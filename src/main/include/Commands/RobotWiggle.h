@@ -7,21 +7,14 @@
 
 #pragma once
 
-#include <Commands/Subsystem.h>
+#include <Commands/Command.h>
 
-#include <RobotMap.h>
-#include <Spark.h>
-
-class CordeMoteur : public frc::Subsystem {
- private:
-  // It's desirable that everything possible under private except
-  // for methods that implement subsystem capabilities
-  Spark* moteur;
-  double cordeProg;
-  double cordeMax;
-  double cordeMin;
+class RobotWiggle : public frc::Command {
  public:
-  CordeMoteur();
-  void InitDefaultCommand() override;
-  void Set(double value);
+  RobotWiggle();
+  void Initialize() override;
+  void Execute() override;
+  bool IsFinished() override;
+  void End() override;
+  void Interrupted() override;
 };
