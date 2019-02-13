@@ -37,6 +37,8 @@ void GPS::ResetSensors()
   }
   mTimer->Reset();
   mTimer->Start();
+  mSpeed = 0;
+  mPosition = 0;
 }
 
 double GPS::GetAngle() 
@@ -52,7 +54,11 @@ double GPS::GetXAcceleration()
 {
   if(mAcceleroPtr != nullptr)
   {
-    return mAcceleroPtr->GetX() - kAccelerometerBias;
+    if(fabs(mAcceleroPtr->GetX() - kAccelerometerBias) > 0.02)
+    {
+      return mAcceleroPtr->GetX() - kAccelerometerBias;
+    }
+    else return 0;
   }
   else return 0;
 }

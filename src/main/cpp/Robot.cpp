@@ -78,7 +78,8 @@ void Robot::DisabledPeriodic() {
  * chooser code above (like the commented example) or additional comparisons to
  * the if-else structure below with additional strings & commands.
  */
-void Robot::AutonomousInit() {
+void Robot::AutonomousInit() 
+{
 }
 
 void Robot::AutonomousPeriodic() 
@@ -101,8 +102,8 @@ void Robot::TeleopPeriodic()
   frc::Scheduler::GetInstance()->Run();
   m_gps.UpdateGPS();
   //std::cout<<"Accel : "<< m_gps.GetXAcceleration()<<std::endl;
-  //std::cout<<"Vitesse : "<< m_gps.GetSpeed()<<std::endl;
-  std::cout<<"Position : "<< m_gps.GetPosition()<<std::endl;
+  std::cout<<"Vitesse : "<< m_gps.GetSpeed()<<std::endl;
+  //std::cout<<"Position : "<< m_gps.GetPosition()<<std::endl;
 }
 
 void Robot::TestPeriodic() 
