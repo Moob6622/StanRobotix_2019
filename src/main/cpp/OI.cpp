@@ -12,6 +12,7 @@
 #include "Commands/HatchAlign.h"
 #include "Commands/Advance.h"
 #include "Robot.h"
+#include <math.h>
 
 OI::OI() 
 {
@@ -43,13 +44,29 @@ OI::OI()
 
 double OI::GetLeftJoystick() 
 {
-  return -mJoystickPtr->GetRawAxis(1); //signe << - >> devant la valeur des joysticks car 
+  double leftValue = -mJoystickPtr->GetRawAxis(1);
+  
+  if(leftValue > 0.85)
+  {
+    leftValue = 1;
+    return leftValue;
+  }
+
+   return pow(leftValue, 3)*0.85+0.15*leftValue - 0.15; //signe << - >> devant la valeur des joysticks car 
                                        // leur orientation est inversee par rapport au tank drive
 }
 
 double OI::GetRightJoystick() 
 {
-  return -mJoystickPtr->GetRawAxis(0);
+  double rightValue = -mJoystickPtr->GetRawAxis(0);
+  
+  if(rightValue > 0.85)
+  {
+    rightValue = 1;
+    return rightValue;
+  }
+
+  return pow(rightValue, 3)*0.85+0.15*rightValue - 0.15;
   //return -mJoystickPtr->GetRawAxis(3); //signe << - >> devant la valeur des joysticks car 
                                        //leur orientation est inversee par rapport au tank drive
 }

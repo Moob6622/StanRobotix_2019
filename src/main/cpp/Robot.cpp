@@ -11,6 +11,8 @@
 #include <Commands/Scheduler.h>
 #include <SmartDashboard/SmartDashboard.h>
 
+#include <vitesse_force_joystick-Mael-Raph.cpp>
+
 
 GPS Robot::m_gps;
 OI Robot::m_oi;
@@ -56,7 +58,7 @@ void Robot::RobotPeriodic()
   PIDP = prefs->GetDouble("PIDP", 1.0);
   PIDI = prefs->GetDouble("PIDI", 1.0);
   PIDD = prefs->GetDouble("PIDD", 1.0);
-  std::cout<<"distance en pouces : "<<m_gps.GetCapteurDistance()<<std::endl;
+  //std::cout<<"distance en pouces : "<<m_gps.GetCapteurDistance()<<std::endl;
   //std::cout<<Robot::PIDSettingsPtr[0]<<" "<<Robot::PIDSettingsPtr[1]<<" "<<Robot::PIDSettingsPtr[2]<<std::endl;
 }
 /**
@@ -100,6 +102,10 @@ void Robot::TeleopInit()
 void Robot::TeleopPeriodic() 
 { 
   frc::Scheduler::GetInstance()->Run();
+  std::cout << vitesse_force(m_oi.GetLeftJoystick(), true) << " vitesse du robot\n\n"; 
+  std::cout << vitesse_force(m_oi.GetLeftJoystick(), false) << " vitesse du robot\n\n";
+  //Les valeurs + sont des déplacements en avant
+  //Les valeurs - sont des dé^placements en arriere
 }
 
 void Robot::TestPeriodic() 
