@@ -6,13 +6,17 @@
 /*----------------------------------------------------------------------------*/
 
 #include "Subsystems\GPS.h"
+#include <iostream>
 
 GPS::GPS() : frc::Subsystem("GPS"), mGyroPtr(nullptr), mAcceleroPtr(nullptr), mRightEncoder(nullptr), mLeftEncoder(nullptr)
 {
+  std::cout << "GPS contructor" << this;
   mGyroPtr = new ADXRS450_Gyro();
   mAcceleroPtr = new frc::BuiltInAccelerometer();
-  mRightEncoder = new Encoder(0,1,false);
-  mLeftEncoder = new Encoder(2,3,false);
+  mRightEncoder = new Encoder(0,1,false,Encoder::EncodingType::k4X);
+  //mRightEncoder->Reset();
+  mLeftEncoder = new Encoder(2,3,false,Encoder::EncodingType::k4X);
+  //mLeftEncoder->Reset();
 }
 
 void GPS::InitDefaultCommand() 
@@ -80,7 +84,9 @@ double GPS::GetDistance()
 {
   if(mRightEncoder != nullptr)
   {
-    return mRightEncoder->GetRaw()/1430*kCircumference;
+    std::cout<<"Raw encoder : "<<mRightEncoder->GetRaw()<<std::endl;
+     std::cout<<"Encoder Wratio : "<<(double) mRightEncoder->GetRaw()/ 1430.0 * kCircumference<<std::endl;
+    return (double)   mRightEncoder->GetRaw() / (1430.0 * kCircumference);
   }
-  else return 0;
+  else return -1;
 }

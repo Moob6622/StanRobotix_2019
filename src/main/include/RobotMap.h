@@ -28,6 +28,9 @@ constexpr int kGyroSensitivity = 3;
 
 constexpr double kCircumference = 18.8495559; 
 
+constexpr double kEncoder = 0; 
+// il faudra tester le coefficient
+
 /**
  * The RobotMap is a mapping from the ports sensors and actuators are wired into
  * to a variable name. This provides flexibility changing wiring, makes checking

@@ -13,7 +13,7 @@
 #include <iostream>
 
 //RotationPID::RotationPID() : PIDSubsystem("RotationPID", Robot::PIDSettingsPtr[0], Robot::PIDSettingsPtr[1], Robot::PIDSettingsPtr[2]) 
-RotationPID::RotationPID() : PIDSubsystem("RotationPID", 1 ,1, 1) 
+RotationPID::RotationPID() : PIDSubsystem("RotationPID", 1 ,0, 0) 
 {
   EnableWithSettings();
 }
@@ -52,7 +52,7 @@ void RotationPID::InitDefaultCommand()
 
 void RotationPID::EnableWithSettings()
 {
-  SetOutputRange(-0.3,0.3);
+  SetOutputRange(-0.8,0.8);
   SetAbsoluteTolerance(1);
   Enable();  
 }

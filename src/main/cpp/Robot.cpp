@@ -22,9 +22,11 @@ double Robot::PIDP;
 double Robot::PIDI;
 double Robot::PIDD;
 
+int counter;
+
 RotationPID *Robot::mPid;
 StraightPID *Robot::mS_Pid;
-
+  
 /**
 RotationPID * Robot::mPidPtr = new RotationPID(SmartDashboard::GetNumber("DB/Slider 0",0.0),
                                                SmartDashboard::GetNumber("DB/Slider 1",0.0)*0.05, 
@@ -34,6 +36,7 @@ RotationPID * Robot::mPidPtr = new RotationPID(SmartDashboard::GetNumber("DB/Sli
 void Robot::RobotInit() 
 {
   mPid = new RotationPID();
+  mS_Pid = new StraightPID();
   prefs = Preferences::GetInstance();
 	PIDVal = prefs->GetDouble("PIDVal", 40.0);
 	PIDP = prefs->GetDouble("PIDP", 1.0);
@@ -96,8 +99,19 @@ void Robot::TeleopInit()
 void Robot::TeleopPeriodic() 
 { 
   frc::Scheduler::GetInstance()->Run();
-
   SmartDashboard::PutNumber("PID", mPid->GetPIDOutput());
+
+
+  if(counter > 40)
+  {
+    int val = m_gps.GetDistance();
+    if(val ==-1)
+    std::cout<<"Encoder get distance error"<<std::endl;
+    
+    counter = 0;
+  }
+  
+  counter++;
 }
 
 void Robot::TestPeriodic() 

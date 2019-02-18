@@ -22,6 +22,7 @@ void Advance::Initialize()
   if(mPidPtr != nullptr) 
   {
     mPidPtr->SetSetpoint(mTargetDistance);
+    std::cout<<mTargetDistance<<std::endl;
   }
 }
 
@@ -34,6 +35,7 @@ void Advance::Execute()
     wPower = mPidPtr->GetPIDOutput();
   }
   
+  //std::cout<<Robot::m_gps.GetDistance()<<std::endl;
   Robot::m_drivetrain.TankDrive(wPower, wPower); 
 }
 

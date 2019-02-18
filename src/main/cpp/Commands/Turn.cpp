@@ -34,6 +34,7 @@ void Turn::Initialize()
   {
     mAngleIncrement = Robot::PIDVal;
   }
+  std::cout<< mAngleIncrement << std::endl;
   mTargetAngle = mAngleIncrement + Robot::m_gps.GetAngle();
   mPidPtr->SetSetpoint(mTargetAngle);
 }
@@ -54,6 +55,7 @@ bool Turn::IsFinished()
 { 
   if(mPidPtr != nullptr) 
   { 
+    //std::cout<<"test"<<std::endl;
     return mPidPtr->OnTarget();
   }
   else return false; 

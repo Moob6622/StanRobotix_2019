@@ -32,12 +32,12 @@ OI::OI()
   Turn * mYButtonCommandPtr = new Turn(0.0, Robot::mPid, true);
   Advance * mAButtonCommandPtr = new Advance(72, Robot::mS_Pid, false);
 
-  mYButtonPtr->WhenPressed(mYButtonCommandPtr);
-  mAButtonPtr->WhenPressed(mAButtonCommandPtr);
+  //mYButtonPtr->WhenPressed(mYButtonCommandPtr);
+  //mAButtonPtr->WhenPressed(mAButtonCommandPtr);
   MoveServo* Retracter = new MoveServo(0.2);
   MoveServo* Etendre = new MoveServo(0.9);
-  //mYButtonPtr->WhenPressed(Etendre);
-  //mAButtonPtr->WhenPressed(Retracter);
+  mYButtonPtr->WhenPressed(Etendre);
+  mAButtonPtr->WhenPressed(Retracter);
 }
 
 double OI::GetLeftJoystick() 
@@ -48,6 +48,6 @@ double OI::GetLeftJoystick()
 
 double OI::GetRightJoystick() 
 {
-  return -mJoystickPtr->GetRawAxis(3); //signe << - >> devant la valeur des joysticks car 
+  return -mJoystickPtr->GetRawAxis(5); //signe << - >> devant la valeur des joysticks car 
                                    //leur orientation est inversee par rapport au tank drive
 }
