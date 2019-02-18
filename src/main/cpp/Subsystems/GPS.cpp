@@ -86,7 +86,7 @@ double GPS::GetDistance()
   {
     std::cout<<"Raw encoder : "<<mRightEncoder->GetRaw()<<std::endl;
      std::cout<<"Encoder Wratio : "<<(double) mRightEncoder->GetRaw()/ 1430.0 * kCircumference<<std::endl;
-    return (double)   mRightEncoder->GetRaw() / (1430.0 * kCircumference);
+    return ((double)mRightEncoder->GetRaw() / 1430.0) * kCircumference;
   }
   else return -1;
 }
