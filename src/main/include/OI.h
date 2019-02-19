@@ -34,11 +34,6 @@ class OI
     JoystickButton * m3ButtonPtr;
     JoystickButton * m4ButtonPtr;
 
-    
-    JoystickButton * m1ButtonPtr;
-    JoystickButton * m3ButtonPtr;
-    JoystickButton * m4ButtonPtr;
-
     JoystickButton * mFrontLeftTriggerPtr;
     JoystickButton * mBackLeftTriggerPtr;
     JoystickButton * mFrontRightTriggerPtr;
