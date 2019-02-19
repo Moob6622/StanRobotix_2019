@@ -102,7 +102,7 @@ void Robot::TeleopPeriodic()
   frc::Scheduler::GetInstance()->Run();
   m_gps.UpdateGPS();
   //std::cout<<"Accel : "<< m_gps.GetXAcceleration()<<std::endl;
-  std::cout<<"Vitesse : "<< m_gps.GetSpeed()<<std::endl;
+  std::cout<<"(1)Dist capteur : "<< m_gps.GetCapteurDistance()<<std::endl;
   //std::cout<<"Position : "<< m_gps.GetPosition()<<std::endl;
 }
 

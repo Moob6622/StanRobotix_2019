@@ -20,9 +20,9 @@ HatchAlign::HatchAlign() {
   std::cout<<"construct"<<std::endl;
   // //Il faudra smooth out toutes les questions d'unites (cm, inch, unite arbitraire, ...)
   //AddSequential(new Turn((90-fabs(theta))*theta/fabs(theta), Robot::m_RotationPID));
-  AddSequential(new Turn(90 - theta, Robot::m_RotationPID));
+  AddSequential(new Turn((90 - fabs(theta))*theta/fabs(theta), Robot::m_RotationPID));
   std::cout<<"fin rotation 1"<<std::endl;
   AddSequential(new Advance(fabs(dist*sin(theta*M_PI/180)), Robot::m_StraightPID, false));
-  AddSequential(new Turn(-90, Robot::m_RotationPID));
+  AddSequential(new Turn(-90*theta/fabs(theta), Robot::m_RotationPID));
   AddSequential(new Advance(dist*cos(theta*M_PI/180), Robot::m_StraightPID, false));
 }

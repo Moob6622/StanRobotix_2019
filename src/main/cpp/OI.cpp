@@ -38,7 +38,7 @@ OI::OI()
   PrepHatchAlign* k1ButtonCommand = new PrepHatchAlign();
 
   m1ButtonPtr->WhenPressed(k1ButtonCommand);
-  m2ButtonPtr->WhenPressed(new Advance(60, Robot::m_StraightPID, false));
+  m2ButtonPtr->WhenPressed(new Advance(10, Robot::m_StraightPID, false));
   //m2ButtonPtr->WhenPressed(new Turn(30.0, Robot::m_RotationPID));
 }
 

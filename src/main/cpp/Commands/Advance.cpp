@@ -22,8 +22,8 @@ void Advance::Initialize()
   std::cout<<"adv init :"<<mDistanceIncrement<<std::endl;
   mSPidPtr = new StraightPID();
   Robot::m_StraightPID = mSPidPtr;
-  Robot::m_gps.SetPosition(0); 
-  mTargetDistance = mDistanceIncrement;
+  // Robot::m_gps.SetPosition(0); 
+  mTargetDistance = Robot::m_gps.GetCapteurDistance() - mDistanceIncrement;
   if(mSPidPtr != nullptr) 
   {
     mSPidPtr->SetSetpoint(mTargetDistance);
@@ -39,7 +39,7 @@ void Advance::Execute()
        wPower = mSPidPtr->GetPIDOutput();
      }
   
-  Robot::m_drivetrain.TankDrive(-wPower, -wPower);
+  Robot::m_drivetrain.TankDrive(-wPower*1.2, -wPower);
 }
 
 bool Advance::IsFinished() 

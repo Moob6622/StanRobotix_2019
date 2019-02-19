@@ -54,7 +54,7 @@ double Vision::GetContoursCentreX(){
 
 double Vision::GetContourAngle()
 {
-  //angle forme entre avant du robot et hatch (entre -90 a 90)
+  //angle forme entre avant du robot et hatch (entre -90 et 90)
   auto table = mNetworkTableInstanceInst.GetTable("GRIP/myContoursReport");
 
   auto wCoordX = table->GetEntry("centerX").GetDoubleArray(0);
@@ -64,7 +64,10 @@ double Vision::GetContourAngle()
     if (wArea.size() == 2)
     {
       foundContour = true;
-      double absoluteAngle = (std::min(wArea[0],wArea[1])/std::max(wArea[0],wArea[1])-1)/-0.0088;
+      //distance au hatch en pieds
+      double dist = Robot::m_gps.GetCapteurDistance()/12.0;
+      //formule avec ln pour trouver angle
+      double absoluteAngle = log(std::min(wArea[0],wArea[1])/std::max(wArea[0],wArea[1])/(0.041+0.007*dist));
       
       // en face du hatch, si bande à ma droite est plus proche :
       if(wCoordX[0]>wCoordX[1])
