@@ -22,6 +22,3 @@ void DriveTrain::TankDrive(double iLeft, double iRight)
 {
   Drive.TankDrive(iLeft, iRight, false);
 }
-
-// Put methods for controlling this subsystem
-// here. Call these from Commands.

@@ -7,16 +7,17 @@
 
 #pragma once
 
-#include "Commands/Subsystem.h"
 #include "Commands/PIDSubsystem.h"
 
 class CentrePID : public frc::PIDSubsystem {
  public:
   CentrePID();
+  CentrePID(double p, double i, double d);
   double ReturnPIDInput() override;
   void UsePIDOutput(double output) override;
   void InitDefaultCommand() override;
   double GetPIDOutput();
  private:
-  double mPIDOutput = 0.0;
+  double mPIDOutput;
+  void EnableWithSettings(); 
 };

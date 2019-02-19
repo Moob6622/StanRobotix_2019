@@ -7,17 +7,14 @@
 
 #pragma once
 
-#include "Commands/PIDSubsystem.h"
+#include <Commands/Command.h>
 
-class StraightPID : public frc::PIDSubsystem {
+class TogglePiston : public frc::Command {
  public:
-  StraightPID();
-  StraightPID(double p, double i, double d);
-  double ReturnPIDInput() override;
-  void UsePIDOutput(double output) override;
-  void InitDefaultCommand() override;
-  double GetPIDOutput(); 
- private:
-  double mPIDOutput;
-  void EnableWithSettings(); 
+  TogglePiston();
+  void Initialize() override;
+  void Execute() override;
+  bool IsFinished() override;
+  void End() override;
+  void Interrupted() override;
 };

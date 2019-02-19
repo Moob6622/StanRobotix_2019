@@ -7,17 +7,17 @@
 
 #pragma once
 
-#include "Commands/PIDSubsystem.h"
+#include <Commands/Subsystem.h>
+#include <Solenoid.h>
 
-class StraightPID : public frc::PIDSubsystem {
- public:
-  StraightPID();
-  StraightPID(double p, double i, double d);
-  double ReturnPIDInput() override;
-  void UsePIDOutput(double output) override;
-  void InitDefaultCommand() override;
-  double GetPIDOutput(); 
+class HatchPiston : public frc::Subsystem {
  private:
-  double mPIDOutput;
-  void EnableWithSettings(); 
+  Solenoid* solenoid0;
+  Solenoid* solenoid1;
+
+ public:
+  HatchPiston();
+  void InitDefaultCommand() override;
+  void Toggle();
+  void Retract();
 };

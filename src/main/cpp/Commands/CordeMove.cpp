@@ -19,7 +19,7 @@ void CordeMove::Initialize() {}
 
 // Called repeatedly when this Command is scheduled to run
 void CordeMove::Execute() {
-  Robot::m_CordeMoteur.Set(Robot::m_oi.GetM3()+Robot::m_oi.GetM4());
+  Robot::m_CordeMoteur.Set(Robot::m_oi.GetLT()+Robot::m_oi.GetRT());
 }
 
 // Make this return true when this Command no longer needs to run execute()

@@ -13,33 +13,40 @@ static std::string kCameraName = "camera0";
 constexpr int axisCamWidth = 480;
 constexpr int axisCamHeight = 360;
 
+
+constexpr int kVentouse0 = 1;
+constexpr int kVentouse1 = 2;
+constexpr int kHatchPiston0 = 2;
+constexpr int kHatchPiston1 = 3;
+
+
 constexpr int kMotorLeft1 = 1;
 constexpr int kMotorLeft2 = 2;
 constexpr int kMotorRight1 = 3;
 constexpr int kMotorRight2 = 0;
-constexpr int SparkMotor = 5;
+constexpr int SparkMotor = 1;
 constexpr int kActuator = 0;
+
 
 constexpr int kJoystick = 0;
 constexpr int kJoystickLeft = 1;
 constexpr int kJoystickRight = 5;
+constexpr int kJoystickLeftTrigger = 2;
+constexpr int kJoystickRightTrigger = 3;
 
-constexpr int kYButton = 4; 
-constexpr int kXButton = 1;
-constexpr int kBButton = 3; 
-constexpr int kAButton = 2; 
+constexpr int kAButton = 1;
+constexpr int kBButton = 2; 
+constexpr int kXButton = 3;
+constexpr int kYButton = 4;
+constexpr int kLBButton = 5; 
+constexpr int kRBButton = 6;
+constexpr int kStartButton = 7;
 
-constexpr int k1Button = 1;
-constexpr int k2Button = 2;
-constexpr int k3Button = 3;
-constexpr int k4Button = 4;
 
 constexpr int kGyro = 0;  
 constexpr int kGyroSensitivity = 3;
 
-constexpr double kCircumference = 18.8495559; 
-constexpr double kEncoder = 0; 
-
+constexpr double kCircumference = 18.8495559;
 
 constexpr double VoltToFootDistCapt = 3.5606;
 

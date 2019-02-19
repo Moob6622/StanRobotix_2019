@@ -18,24 +18,19 @@ class OI
     double GetLeftJoystick();
     double GetRightJoystick();
     double GetActuatorInput();
-    double GetM3();
-    double GetM4();
+    double GetLT();
+    double GetRT();
+    bool GetStart();
 
   private:
     Joystick * mJoystickPtr;
 
-    JoystickButton * mYButtonPtr;
-    JoystickButton * mXButtonPtr;
-    JoystickButton * mBButtonPtr;
     JoystickButton * mAButtonPtr;
-    
-    JoystickButton * m1ButtonPtr;
-    JoystickButton * m2ButtonPtr;
-    JoystickButton * m3ButtonPtr;
-    JoystickButton * m4ButtonPtr;
+    JoystickButton * mBButtonPtr;
+    JoystickButton * mXButtonPtr;
+    JoystickButton * mYButtonPtr;
 
-    JoystickButton * mFrontLeftTriggerPtr;
-    JoystickButton * mBackLeftTriggerPtr;
-    JoystickButton * mFrontRightTriggerPtr;
-    JoystickButton * mBackRightTriggerPtr;
+    JoystickButton * mLBButtonPtr;
+    JoystickButton * mRBButtonPtr;
+    JoystickButton * mStartButtonPtr;
 };

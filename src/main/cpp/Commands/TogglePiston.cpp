@@ -5,53 +5,27 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-#include "Commands/Aligner.h"
+#include "Commands/TogglePiston.h"
 #include "Robot.h"
-#include <SmartDashboard/SmartDashboard.h>
-#include <iostream>
 
-Aligner::Aligner(CentrePID * iCPid) 
-{
-  Requires(&Robot::m_drivetrain);
-  Requires(&Robot::m_vision);
-  mCPidPtr = iCPid;
+TogglePiston::TogglePiston() {
+  Requires(&Robot::m_piston);
 }
 
 // Called just before this Command runs the first time
-void Aligner::Initialize() 
-{
-  mCPidPtr = new CentrePID(Robot::PIDP,Robot::PIDI,Robot::PIDD);
-  Robot::m_CentrePID = mCPidPtr;
-  mCPidPtr->SetSetpoint(axisCamWidth/2);
-}
+void TogglePiston::Initialize() {}
 
 // Called repeatedly when this Command is scheduled to run
-void Aligner::Execute()
-{
-   double wPower = 0;
-
-   if(mCPidPtr != nullptr) 
-     {
-       wPower = mCPidPtr->GetPIDOutput();
-     }
-  Robot::m_drivetrain.TankDrive(wPower,-wPower);
+void TogglePiston::Execute() {
+  Robot::m_piston.Toggle();
 }
 
 // Make this return true when this Command no longer needs to run execute()
-bool Aligner::IsFinished() 
-{
-  if(mCPidPtr != nullptr) 
-  { 
-    return mCPidPtr->OnTarget();
-  }
-  else return false || Robot::m_oi.GetStart();
-}
+bool TogglePiston::IsFinished() { return true; }
 
 // Called once after isFinished returns true
-void Aligner::End()
-{
-}
+void TogglePiston::End() {}
 
 // Called when another command which requires one or more of the same
 // subsystems is scheduled to run
-void Aligner::Interrupted() {}
+void TogglePiston::Interrupted() {}

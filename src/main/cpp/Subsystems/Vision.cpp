@@ -26,9 +26,7 @@ void Vision::Initialization()
   mNetworkTableInstanceInst = nt::NetworkTableInstance::GetDefault();
 }
 
-void Vision::InitDefaultCommand() 
-{
-}
+void Vision::InitDefaultCommand() {}
 
 double Vision::GetContoursCentreX(){
   auto table = mNetworkTableInstanceInst.GetTable("GRIP/myContoursReport");

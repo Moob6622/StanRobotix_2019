@@ -17,13 +17,13 @@ Actuator Robot::m_actuator;
 DriveTrain Robot::m_drivetrain;
 Vision Robot::m_vision;
 Ventouse Robot::m_ventouse;
-
+HatchPiston Robot::m_piston;
 CordeMoteur Robot::m_CordeMoteur;
+
 double Robot::PIDVal;
 double Robot::PIDP;
 double Robot::PIDI;
 double Robot::PIDD;
-
 
 CentrePID *Robot::m_CentrePID;
 RotationPID *Robot::m_RotationPID;
@@ -34,6 +34,7 @@ void Robot::RobotInit()
   m_CentrePID = new CentrePID();
   m_RotationPID = new RotationPID();
   m_StraightPID = new StraightPID();
+
   prefs = Preferences::GetInstance();
 	PIDVal = prefs->GetDouble("PIDVal", 40.0);
 	PIDP = prefs->GetDouble("PIDP", 1.0);
@@ -43,7 +44,6 @@ void Robot::RobotInit()
   m_gps.ResetSensors();
 
   m_vision.Initialization(); 
-
 }
 
 /**
@@ -101,6 +101,7 @@ void Robot::TeleopInit()
   m_gps.ResetSensors();
 
   m_ventouse.TurnOff();
+  m_piston.Retract();
 }
 
 void Robot::TeleopPeriodic() 

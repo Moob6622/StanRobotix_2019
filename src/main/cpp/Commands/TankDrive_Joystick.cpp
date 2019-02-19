@@ -15,10 +15,7 @@ TankDrive_Joystick::TankDrive_Joystick()
 }
 
 // Called just before this Command runs the first time
-void TankDrive_Joystick::Initialize() 
-{
-
-}
+void TankDrive_Joystick::Initialize() {}
 
 // Called repeatedly when this Command is scheduled to run
 void TankDrive_Joystick::Execute() 

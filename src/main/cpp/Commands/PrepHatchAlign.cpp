@@ -6,6 +6,7 @@
 /*----------------------------------------------------------------------------*/
 
 #include "Commands/PrepHatchAlign.h"
+#include <Robot.h>
 
 PrepHatchAlign::PrepHatchAlign() {
   // Use Requires() here to declare subsystem dependencies
@@ -24,7 +25,7 @@ void PrepHatchAlign::Execute() {
 }
 
 // Make this return true when this Command no longer needs to run execute()
-bool PrepHatchAlign::IsFinished() { return command->IsCompleted(); }
+bool PrepHatchAlign::IsFinished() { return command->IsCompleted() || Robot::m_oi.GetStart(); }
 
 // Called once after isFinished returns true
 void PrepHatchAlign::End() {}

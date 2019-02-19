@@ -19,7 +19,7 @@ class Turn : public frc::Command {
   bool mDynamicAngle;
 
  public:
-  Turn(double iAngle, RotationPID *pid, bool dynamicAngle = false);
+  Turn(double iAngle, RotationPID *iPid, bool dynamicAngle = false);
   void Initialize() override;
   void Execute() override;
   bool IsFinished() override;

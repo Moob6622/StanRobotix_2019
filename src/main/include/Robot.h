@@ -30,6 +30,7 @@
 
 #include <Subsystems/DriveTrain.h>
 #include <Subsystems/Vision.h>
+#include <Subsystems/HatchPiston.h>
 
 #include <Subsystems/Ventouse.h>
 
@@ -45,6 +46,7 @@ class Robot : public frc::TimedRobot
   static Actuator m_actuator;
   static Vision m_vision;
   static Ventouse m_ventouse;
+  static HatchPiston m_piston;
   
   static double PIDVal;
   static double PIDP;

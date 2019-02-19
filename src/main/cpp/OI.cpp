@@ -14,6 +14,7 @@
 #include "Commands/Advance.h"
 #include <math.h>
 #include <Commands/ToggleVentouse.h>
+#include <Commands/TogglePiston.h>
 #include "Robot.h"
 #include "Commands/RobotWiggle.h"
 
@@ -27,28 +28,18 @@ OI::OI()
   mAButtonPtr = new JoystickButton(mJoystickPtr, kAButton);
   mBButtonPtr = new JoystickButton(mJoystickPtr, kBButton);
   mXButtonPtr = new JoystickButton(mJoystickPtr, kXButton);
-  
-  m1ButtonPtr = new JoystickButton(mJoystickPtr, k1Button);
-  m2ButtonPtr = new JoystickButton(mJoystickPtr, k2Button);
-  m3ButtonPtr = new JoystickButton(mJoystickPtr, k3Button);
-  m4ButtonPtr = new JoystickButton(mJoystickPtr, k4Button);
+  mLBButtonPtr = new JoystickButton(mJoystickPtr, kLBButton);
+  mRBButtonPtr = new JoystickButton(mJoystickPtr, kRBButton);
+  mStartButtonPtr = new JoystickButton(mJoystickPtr, kStartButton);
 
-  m3ButtonPtr = new JoystickButton(mJoystickPtr, k3Button);
-  m4ButtonPtr = new JoystickButton(mJoystickPtr, k4Button);
-  m1ButtonPtr = new JoystickButton(mJoystickPtr, k1Button);
-
-  m1ButtonPtr->WhenPressed(new RobotWiggle());
+  mYButtonPtr->WhenPressed(new RobotWiggle());
+  mBButtonPtr->WhenPressed(new PrepHatchAlign());
+  mXButtonPtr->WhenPressed(new TogglePiston());
+  mAButtonPtr->WhenPressed(new ToggleVentouse());
 
   //impossible de declarer le mButtonPtr dans le OI.h,
   //car le OI est utilise dans le DriveTrain.cpp qui est utilise
   //dans le Turn.cpp
-
-
-  PrepHatchAlign* k1ButtonCommand = new PrepHatchAlign();
-  ToggleVentouse* k2ButtonCommand = new ToggleVentouse();
-
-  m1ButtonPtr->WhenPressed(k1ButtonCommand);
-  m2ButtonPtr->WhenPressed(k2ButtonCommand);
 }
 
 double OI::GetLeftJoystick() 
@@ -65,20 +56,20 @@ double OI::GetRightJoystick()
 
 double OI::GetActuatorInput()
 {
-  if (m4ButtonPtr->Get() && !m3ButtonPtr->Get())
+  if (mRBButtonPtr->Get() && !mLBButtonPtr->Get())
   {
     return 1.0;
   }
   
-  if (!m4ButtonPtr->Get() && m3ButtonPtr->Get())
+  if (!mRBButtonPtr->Get() && mLBButtonPtr->Get())
   {
     return -1.0;
   }
   return 0.0;
 }
 
-double OI::GetM3(){
-  if (m3ButtonPtr->Get())
+double OI::GetLT(){
+  if (mJoystickPtr->GetRawAxis(kJoystickLeftTrigger) > 0.1)
   {
     return -1.0;
   }
@@ -87,12 +78,17 @@ double OI::GetM3(){
   }
 }
 
-double OI::GetM4(){
-  if (m4ButtonPtr->Get())
+double OI::GetRT(){
+  if (mJoystickPtr->GetRawAxis(kJoystickRightTrigger) > 0.1)
   {
     return 1.0;
   }
   else{
     return 0.0;
   }
+}
+
+bool OI::GetStart()
+{
+  return mStartButtonPtr->Get(); 
 }

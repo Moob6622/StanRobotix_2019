@@ -36,7 +36,7 @@ void RobotWiggle::Execute()
 }
 
 // Make this return true when this Command no longer needs to run execute()
-bool RobotWiggle::IsFinished() { return lastDid>=28; }
+bool RobotWiggle::IsFinished() { return lastDid>=28 || Robot::m_oi.GetStart(); }
 
 // Called once after isFinished returns true
 void RobotWiggle::End() {}

@@ -14,9 +14,12 @@
 
 StraightPID::StraightPID(): PIDSubsystem("StraightPID", 1, 2, 1)
 {
-  SetOutputRange(-0.8,0.8);
-  SetAbsoluteTolerance(1);
-  Enable();
+  EnableWithSettings();
+}
+
+StraightPID::StraightPID(double p, double i, double d) : PIDSubsystem("StraightPID", p,i,d) 
+{
+  EnableWithSettings();
 }
 
 double StraightPID::ReturnPIDInput() 
@@ -31,11 +34,16 @@ void StraightPID::UsePIDOutput(double output)
 
 void StraightPID::InitDefaultCommand() 
 {
-  // Set the default command for a subsystem here.
-  // SetDefaultCommand(new MySpecialCommand());
 }
 
 double StraightPID::GetPIDOutput() 
 {
   return mPIDOutput;
+}
+
+void StraightPID::EnableWithSettings()
+{
+  SetOutputRange(-0.8,0.8);
+  SetAbsoluteTolerance(1);
+  Enable();  
 }

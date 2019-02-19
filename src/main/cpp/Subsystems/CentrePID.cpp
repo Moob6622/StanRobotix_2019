@@ -12,13 +12,13 @@
 #include "Robot.h"
 #include <iostream>
 
-CentrePID::CentrePID()
-    : PIDSubsystem("CentrePID", 2.0, 2.0, 2.0) 
+CentrePID::CentrePID() : PIDSubsystem("CentrePID", 2.0, 2.0, 2.0) 
 {
-  SetOutputRange(-0.3,0.3);
-  SetAbsoluteTolerance(0.2);
-  Enable();
-  //mPIDOutput = 0.0;
+  EnableWithSettings();
+}
+CentrePID::CentrePID(double p, double i, double d) : PIDSubsystem("CentrePID", p,i,d) 
+{
+  EnableWithSettings();
 }
 
 double CentrePID::ReturnPIDInput() 
@@ -47,4 +47,11 @@ double CentrePID::GetPIDOutput()
   {
     return 0;
   }
+}
+
+void CentrePID::EnableWithSettings()
+{
+  SetOutputRange(-0.3,0.3);
+  SetAbsoluteTolerance(0.2);
+  Enable();  
 }

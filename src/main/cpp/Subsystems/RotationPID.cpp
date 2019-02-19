@@ -27,17 +27,12 @@ RotationPID::RotationPID(double p, double i, double d) : PIDSubsystem("RotationP
 
 
 double RotationPID::ReturnPIDInput() {
-  // Return your input value for the PID loop
-  // e.g. a sensor, like a potentiometer:
-  // yourPot->SetAverageVoltage() / kYourMaxVoltage;
   return Robot::m_gps.GetAngle();
 }
 
 void RotationPID::UsePIDOutput(double output) 
 {
   mPIDOutput = output;
-  // Use output to drive your system, like a motor
-  // e.g. yourMotor->Set(output);
 }
 
 double RotationPID::GetPIDOutput()

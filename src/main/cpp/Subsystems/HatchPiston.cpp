@@ -5,33 +5,32 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-#include "Subsystems/Ventouse.h"
+#include "Subsystems/HatchPiston.h"
 #include <RobotMap.h>
 
+HatchPiston::HatchPiston() : Subsystem("HatchPiston") {
+  solenoid0 = new Solenoid(kHatchPiston0);
+  //^^^
+  solenoid1 = new Solenoid(kHatchPiston1);
+  //^^^
 
-Ventouse::Ventouse() : Subsystem("Ventouse") {
-  solenoid0 = new Solenoid(kVentouse0);
-  //^^^Valve de pression
-  solenoid1 = new Solenoid(kVentouse1);
-  //^^^Solenoid de ventouses
-  
   solenoid0->Set(true);
   solenoid1->Set(false);
-  //ventouse est desactivee quand 0 est true et 1 est false
+  //ventouse est desactivee quand ? est true et ? est false
 }
 
-void Ventouse::InitDefaultCommand() {
-  
+void HatchPiston::InitDefaultCommand() {
 }
 
-void Ventouse::Toggle()
+void HatchPiston::Toggle()
 {
   solenoid0->Set(!solenoid0->Get());
   solenoid1->Set(!solenoid1->Get());
 }
 
-void Ventouse::TurnOff()
+void HatchPiston::Retract()
 {
+  // valeurs true/false inconnues
   solenoid0->Set(true);
   solenoid1->Set(false);
 }

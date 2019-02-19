@@ -18,8 +18,14 @@ Advance::Advance(double iDistance, StraightPID *iPid, bool dynamicDistance)
 
 void Advance::Initialize() 
 {
-  mSPidPtr = new StraightPID();
+  mSPidPtr = new StraightPID(Robot::PIDP,Robot::PIDI,Robot::PIDD);
   Robot::m_StraightPID = mSPidPtr;
+  
+  if (mDynamicDistance)
+  {
+    mDistanceIncrement = Robot::PIDVal;
+  }
+
   mTargetDistance = Robot::m_gps.GetEncoderDistance() + mDistanceIncrement;
   if(mSPidPtr != nullptr) 
   {
@@ -45,7 +51,7 @@ bool Advance::IsFinished()
   { 
     return mSPidPtr->OnTarget();
   }
-  else return false;
+  else return false || Robot::m_oi.GetStart();
 }
 
 void Advance::End() 

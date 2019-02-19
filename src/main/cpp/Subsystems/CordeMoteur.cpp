@@ -17,13 +17,11 @@ CordeMoteur::CordeMoteur() : Subsystem("CordeMoteur") {
   cordeMin = -900;
   //cordeMax = 324;
   cordeMax = 900;
-  // 0 correspond a la corde retractee, et ... a la corde etendue
+  // 0 correspond a la corde retractee, et 324 a la corde etendue
 }
 
 void CordeMoteur::InitDefaultCommand() {
   SetDefaultCommand(new CordeMove());
-  // Set the default command for a subsystem here.
-  // SetDefaultCommand(new MySpecialCommand());
 }
 
 void CordeMoteur::Set(double value)
@@ -39,6 +37,3 @@ void CordeMoteur::Set(double value)
   }
   std::cout<<cordeProg<<std::endl;
 }
-
-// Put methods for controlling this subsystem
-// here. Call these from Commands.

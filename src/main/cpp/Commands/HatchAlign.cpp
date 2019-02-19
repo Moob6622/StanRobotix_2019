@@ -20,7 +20,8 @@ HatchAlign::HatchAlign() {
 
   AddSequential(new Turn((90 - fabs(theta))*theta/fabs(theta), Robot::m_RotationPID));
   AddSequential(new Advance(fabs(dist*sin(theta*M_PI/180)), Robot::m_StraightPID, false));
-  
+
   AddSequential(new Turn(-90*theta/fabs(theta), Robot::m_RotationPID));
   AddSequential(new Advance(dist*cos(theta*M_PI/180), Robot::m_StraightPID, false));
 }
+ 
