@@ -8,6 +8,7 @@
 #pragma once
 
 #include <Commands/Command.h>
+#include <Subsystems/StraightPID.h>
 #include "Robot.h"
 
 class Advance : public frc::Command {
@@ -23,5 +24,5 @@ class Advance : public frc::Command {
   double mDistanceIncrement;
   bool mDynamicDistance;
 
-  StraightPID * mPidPtr;
+  StraightPID * mSPidPtr;
 };

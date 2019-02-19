@@ -7,18 +7,18 @@
 
 #pragma once
 
-#include <Commands/Subsystem.h>
-#include <Servo.h>
+#include <Commands/Command.h>
+#include <Commands/HatchAlign.h>
 
-class Actuator : public frc::Subsystem {
- private:
-
-  // It's desirable that everything possible under private except
-  // for methods that implement subsystem capabilities
-
-  Servo * mActuator;
+class PrepHatchAlign : public frc::Command {
  public:
-  Actuator();
-  void InitDefaultCommand() override;
-  void MoveDelta(double distance);
+  PrepHatchAlign();
+  void Initialize() override;
+  void Execute() override;
+  bool IsFinished() override;
+  void End() override;
+  void Interrupted() override;
+
+  private:
+   HatchAlign* command;
 };

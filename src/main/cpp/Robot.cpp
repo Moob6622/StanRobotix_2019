@@ -6,43 +6,42 @@
 /*----------------------------------------------------------------------------*/
 
 #include "Robot.h"
+#include <iostream>
 
 #include <Commands/Scheduler.h>
 #include <SmartDashboard/SmartDashboard.h>
 
-#include <iostream>
 
-
-DriveTrain Robot::m_drivetrain;
-Actuator Robot::m_Actuator;
 GPS Robot::m_gps;
 OI Robot::m_oi;
+Actuator Robot::m_actuator;
+DriveTrain Robot::m_drivetrain;
+Vision Robot::m_vision;
+
 double Robot::PIDVal;
 double Robot::PIDP;
 double Robot::PIDI;
 double Robot::PIDD;
 
-int counter;
 
-RotationPID *Robot::mPid;
-StraightPID *Robot::mS_Pid;
-  
-/**
-RotationPID * Robot::mPidPtr = new RotationPID(SmartDashboard::GetNumber("DB/Slider 0",0.0),
-                                               SmartDashboard::GetNumber("DB/Slider 1",0.0)*0.05, 
-                                               SmartDashboard::GetNumber("DB/Slider 2",0.0)*0.05);
-**/
+CentrePID *Robot::m_CentrePID;
+RotationPID *Robot::m_RotationPID;
+StraightPID *Robot::m_StraightPID;
 
 void Robot::RobotInit() 
 {
-  mPid = new RotationPID();
-  mS_Pid = new StraightPID();
+  m_CentrePID = new CentrePID();
+  m_RotationPID = new RotationPID();
+  m_StraightPID = new StraightPID();
   prefs = Preferences::GetInstance();
 	PIDVal = prefs->GetDouble("PIDVal", 40.0);
 	PIDP = prefs->GetDouble("PIDP", 1.0);
 	PIDI = prefs->GetDouble("PIDI", 1.0);
 	PIDD = prefs->GetDouble("PIDD", 1.0);
-  m_gps.ResetSensors();
+
+
+  m_vision.Initialization(); 
+
 }
 
 /**
@@ -60,9 +59,7 @@ void Robot::RobotPeriodic()
   PIDP = prefs->GetDouble("PIDP", 1.0);
   PIDI = prefs->GetDouble("PIDI", 1.0);
   PIDD = prefs->GetDouble("PIDD", 1.0);
-  
-  //std::cout<<Robot::PIDSettingsPtr[0]<<" "<<Robot::PIDSettingsPtr[1]<<" "<<Robot::PIDSettingsPtr[2]<<std::endl;
-  }
+}
 /**
  * This function is called once each time the robot enters Disabled mode. You
  * can use it to reset any subsystem information you want to clear when the
@@ -70,7 +67,9 @@ void Robot::RobotPeriodic()
  */
 void Robot::DisabledInit() {}
 
-void Robot::DisabledPeriodic() { frc::Scheduler::GetInstance()->Run(); }
+void Robot::DisabledPeriodic() {
+  frc::Scheduler::GetInstance()->Run();
+}
 
 /**
  * This autonomous (along with the chooser code above) shows how to select
@@ -83,8 +82,8 @@ void Robot::DisabledPeriodic() { frc::Scheduler::GetInstance()->Run(); }
  * chooser code above (like the commented example) or additional comparisons to
  * the if-else structure below with additional strings & commands.
  */
-void Robot::AutonomousInit() {
-
+void Robot::AutonomousInit() 
+{
 }
 
 void Robot::AutonomousPeriodic() 
@@ -94,24 +93,16 @@ void Robot::AutonomousPeriodic()
 
 void Robot::TeleopInit() 
 {
+  m_CentrePID = new CentrePID();
+  m_StraightPID = new StraightPID();
+  m_RotationPID = new RotationPID();
+  m_gps.ResetSensors();
+
 }
 
 void Robot::TeleopPeriodic() 
 { 
   frc::Scheduler::GetInstance()->Run();
-  SmartDashboard::PutNumber("PID", mPid->GetPIDOutput());
-
-
-  if(counter > 40)
-  {
-    int val = m_gps.GetDistance();
-    if(val ==-1)
-    std::cout<<"Encoder get distance error"<<std::endl;
-    
-    counter = 0;
-  }
-  
-  counter++;
 }
 
 void Robot::TestPeriodic() 

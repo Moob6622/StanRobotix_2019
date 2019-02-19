@@ -8,21 +8,25 @@
 #pragma once
 
 #include <Commands/Command.h>
-#include <RobotMap.h>
-#include "Robot.h"
+#include "Networktables/NetworkTable.h"
+#include "Networktables/NetworkTableEntry.h"
+#include "Networktables/NetworkTableInstance.h"
 
-class Turn : public frc::Command {
- private:
-  double mTargetAngle;
-  double mAngleIncrement;
-  RotationPID* mRPidPtr;
-  bool mDynamicAngle;
+#include "Subsystems/AnglePID.h"
+#include "Subsystems/CentrePID.h"
 
+class Aligner : public frc::Command {
  public:
-  Turn(double iAngle, RotationPID *pid, bool dynamicAngle = false);
+  Aligner(AnglePID * iAPid, CentrePID * iCPid);
   void Initialize() override;
   void Execute() override;
   bool IsFinished() override;
   void End() override;
   void Interrupted() override;
+
+ private:
+  AnglePID * mAPidPtr;
+  CentrePID * mCPidPtr;
+  bool aligned;
+  
 };

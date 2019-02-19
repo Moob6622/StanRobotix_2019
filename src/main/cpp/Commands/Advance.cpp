@@ -11,41 +11,41 @@
 Advance::Advance(double iDistance, StraightPID *iPid, bool dynamicDistance) 
 {
   Requires(&Robot::m_drivetrain);
-  mPidPtr = iPid;
+  mSPidPtr = iPid;
   mDistanceIncrement = iDistance;
   mDynamicDistance = dynamicDistance;
 }
 
 void Advance::Initialize() 
 {
-  mTargetDistance = mDistanceIncrement + Robot::m_gps.GetDistance();
-  if(mPidPtr != nullptr) 
+  mSPidPtr = new StraightPID();
+  Robot::m_StraightPID = mSPidPtr;
+  mTargetDistance = Robot::m_gps.GetEncoderDistance() + mDistanceIncrement;
+  if(mSPidPtr != nullptr) 
   {
-    mPidPtr->SetSetpoint(mTargetDistance);
-    std::cout<<mTargetDistance<<std::endl;
+    mSPidPtr->SetSetpoint(mTargetDistance);
   }
 }
 
 void Advance::Execute() 
 {
-  double wPower = 0;
+   double wPower = 0;
 
-  if(mPidPtr != nullptr) 
-  {
-    wPower = mPidPtr->GetPIDOutput();
-  }
+   if(mSPidPtr != nullptr) 
+     {
+       wPower = mSPidPtr->GetPIDOutput();
+     }
   
-  //std::cout<<Robot::m_gps.GetDistance()<<std::endl;
-  Robot::m_drivetrain.TankDrive(wPower, wPower); 
+  Robot::m_drivetrain.TankDrive(wPower, wPower);
 }
 
 bool Advance::IsFinished() 
 { 
-  if(mPidPtr != nullptr) 
+  if(mSPidPtr != nullptr) 
   { 
-    return mPidPtr->OnTarget();
+    return mSPidPtr->OnTarget();
   }
-  else return false; 
+  else return false;
 }
 
 void Advance::End() 

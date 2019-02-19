@@ -5,38 +5,46 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-#include "Subsystems\StraightPID.h"
+#include "Subsystems/AnglePID.h"
 
-#include "LiveWindow\LiveWindow.h"
-#include <SmartDashboard/SmartDashboard.h>
-#include <Robot.h>
+#include <livewindow/LiveWindow.h>
+#include <smartdashboard/SmartDashboard.h>
+#include "Robot.h"
 #include <iostream>
 
-StraightPID::StraightPID(): PIDSubsystem("StraightPID", 1, 2, 1)
+AnglePID::AnglePID()
+    : PIDSubsystem("AnglePID", 1.0, 1.0, 1.0) 
 {
-  SetOutputRange(-0.8,0.8);
-  SetAbsoluteTolerance(1);
+  SetOutputRange(-0.4,0.4);
+  SetAbsoluteTolerance(0.1);
   Enable();
+  //mPIDOutput = 0.0;
 }
 
-double StraightPID::ReturnPIDInput() 
+double AnglePID::ReturnPIDInput() 
 {
-  //std::cout<<"dist captee :"<<Robot::m_gps.GetPosition()<<std::endl;
-  return Robot::m_gps.GetEncoderDistance();
+  return Robot::m_vision.GetLineAngle();
 }
 
-void StraightPID::UsePIDOutput(double output) 
+void AnglePID::UsePIDOutput(double output) 
 {
   mPIDOutput = output;
-}
+} 
 
-void StraightPID::InitDefaultCommand() 
+void AnglePID::InitDefaultCommand() 
 {
   // Set the default command for a subsystem here.
   // SetDefaultCommand(new MySpecialCommand());
 }
 
-double StraightPID::GetPIDOutput() 
+double AnglePID::GetPIDOutput() 
 {
+  if (Robot::m_vision.FoundLine())
+  {
   return mPIDOutput;
+  }
+  else
+  {
+    return 0;
+  }
 }

@@ -5,38 +5,46 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-#include "Subsystems\StraightPID.h"
+#include "Subsystems/CentrePID.h"
 
-#include "LiveWindow\LiveWindow.h"
-#include <SmartDashboard/SmartDashboard.h>
-#include <Robot.h>
+#include <livewindow/LiveWindow.h>
+#include <smartdashboard/SmartDashboard.h>
+#include "Robot.h"
 #include <iostream>
 
-StraightPID::StraightPID(): PIDSubsystem("StraightPID", 1, 2, 1)
+CentrePID::CentrePID()
+    : PIDSubsystem("CentrePID", 2.0, 2.0, 2.0) 
 {
-  SetOutputRange(-0.8,0.8);
-  SetAbsoluteTolerance(1);
+  SetOutputRange(-0.3,0.3);
+  SetAbsoluteTolerance(0.2);
   Enable();
+  //mPIDOutput = 0.0;
 }
 
-double StraightPID::ReturnPIDInput() 
+double CentrePID::ReturnPIDInput() 
 {
-  //std::cout<<"dist captee :"<<Robot::m_gps.GetPosition()<<std::endl;
-  return Robot::m_gps.GetEncoderDistance();
+  return Robot::m_vision.GetContoursCentreX();
 }
 
-void StraightPID::UsePIDOutput(double output) 
+void CentrePID::UsePIDOutput(double output) 
 {
   mPIDOutput = output;
-}
+} 
 
-void StraightPID::InitDefaultCommand() 
+void CentrePID::InitDefaultCommand() 
 {
   // Set the default command for a subsystem here.
   // SetDefaultCommand(new MySpecialCommand());
 }
 
-double StraightPID::GetPIDOutput() 
+double CentrePID::GetPIDOutput() 
 {
+  if (Robot::m_vision.FoundContour())
+  {
   return mPIDOutput;
+  }
+  else
+  {
+    return 0;
+  }
 }

@@ -7,18 +7,16 @@
 
 #pragma once
 
-#include <Commands/Command.h>
-#include <Servo.h>
+#include "Commands/Subsystem.h"
+#include "Commands/PIDSubsystem.h"
 
-class MoveServo : public frc::Command {
+class LineLengthPID : public frc::PIDSubsystem {
  public:
-  MoveServo(double value);
-  void Initialize() override;
-  void Execute() override;
-  bool IsFinished() override;
-  void End() override;
-  void Interrupted() override;
-  private:
-
-  double moveValue;
+  LineLengthPID();
+  double ReturnPIDInput() override;
+  void UsePIDOutput(double output) override;
+  void InitDefaultCommand() override;
+  double GetPIDOutput();
+ private:
+  double mPIDOutput = 0.0;
 };

@@ -5,43 +5,30 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-#include "Commands/TankDrive_Joystick.h"
-#include "Robot.h"
-#include <iostream>
+#include "Commands/PrepHatchAlign.h"
 
-TankDrive_Joystick::TankDrive_Joystick() 
-{
-  Requires(&Robot::m_drivetrain);
+PrepHatchAlign::PrepHatchAlign() {
+  // Use Requires() here to declare subsystem dependencies
+  // eg. Requires(Robot::chassis.get());
 }
 
 // Called just before this Command runs the first time
-void TankDrive_Joystick::Initialize() 
-{
-
+void PrepHatchAlign::Initialize() {
+  command = new HatchAlign();
+  command->Start();
+  command->Run();
 }
 
 // Called repeatedly when this Command is scheduled to run
-void TankDrive_Joystick::Execute() 
-{
-  Robot::m_drivetrain.TankDrive(Robot::m_oi.GetLeftJoystick(), 
-                                Robot::m_oi.GetRightJoystick());
+void PrepHatchAlign::Execute() {
 }
 
 // Make this return true when this Command no longer needs to run execute()
-bool TankDrive_Joystick::IsFinished() 
-{ 
-  return false; 
-}
+bool PrepHatchAlign::IsFinished() { return command->IsCompleted(); }
 
 // Called once after isFinished returns true
-void TankDrive_Joystick::End() 
-{
-  Robot::m_drivetrain.TankDrive(0,0);
-}
+void PrepHatchAlign::End() {}
 
 // Called when another command which requires one or more of the same
 // subsystems is scheduled to run
-void TankDrive_Joystick::Interrupted() 
-{
-  Robot::m_drivetrain.TankDrive(0,0);
-}
+void PrepHatchAlign::Interrupted() {}

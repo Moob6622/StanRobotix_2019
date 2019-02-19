@@ -8,15 +8,17 @@
 #include "Subsystems\GPS.h"
 #include <iostream>
 
-GPS::GPS() : frc::Subsystem("GPS"), mGyroPtr(nullptr), mAcceleroPtr(nullptr), mRightEncoder(nullptr), mLeftEncoder(nullptr)
+GPS::GPS() : frc::Subsystem("GPS"), mGyroPtr(nullptr), mAcceleroPtr(nullptr), mRightEncoder(nullptr), mLeftEncoder(nullptr), mTimer(nullptr)
 {
   std::cout << "GPS contructor" << this;
   mGyroPtr = new ADXRS450_Gyro();
   mAcceleroPtr = new frc::BuiltInAccelerometer();
-  mRightEncoder = new Encoder(0,1,false,Encoder::EncodingType::k4X);
-  //mRightEncoder->Reset();
-  mLeftEncoder = new Encoder(2,3,false,Encoder::EncodingType::k4X);
-  //mLeftEncoder->Reset();
+
+  mRightEncoder = new Encoder(0,1,false);
+  mRightEncoder->SetReverseDirection(true);
+  mLeftEncoder = new Encoder(2,3,false);
+
+  mDistCaptPtr = new AnalogInput(0);
 }
 
 void GPS::InitDefaultCommand() 
@@ -31,6 +33,8 @@ void GPS::ResetSensors()
   {
     mGyroPtr->Calibrate();
   }
+  mRightEncoder->Reset();
+  mLeftEncoder->Reset();
 }
 
 double GPS::GetAngle() 
@@ -80,13 +84,21 @@ double GPS::GetAcceleration()
   else return 0;
 }
 
-double GPS::GetDistance()
+double GPS::GetEncoderDistance()
 {
+  // en pouces
   if(mRightEncoder != nullptr)
   {
-    std::cout<<"Raw encoder : "<<mRightEncoder->GetRaw()<<std::endl;
-     std::cout<<"Encoder Wratio : "<<(double) mRightEncoder->GetRaw()/ 1430.0 * kCircumference<<std::endl;
-    return ((double)mRightEncoder->GetRaw() / 1430.0) * kCircumference;
+    return double(mRightEncoder->GetRaw()/1430.0*kCircumference);
   }
-  else return -1;
+  else return 0;
+}
+
+double GPS::GetCapteurDistance()
+{
+  // en pouces
+  if (mDistCaptPtr != nullptr)
+  {
+    return (mDistCaptPtr->GetVoltage()*VoltToFootDistCapt*12);
+  }
 }

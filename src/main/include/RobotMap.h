@@ -6,17 +6,29 @@
 /*----------------------------------------------------------------------------*/
 
 #pragma once
+#include <string>
 
-/**
- * Les ports sont au hasard. A changer quand on aura le materiel.
- */
 
-constexpr int kMotorLeft1 = 1;
-constexpr int kMotorLeft2 = 2;
-constexpr int kMotorRight1 = 3;
-constexpr int kMotorRight2 = 0;
+constexpr int kLineDetectionVerticalThreshold = 400;
 
-constexpr int kJoystick1 = 0;
+// en pouces
+constexpr double kRobotLargeur = 28.25;
+constexpr double kLongeurDiagonaleRobot = 0;
+constexpr double kAngleDiagonaleRobot = 0;
+
+static std::string kCameraIP = "10.66.22.20";
+static std::string kCameraName = "camera0";
+constexpr int axisCamWidth = 640;
+constexpr int axisCamHeight = 480;
+
+constexpr int kMotorLeft1 = 8;
+constexpr int kMotorLeft2 = 9;
+constexpr int kMotorRight1 = 4;
+constexpr int kMotorRight2 = 5;
+
+constexpr int kJoystick = 0;
+constexpr int kJoystickLeft = 1;
+constexpr int kJoystickRight = 5;
 
 constexpr int kYButton = 4; 
 constexpr int kXButton = 1;
@@ -27,6 +39,20 @@ constexpr int kGyro = 0;
 constexpr int kGyroSensitivity = 3;
 
 constexpr double kCircumference = 18.8495559; 
+constexpr int k1Button = 1;
+constexpr int k2Button = 2;
+constexpr int k3Button = 3;
+constexpr int k4Button = 4;
+
+constexpr double kAccelerometerBias = 0.03066;
+
+constexpr int kActuator = 0;
+
+constexpr double VoltToFootDistCapt = 3.5606;
+
+constexpr double kConversionAccelerometer = 385.82698;
+
+//constexpr double kCircumference = 0.4787787204060999; 
 
 constexpr double kEncoder = 0; 
 // il faudra tester le coefficient
