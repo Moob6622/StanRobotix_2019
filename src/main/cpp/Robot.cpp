@@ -10,14 +10,15 @@
 
 #include <Commands/Scheduler.h>
 #include <SmartDashboard/SmartDashboard.h>
-#include "Commands/Actuate.h"
 
 GPS Robot::m_gps;
 OI Robot::m_oi;
 Actuator Robot::m_actuator;
 DriveTrain Robot::m_drivetrain;
 Vision Robot::m_vision;
+Ventouse Robot::m_ventouse;
 
+CordeMoteur Robot::m_CordeMoteur;
 double Robot::PIDVal;
 double Robot::PIDP;
 double Robot::PIDI;

@@ -15,6 +15,7 @@
 #include <math.h>
 #include <Commands/ToggleVentouse.h>
 #include "Robot.h"
+#include "Commands/RobotWiggle.h"
 
 OI::OI() 
 {
@@ -31,6 +32,12 @@ OI::OI()
   m2ButtonPtr = new JoystickButton(mJoystickPtr, k2Button);
   m3ButtonPtr = new JoystickButton(mJoystickPtr, k3Button);
   m4ButtonPtr = new JoystickButton(mJoystickPtr, k4Button);
+
+  m3ButtonPtr = new JoystickButton(mJoystickPtr, k3Button);
+  m4ButtonPtr = new JoystickButton(mJoystickPtr, k4Button);
+  m1ButtonPtr = new JoystickButton(mJoystickPtr, k1Button);
+
+  m1ButtonPtr->WhenPressed(new RobotWiggle());
 
   //impossible de declarer le mButtonPtr dans le OI.h,
   //car le OI est utilise dans le DriveTrain.cpp qui est utilise
@@ -68,4 +75,24 @@ double OI::GetActuatorInput()
     return -1.0;
   }
   return 0.0;
+}
+
+double OI::GetM3(){
+  if (m3ButtonPtr->Get())
+  {
+    return -1.0;
+  }
+  else{
+    return 0.0;
+  }
+}
+
+double OI::GetM4(){
+  if (m4ButtonPtr->Get())
+  {
+    return 1.0;
+  }
+  else{
+    return 0.0;
+  }
 }

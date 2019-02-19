@@ -8,6 +8,7 @@
 #pragma once
 
 #include "OI.h"
+#include <Subsystems/CordeMoteur.h>
 #include <SmartDashboard/SendableChooser.h>
 #include <TimedRobot.h>
 #include "Preferences.h"
@@ -43,11 +44,13 @@ class Robot : public frc::TimedRobot
   static OI m_oi;
   static Actuator m_actuator;
   static Vision m_vision;
+  static Ventouse m_ventouse;
   
   static double PIDVal;
   static double PIDP;
   static double PIDI;
   static double PIDD;
+  static CordeMoteur m_CordeMoteur;
 
   static CentrePID* m_CentrePID;
   static StraightPID* m_StraightPID;

@@ -18,6 +18,8 @@ class OI
     double GetLeftJoystick();
     double GetRightJoystick();
     double GetActuatorInput();
+    double GetM3();
+    double GetM4();
 
   private:
     Joystick * mJoystickPtr;
@@ -29,6 +31,11 @@ class OI
     
     JoystickButton * m1ButtonPtr;
     JoystickButton * m2ButtonPtr;
+    JoystickButton * m3ButtonPtr;
+    JoystickButton * m4ButtonPtr;
+
+    
+    JoystickButton * m1ButtonPtr;
     JoystickButton * m3ButtonPtr;
     JoystickButton * m4ButtonPtr;
 
