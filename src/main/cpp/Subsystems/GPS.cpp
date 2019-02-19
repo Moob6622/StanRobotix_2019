@@ -8,15 +8,20 @@
 #include "Subsystems\GPS.h"
 #include <iostream>
 
-GPS::GPS() : frc::Subsystem("GPS"), mGyroPtr(nullptr), mAcceleroPtr(nullptr), mRightEncoder(nullptr), mLeftEncoder(nullptr)
+GPS::GPS() : frc::Subsystem("GPS"), mGyroPtr(nullptr), mAcceleroPtr(nullptr), mRightEncoder(nullptr), mLeftEncoder(nullptr), mTimer(nullptr)
 {
   mGyroPtr = new ADXRS450_Gyro();
   mAcceleroPtr = new frc::BuiltInAccelerometer();
 
   mRightEncoder = new Encoder(0,1,false);
+  mRightEncoder->SetReverseDirection(true);
   mLeftEncoder = new Encoder(2,3,false);
 
   mDistCaptPtr = new AnalogInput(0);
+
+  mTimer = new frc::Timer();
+  mSpeed = 0;
+  mPosition = 0;
 }
 
 void GPS::InitDefaultCommand() 
@@ -31,6 +36,12 @@ void GPS::ResetSensors()
   {
     mGyroPtr->Calibrate();
   }
+  mRightEncoder->Reset();
+  mLeftEncoder->Reset();
+  mTimer->Reset();
+  mTimer->Start();
+  mSpeed = 0;
+  mPosition = 0;
 }
 
 double GPS::GetAngle() 
@@ -46,7 +57,11 @@ double GPS::GetXAcceleration()
 {
   if(mAcceleroPtr != nullptr)
   {
-    return mAcceleroPtr->GetX();
+    if(fabs(mAcceleroPtr->GetX() - kAccelerometerBias) > 0.02)
+    {
+      return mAcceleroPtr->GetX() - kAccelerometerBias;
+    }
+    else return 0;
   }
   else return 0;
 }
@@ -82,11 +97,9 @@ double GPS::GetAcceleration()
 
 double GPS::GetEncoderDistance()
 {
-  std::cout.precision(17);
   if(mRightEncoder != nullptr)
   {
-    std::cout<<mRightEncoder->GetRaw()/1430*kCircumference<<std::endl;
-    return mRightEncoder->GetRaw()/1430*kCircumference;
+    return double(mRightEncoder->GetRaw()/1430.0*kCircumference);
   }
   else return 0;
 }
@@ -95,4 +108,45 @@ double GPS::GetCapteurDistance()
 {
   // en pouces
   return (mDistCaptPtr->GetVoltage()*VoltToFootDistCapt*12);
+}
+
+double GPS::ComputeDistance(double iX1, double iY1, double iX2, double iY2)
+{
+  return sqrt(  pow(iX1 - iX2, 2) 
+              + pow(iY1 - iY2, 2));
+}
+
+void GPS::UpdateGPS()
+{
+  double wDeltaTime = mTimer->Get();
+  UpdateSpeed(wDeltaTime);
+  UpdatePosition(wDeltaTime);
+  mTimer->Reset();
+}
+
+void GPS::UpdateSpeed(double iDeltaTime)
+{
+  //std::cout<<"DeltaTime : "<<iDeltaTime<<std::endl;
+  //std::cout<<"Acceleration : "<<GetXAcceleration()<<std::endl;
+  mSpeed = mSpeed + GetXAcceleration() * kConversionAccelerometer * iDeltaTime;
+}
+
+void GPS::UpdatePosition(double iDeltaTime)
+{
+  mPosition = mPosition + GetSpeed() * iDeltaTime;
+}
+
+void GPS::SetPosition(double iPos)
+{
+  mPosition = iPos; 
+}
+
+double GPS::GetSpeed() 
+{
+  return mSpeed;
+}
+
+double GPS::GetPosition()
+{
+  return mPosition;
 }

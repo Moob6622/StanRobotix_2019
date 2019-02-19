@@ -36,7 +36,6 @@ void Robot::RobotInit()
 	PIDP = prefs->GetDouble("PIDP", 1.0);
 	PIDI = prefs->GetDouble("PIDI", 1.0);
 	PIDD = prefs->GetDouble("PIDD", 1.0);
-  m_gps.ResetSensors();
 
 
   m_vision.Initialization(); 
@@ -58,8 +57,6 @@ void Robot::RobotPeriodic()
   PIDP = prefs->GetDouble("PIDP", 1.0);
   PIDI = prefs->GetDouble("PIDI", 1.0);
   PIDD = prefs->GetDouble("PIDD", 1.0);
-  //std::cout<<"distance en pouces : "<<m_gps.GetCapteurDistance()<<std::endl;
-  //std::cout<<Robot::PIDSettingsPtr[0]<<" "<<Robot::PIDSettingsPtr[1]<<" "<<Robot::PIDSettingsPtr[2]<<std::endl;
 }
 /**
  * This function is called once each time the robot enters Disabled mode. You
@@ -83,7 +80,8 @@ void Robot::DisabledPeriodic() {
  * chooser code above (like the commented example) or additional comparisons to
  * the if-else structure below with additional strings & commands.
  */
-void Robot::AutonomousInit() {
+void Robot::AutonomousInit() 
+{
 }
 
 void Robot::AutonomousPeriodic() 
@@ -97,15 +95,17 @@ void Robot::TeleopInit()
   m_CentrePID = new CentrePID();
   m_StraightPID = new StraightPID();
   m_RotationPID = new RotationPID();
+  m_gps.ResetSensors();
+
 }
 
 void Robot::TeleopPeriodic() 
 { 
   frc::Scheduler::GetInstance()->Run();
-  std::cout << vitesse_force(m_oi.GetLeftJoystick(), true) << " vitesse du robot\n\n"; 
-  std::cout << vitesse_force(m_oi.GetLeftJoystick(), false) << " vitesse du robot\n\n";
-  //Les valeurs + sont des déplacements en avant
-  //Les valeurs - sont des dé^placements en arriere
+  m_gps.UpdateGPS();
+  //std::cout<<"Accel : "<< m_gps.GetXAcceleration()<<std::endl;
+  std::cout<<"Encoder thingy : "<< m_gps.GetEncoderDistance()<<std::endl;
+  //std::cout<<"Position : "<< m_gps.GetPosition()<<std::endl;
 }
 
 void Robot::TestPeriodic() 

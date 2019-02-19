@@ -7,14 +7,18 @@
 
 #pragma once
 
-#include <Commands/CommandGroup.h>
-#include <Commands/Aligner.h>
-#include <Commands/Advance.h>
-#include <Commands/Turn.h>
-#include <Subsystems/AnglePID.h>
-#include <Subsystems/CentrePID.h>
+#include <Commands/Command.h>
+#include <Commands/HatchAlign.h>
 
-class HatchAlign : public frc::CommandGroup {
+class PrepHatchAlign : public frc::Command {
  public:
-  HatchAlign();
+  PrepHatchAlign();
+  void Initialize() override;
+  void Execute() override;
+  bool IsFinished() override;
+  void End() override;
+  void Interrupted() override;
+
+  private:
+   HatchAlign* command;
 };

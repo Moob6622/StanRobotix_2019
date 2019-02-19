@@ -12,15 +12,16 @@
 #include <Robot.h>
 #include <iostream>
 
-StraightPID::StraightPID(): PIDSubsystem("StraightPID", 0.1, 0.0, 0.1)
+StraightPID::StraightPID(): PIDSubsystem("StraightPID", 0.05, 0.0, 0.0)
 {
   SetOutputRange(-0.3,0.3);
-  SetAbsoluteTolerance(2);
+  SetAbsoluteTolerance(0.1);
   Enable();
 }
 
 double StraightPID::ReturnPIDInput() 
 {
+  //std::cout<<"dist captee :"<<Robot::m_gps.GetPosition()<<std::endl;
   return Robot::m_gps.GetEncoderDistance();
 }
 

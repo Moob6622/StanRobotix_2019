@@ -17,6 +17,8 @@
 
 #include <SmartDashboard/SmartDashboard.h>
 
+#include <math.h>
+
 //class Robot;
 
 class Vision : public frc::Subsystem {
@@ -28,26 +30,42 @@ class Vision : public frc::Subsystem {
   Vision();
 
   void Initialization(); 
-
   void InitDefaultCommand() override;
 
-
   double GetContoursCentreX();
+  double GetContourAngle();
   double GetLineAngle();
+  void GetLine(double * oLine);
 
   bool FoundContour();
   bool FoundLine();
 
-  void GetLine(double * oLine);
-
   void DisplayData(); 
-  
 
-  double AlignerRobotLigne(const double iTableau[5]); //Aligne le robot avec une ligne
+  double GetAlpha();
+  double GetBeta();
 
-  private:
+  double GetC1X();
+  double GetC1Y();
+  double GetC2X();
+  double GetC2Y(); 
+
+  double GetAX();
+  double GetAY();
+  double GetA1X();
+  double GetA1Y();
+  double GetA2X();
+  double GetA2Y(); 
+
+  double GetRightAngle();
+  double GetLeftAngle();
+
+  void ReadyData();
+
+ private:
   bool foundContour;
   bool foundLine;
 
   double lastAngle;
+  double mTheta;
 };

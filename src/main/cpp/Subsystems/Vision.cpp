@@ -8,7 +8,9 @@
 #include "Subsystems\Vision.h"
 #include "Subsystems\DriveTrain.h"
 #include "Timer.h"
+#include <math.h>
 #include <iostream>
+#include "Robot.h"
 
 Vision::Vision() : Subsystem("Vision"), mCameraServer(nullptr) {}
 
@@ -48,6 +50,46 @@ double Vision::GetContoursCentreX(){
   }
   foundContour = false;
   return -1;
+}
+
+double Vision::GetContourAngle()
+{
+  //angle forme entre avant du robot et hatch (entre -90 et 90)
+  auto table = mNetworkTableInstanceInst.GetTable("GRIP/myContoursReport");
+
+  auto wCoordX = table->GetEntry("centerX").GetDoubleArray(0);
+  auto wArea = table->GetEntry("area").GetDoubleArray(0);
+  if (!wArea.empty())
+  {
+    if (wArea.size() == 2)
+    {
+      foundContour = true;
+      //distance au hatch en pieds
+      double dist = Robot::m_gps.GetCapteurDistance()/12.0;
+      //formule avec ln pour trouver angle
+      double absoluteAngle = log(std::min(wArea[0],wArea[1])/std::max(wArea[0],wArea[1])/(0.041+0.007*dist));
+      
+      // en face du hatch, si bande à ma droite est plus proche :
+      if(wCoordX[0]>wCoordX[1])
+      {
+        if (wArea[0]>wArea[1])
+        {
+        return -absoluteAngle;
+        }
+      }
+      else
+      {
+        if (wArea[0]<wArea[1])
+        {
+        return -absoluteAngle;
+        }
+      }
+      return absoluteAngle;
+      //return angle orienté de (arrière-avant du robot) et (avant-arriere du hatch) en degrés
+    }
+  }
+  foundContour = false;
+  return 0;
 }
 
 double Vision::GetLineAngle()
@@ -121,27 +163,165 @@ void Vision::DisplayData()
   SmartDashboard::PutNumber("angle", wCoordLine[4]);
 }
 
-// Fonction: AlignerRobotLigne
-// Entree: oTableau est un array qui contient les valeurs d une ligne
-// Sortie: retour: vitesse du robot pour s'aligner
-// Sert pour un parametre de la methode TankDrive
-// L'autre prend un 0
-// Rend par defaut un 0 si le robot est aligne avec la ligne
 
-double Vision::AlignerRobotLigne(const double iTableau[5])
+/**
+ * 
+ *          Section calcul de coordonnees pour PID
+ * 
+ * 
+ * */
+
+void Vision::ReadyData()
 {
-  double angle = iTableau[4];
-  if(angle != 90)
-  {
-    if(angle < 90)
-    {
-      return 0.4;
-    }
-
-    else
-    {
-      return -0.4;
-    }
-  }
-  return 0;
+  mTheta = GetContourAngle();
 }
+
+
+// double Vision::GetC1X() 
+// {
+//     return kRobotLargeur/2;
+// }
+
+// double Vision::GetC1Y()
+// {
+//   if (mTheta<0)
+//   {
+//   return (-sqrt( pow(kRobotLargeur,2) - pow(GetC1X()+GetA1X(),2))+GetA1Y());
+//   }
+//   else
+//   {
+//     return (-sqrt( pow(kRobotLargeur,2) - pow(GetC1X()+GetA2X(),2))+GetA2Y());
+//   }
+// }
+
+// double Vision::GetC2X()
+// {
+//   return -kRobotLargeur/2;
+// }
+
+// double Vision::GetC2Y()
+// {
+//   if (mTheta<0)
+//   {
+//   return (-sqrt( pow(kRobotLargeur,2) - pow(GetC1X()+GetA1X(),2))+GetA1Y());
+//   }
+//   else
+//   {
+//     return (-sqrt( pow(kRobotLargeur,2) - pow(GetC1X()+GetA2X(),2))+GetA2Y());
+//   }
+// }
+
+// double Vision::GetAX()
+// {
+  
+//   return -cos(mTheta) * Robot::m_gps.GetCapteurDistance();
+// }
+
+// double Vision::GetAY()
+// {
+ 
+//   return sin(mTheta) * Robot::m_gps.GetCapteurDistance();
+// }
+
+// double Vision::GetA1X()
+// {
+//   return (GetAX() + cos(kAngleDiagonaleRobot + mTheta) * kLongeurDiagonaleRobot);
+// }
+
+// double Vision::GetA1Y()
+// {
+//   return (GetAY() + sin(kAngleDiagonaleRobot + mTheta) * kLongeurDiagonaleRobot);
+// }
+
+// double Vision::GetA2X()
+// {
+//   return (GetAX() - cos(kAngleDiagonaleRobot - mTheta) * kLongeurDiagonaleRobot);
+// }
+
+// double Vision::GetA2Y()
+// {
+//   return (GetAY() + sin(kAngleDiagonaleRobot - mTheta) * kLongeurDiagonaleRobot);
+// }
+
+// double Vision::GetRightAngle() 
+// {
+//   if (mTheta < 0)
+//   {
+//     double wA2C2 = Robot::m_gps.ComputeDistance(GetA2X(),
+//                                                 GetA2Y(),
+//                                                 GetC2X(),
+//                                                 GetC2Y());
+//     double wA1C2 = Robot::m_gps.ComputeDistance(GetA1X(),
+//                                                 GetA1Y(),
+//                                                 GetC2X(),
+//                                                 GetC2Y());
+//     double wA1A2 = Robot::m_gps.ComputeDistance(GetA1X(),
+//                                                 GetA1Y(),
+//                                                 GetA2X(),
+//                                                 GetA2Y());
+//     return acos((pow(wA2C2,2)-pow(wA1C2,2)-pow(wA1A2,2))/(-2*wA1C2*wA1A2));
+//   }
+  
+//   else
+//   {
+//     double wA2C2 = Robot::m_gps.ComputeDistance(GetA2X(),
+//                                                 GetA2Y(),
+//                                                 GetC2X(),
+//                                                 GetC2Y());
+//     double wA2C1 = Robot::m_gps.ComputeDistance(GetA2X(),
+//                                                 GetA2Y(),
+//                                                 GetC1X(),
+//                                                 GetC1Y());
+//     double wC1C2 = Robot::m_gps.ComputeDistance(GetC1X(),
+//                                                 GetC1Y(),
+//                                                 GetC2X(),
+//                                                 GetC2Y());
+//     return acos((pow(wA2C2,2)-pow(wA2C1,2)-pow(wC1C2,2))/(-2*wA2C1*wC1C2));
+//   }
+// }
+
+
+// double Vision::GetLeftAngle() 
+// {
+//   if (mTheta > 0)
+//   {
+//     double wA2C2 = Robot::m_gps.ComputeDistance(GetA2X(),
+//                                                 GetA2Y(),
+//                                                 GetC2X(),
+//                                                 GetC2Y());
+//     double wA1C2 = Robot::m_gps.ComputeDistance(GetA1X(),
+//                                                 GetA1Y(),
+//                                                 GetC2X(),
+//                                                 GetC2Y());
+//     double wA1A2 = Robot::m_gps.ComputeDistance(GetA1X(),
+//                                                 GetA1Y(),
+//                                                 GetA2X(),
+//                                                 GetA2Y());
+//     return acos((pow(wA2C2,2)-pow(wA1C2,2)-pow(wA1A2,2))/(-2*wA1C2*wA1A2));
+//   }
+  
+//   else
+//   {
+//     double wA1C1 = Robot::m_gps.ComputeDistance(GetA1X(),
+//                                                 GetA1Y(),
+//                                                 GetC1X(),
+//                                                 GetC1Y());
+//     double wC2A1 = Robot::m_gps.ComputeDistance(GetC2X(),
+//                                                 GetC2Y(),
+//                                                 GetA1X(),
+//                                                 GetA1Y());
+//     double wC1C2 = Robot::m_gps.ComputeDistance(GetC1X(),
+//                                                 GetC1Y(),
+//                                                 GetC2X(),
+//                                                 GetC2Y());
+//     return acos((pow(wA1C1,2)-pow(wC2A1,2)-pow(wC1C2,2))/(-2*wC2A1*wC1C2));
+//   }
+
+
+/**
+ * 
+ *          Section calcul de coordonnees pour PID
+ * 
+ * 
+ * */
+
