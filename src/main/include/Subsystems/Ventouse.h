@@ -7,17 +7,17 @@
 
 #pragma once
 
-#include <Commands/Command.h>
+#include <Commands/Subsystem.h>
+#include <Solenoid.h>
 
-class Actuate : public frc::Command {
- private:
-  double mDistance;
-  
+class Ventouse : public frc::Subsystem {
  public:
-  Actuate();
-  void Initialize() override;
-  void Execute() override;
-  bool IsFinished() override;
-  void End() override;
-  void Interrupted() override;
+  Ventouse();
+  void InitDefaultCommand() override;
+  void Toggle();
+  void TurnOff();
+
+ private:
+  Solenoid* solenoid0;
+  Solenoid* solenoid1;
 };

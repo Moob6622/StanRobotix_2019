@@ -21,7 +21,6 @@ StraightPID::StraightPID(): PIDSubsystem("StraightPID", 1, 2, 1)
 
 double StraightPID::ReturnPIDInput() 
 {
-  //std::cout<<"dist captee :"<<Robot::m_gps.GetPosition()<<std::endl;
   return Robot::m_gps.GetEncoderDistance();
 }
 

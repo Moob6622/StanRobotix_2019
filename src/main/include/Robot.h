@@ -19,15 +19,19 @@
 #include "networktables/NetworkTableEntry.h"
 #include "networktables/NetworkTableInstance.h"
 #include <cscore_oo.h>
-#include "Timer.h"
+
 #include <Subsystems/GPS.h>
 #include <Subsystems/Actuator.h>
-#include <Subsystems/AnglePID.h>
+
 #include <Subsystems/CentrePID.h>
 #include <Subsystems/StraightPID.h>
 #include <Subsystems/RotationPID.h>
+
 #include <Subsystems/DriveTrain.h>
 #include <Subsystems/Vision.h>
+
+#include <Subsystems/Ventouse.h>
+
 
 //class Vision;
 
@@ -39,12 +43,12 @@ class Robot : public frc::TimedRobot
   static OI m_oi;
   static Actuator m_actuator;
   static Vision m_vision;
+  
   static double PIDVal;
   static double PIDP;
   static double PIDI;
   static double PIDD;
 
-  static AnglePID* m_AnglePID;
   static CentrePID* m_CentrePID;
   static StraightPID* m_StraightPID;
   static RotationPID* m_RotationPID;

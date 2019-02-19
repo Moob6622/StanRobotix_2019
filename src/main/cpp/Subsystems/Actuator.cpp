@@ -21,12 +21,7 @@ Actuator::Actuator() : Subsystem("Actuator"), mActuator(nullptr)
 void Actuator::InitDefaultCommand() 
 {
   SetDefaultCommand(new Actuate());
-  // Set the default command for a subsystem here.
-  // SetDefaultCommand(new MySpecialCommand());
 }
-
-// Put methods for controlling this subsystem
-// here. Call these from Commands.
 
 void Actuator::MoveDelta(double iDistance)
 {
@@ -35,11 +30,10 @@ void Actuator::MoveDelta(double iDistance)
   if(mActuator != nullptr)
   {
     
-    // //assure que la valeur soit comprise entre le minimum et le maximum
+    // assure que la valeur soit comprise entre le minimum et le maximum
     if (iDistance != 0)
     {
       double wDistance = std::max(std::min(mActuator->Get() + iDistance * 0.002, 0.8), 0.2);
-      std::cout<<"Stacking command "<<iDistance<<std::endl<<" new set distance is : "<< wDistance << std::endl;
       mActuator->Set(wDistance);
     }
   }

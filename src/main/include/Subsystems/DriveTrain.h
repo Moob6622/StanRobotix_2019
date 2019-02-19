@@ -18,8 +18,6 @@
 #include "Commands/Subsystem.h"
 #include "ctre/Phoenix.h"
 
-#include <PWMTalonSRX.h>
-
 #include <AnalogGyro.h>
 
 
@@ -27,10 +25,10 @@ class DriveTrain : public frc::Subsystem
 {
  private:
 
-  PWMTalonSRX motorL1{kMotorLeft1};
-	PWMTalonSRX motorL2{kMotorLeft2};
-	PWMTalonSRX motorR1{kMotorRight1};
-	PWMTalonSRX motorR2{kMotorRight2};
+  WPI_TalonSRX motorL1{kMotorLeft1};
+	WPI_TalonSRX motorL2{kMotorLeft2};
+	WPI_TalonSRX motorR1{kMotorRight1};
+	WPI_TalonSRX motorR2{kMotorRight2};
 
 	frc::SpeedControllerGroup leftSide{motorL1, motorL2};
 	frc::SpeedControllerGroup rightSide{motorR1, motorR2};

@@ -5,22 +5,34 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-#include "Subsystems\DriveTrain.h"
-#include <math.h>
+#include "Subsystems/Ventouse.h"
 
-DriveTrain::DriveTrain() : frc::Subsystem("DriveTrain"), mDefaultDrivePtr(nullptr) 
-{
-  mDefaultDrivePtr = new TankDrive_Joystick();
+
+Ventouse::Ventouse() : Subsystem("Ventouse") {
+  solenoid0 = new Solenoid(0);
+  //^^^Valve de pression
+  solenoid1 = new Solenoid(1);
+  //^^^Solenoid de ventouses
+  
+  solenoid0->Set(true);
+  solenoid1->Set(false);
+  //ventouse est desactivee quand 0 est true et 1 est false
 }
 
-void DriveTrain::InitDefaultCommand() 
-{
-  SetDefaultCommand(mDefaultDrivePtr);
+void Ventouse::InitDefaultCommand() {
+  
 }
 
-void DriveTrain::TankDrive(double iLeft, double iRight) 
+void Ventouse::Toggle()
 {
-  Drive.TankDrive(iLeft, iRight, false);
+  solenoid0->Set(!solenoid0->Get());
+  solenoid1->Set(!solenoid1->Get());
+}
+
+void Ventouse::TurnOff()
+{
+  solenoid0->Set(true);
+  solenoid1->Set(false);
 }
 
 // Put methods for controlling this subsystem

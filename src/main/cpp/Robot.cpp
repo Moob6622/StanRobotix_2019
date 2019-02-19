@@ -10,7 +10,7 @@
 
 #include <Commands/Scheduler.h>
 #include <SmartDashboard/SmartDashboard.h>
-
+#include "Commands/Actuate.h"
 
 GPS Robot::m_gps;
 OI Robot::m_oi;
@@ -39,6 +39,7 @@ void Robot::RobotInit()
 	PIDI = prefs->GetDouble("PIDI", 1.0);
 	PIDD = prefs->GetDouble("PIDD", 1.0);
 
+  m_gps.ResetSensors();
 
   m_vision.Initialization(); 
 
@@ -98,6 +99,7 @@ void Robot::TeleopInit()
   m_RotationPID = new RotationPID();
   m_gps.ResetSensors();
 
+  m_ventouse.TurnOff();
 }
 
 void Robot::TeleopPeriodic() 
@@ -107,7 +109,6 @@ void Robot::TeleopPeriodic()
 
 void Robot::TestPeriodic() 
 {
-
 }
 
 #ifndef RUNNING_FRC_TESTS

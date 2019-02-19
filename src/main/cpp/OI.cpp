@@ -12,8 +12,9 @@
 #include "Commands/PrepHatchAlign.h"
 #include "Commands/Aligner.h"
 #include "Commands/Advance.h"
-#include "Robot.h"
 #include <math.h>
+#include <Commands/ToggleVentouse.h>
+#include "Robot.h"
 
 OI::OI() 
 {
@@ -37,10 +38,10 @@ OI::OI()
 
 
   PrepHatchAlign* k1ButtonCommand = new PrepHatchAlign();
+  ToggleVentouse* k2ButtonCommand = new ToggleVentouse();
 
   m1ButtonPtr->WhenPressed(k1ButtonCommand);
-  m2ButtonPtr->WhenPressed(new Advance(10, Robot::m_StraightPID, false));
-  //m2ButtonPtr->WhenPressed(new Turn(30.0, Robot::m_RotationPID));
+  m2ButtonPtr->WhenPressed(k2ButtonCommand);
 }
 
 double OI::GetLeftJoystick() 

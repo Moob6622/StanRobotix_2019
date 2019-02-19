@@ -11,20 +11,15 @@
 
 constexpr int kLineDetectionVerticalThreshold = 400;
 
-// en pouces
-constexpr double kRobotLargeur = 28.25;
-constexpr double kLongeurDiagonaleRobot = 0;
-constexpr double kAngleDiagonaleRobot = 0;
-
 static std::string kCameraIP = "10.66.22.20";
 static std::string kCameraName = "camera0";
-constexpr int axisCamWidth = 640;
-constexpr int axisCamHeight = 480;
+constexpr int axisCamWidth = 480;
+constexpr int axisCamHeight = 360;
 
-constexpr int kMotorLeft1 = 8;
-constexpr int kMotorLeft2 = 9;
-constexpr int kMotorRight1 = 4;
-constexpr int kMotorRight2 = 5;
+constexpr int kMotorLeft1 = 1;
+constexpr int kMotorLeft2 = 2;
+constexpr int kMotorRight1 = 3;
+constexpr int kMotorRight2 = 0;
 
 constexpr int kJoystick = 0;
 constexpr int kJoystickLeft = 1;
@@ -44,18 +39,13 @@ constexpr int k2Button = 2;
 constexpr int k3Button = 3;
 constexpr int k4Button = 4;
 
-constexpr double kAccelerometerBias = 0.03066;
-
 constexpr int kActuator = 0;
 
 constexpr double VoltToFootDistCapt = 3.5606;
 
 constexpr double kConversionAccelerometer = 385.82698;
 
-//constexpr double kCircumference = 0.4787787204060999; 
-
 constexpr double kEncoder = 0; 
-// il faudra tester le coefficient
 
 /**
  * The RobotMap is a mapping from the ports sensors and actuators are wired into
