@@ -10,13 +10,13 @@
 
 HatchPiston::HatchPiston() : Subsystem("HatchPiston") {
   solenoid0 = new Solenoid(kHatchPiston0);
-  //^^^
+  //^^^ connecte a la base
   solenoid1 = new Solenoid(kHatchPiston1);
-  //^^^
+  //^^^ connecte a l'extremite
 
-  solenoid0->Set(true);
-  solenoid1->Set(false);
-  //ventouse est desactivee quand ? est true et ? est false
+  solenoid0->Set(false);
+  solenoid1->Set(true);
+  //piston est desactive quand 1 est true et 0 est false
 }
 
 void HatchPiston::InitDefaultCommand() {
@@ -31,6 +31,6 @@ void HatchPiston::Toggle()
 void HatchPiston::Retract()
 {
   // valeurs true/false inconnues
-  solenoid0->Set(true);
-  solenoid1->Set(false);
+  solenoid0->Set(false);
+  solenoid1->Set(true);
 }
