@@ -7,6 +7,7 @@
 
 #include "Subsystems/HatchPiston.h"
 #include <RobotMap.h>
+#include <iostream>
 
 HatchPiston::HatchPiston() : Subsystem("HatchPiston") {
   solenoid0 = new Solenoid(kHatchPiston0);
@@ -26,6 +27,14 @@ void HatchPiston::Toggle()
 {
   solenoid0->Set(!solenoid0->Get());
   solenoid1->Set(!solenoid1->Get());
+  if (solenoid0->Get())
+  {
+    std::cout<<"piston : active "<<std::endl;
+  }
+  else
+  {
+    std::cout<<"piston : desactive "<<std::endl;
+  }
 }
 
 void HatchPiston::Retract()

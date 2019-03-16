@@ -7,6 +7,7 @@
 
 #include "Subsystems/Ventouse.h"
 #include <RobotMap.h>
+#include <iostream>
 
 
 Ventouse::Ventouse() : Subsystem("Ventouse") {
@@ -28,6 +29,14 @@ void Ventouse::Toggle()
 {
   solenoid0->Set(!solenoid0->Get());
   solenoid1->Set(!solenoid1->Get());
+  if (solenoid1->Get())
+  {
+    std::cout<<"ventouse : activee "<<std::endl;
+  }
+  else
+  {
+    std::cout<<"ventouse : desactivee "<<std::endl;
+  }
 }
 
 void Ventouse::TurnOff()

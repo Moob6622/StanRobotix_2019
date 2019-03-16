@@ -14,9 +14,9 @@ CordeMoteur::CordeMoteur() : Subsystem("CordeMoteur") {
   moteur->SetInverted(false);
   cordeProg = 0;
   //cordeMin = 0;
-  cordeMin = -900;
+  cordeMin = -9000;
   //cordeMax = 324;
-  cordeMax = 900;
+  cordeMax = 9000;
   // 0 correspond a la corde retractee, et 324 a la corde etendue
 }
 
@@ -35,5 +35,4 @@ void CordeMoteur::Set(double value)
   {
     moteur->Set(0.0);
   }
-  std::cout<<cordeProg<<std::endl;
 }
