@@ -6,13 +6,14 @@
 /*----------------------------------------------------------------------------*/
 
 #include "Subsystems/HatchPiston.h"
+#include <SmartDashboard/SmartDashboard.h>
 #include <RobotMap.h>
 #include <iostream>
 
 HatchPiston::HatchPiston() : Subsystem("HatchPiston") {
-  solenoid0 = new Solenoid(kHatchPiston0);
+  solenoid0 = new Solenoid(0,kHatchPiston0);
   //^^^ connecte a la base
-  solenoid1 = new Solenoid(kHatchPiston1);
+  solenoid1 = new Solenoid(0,kHatchPiston1);
   //^^^ connecte a l'extremite
 
   solenoid0->Set(false);
@@ -27,6 +28,7 @@ void HatchPiston::Toggle()
 {
   solenoid0->Set(!solenoid0->Get());
   solenoid1->Set(!solenoid1->Get());
+  SmartDashboard::PutBoolean("Hatch", solenoid0->Get());
   if (solenoid0->Get())
   {
     std::cout<<"piston : active "<<std::endl;

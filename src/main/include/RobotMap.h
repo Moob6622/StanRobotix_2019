@@ -14,10 +14,10 @@ constexpr int axisCamWidth = 480;
 constexpr int axisCamHeight = 360;
 
 
-constexpr int kVentouse0 = 0;
-constexpr int kVentouse1 = 1;
-constexpr int kHatchPiston0 = 2;
-constexpr int kHatchPiston1 = 3;
+constexpr int kVentouse0 = 2;
+constexpr int kVentouse1 = 3;
+constexpr int kHatchPiston0 = 0;
+constexpr int kHatchPiston1 =1;
 
 
 constexpr int kMotorLeft1 = 1;
