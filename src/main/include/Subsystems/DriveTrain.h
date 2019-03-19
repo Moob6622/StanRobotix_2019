@@ -16,7 +16,6 @@
 
 #include "Drive/DifferentialDrive.h"
 #include "Commands/Subsystem.h"
-#include "ctre/Phoenix.h"
 
 #include <AnalogGyro.h>
 #include <PWMTalonSRX.h>

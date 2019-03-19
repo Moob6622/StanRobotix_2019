@@ -85,6 +85,10 @@ void Robot::TeleopInit()
 void Robot::TeleopPeriodic() 
 { 
   frc::Scheduler::GetInstance()->Run(); 
+
+  //TEST
+  double SmoothX;
+  //TEST
 }
 
 void Robot::TestPeriodic() 
