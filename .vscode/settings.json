@@ -13,7 +13,6 @@
   },
   "wpilib.online": true,
   "C_Cpp.intelliSenseEngineFallback": "Enabled",
-  "C_Cpp.default.configurationProvider": "vscode-wpilib",
   "files.autoSave": "onWindowChange",
   "files.associations": {
     "xstring": "cpp",
