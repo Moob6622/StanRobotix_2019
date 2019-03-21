@@ -13,7 +13,7 @@
 #include <SmartDashboard/SmartDashboard.h>
 
 
-HatchSystem::HatchSystem() : Subsystem("ExampleSubsystem"), mActuator(nullptr)
+HatchSystem::HatchSystem() : Subsystem("HatchSystem")
 {
   mActuator = new Servo{kActuator};
   mActuator->Set(0.5);
@@ -45,7 +45,7 @@ void HatchSystem::MoveDelta(double iDistance)
   {
     if(iDistance != 0)
     {
-      double wDistance = max(std::min(mActuator->Get() + iDistance * 0.002, 0.8), 0.2);
+      double wDistance = std::max(std::min(mActuator->Get() + iDistance * 0.002, 0.8), 0.2);
       mActuator->Set(wDistance);
     }
   }
@@ -54,6 +54,7 @@ void HatchSystem::MoveDelta(double iDistance)
 //Piston methods
 void HatchSystem::PistonToggle()
 {
+  std::cout<<"piston"<<std::endl;
   mPistonSolenoid0->Set(!mPistonSolenoid0->Get());
   mPistonSolenoid1->Set(!mPistonSolenoid1->Get());
   SmartDashboard::PutBoolean("Piston", mPistonSolenoid0->Get());
@@ -66,9 +67,9 @@ void HatchSystem::PistonRetract()
 }
 
 //Ventous methods
-
 void HatchSystem::VentouseToggle()
 {
+  std::cout<<"ventouse"<<std::endl;
   mVentouseSolenoid0->Set(!mVentouseSolenoid0->Get());
   mVentouseSolenoid0->Set(!mVentouseSolenoid1->Get());
   SmartDashboard::PutBoolean("Ventouse", mVentouseSolenoid0->Get());

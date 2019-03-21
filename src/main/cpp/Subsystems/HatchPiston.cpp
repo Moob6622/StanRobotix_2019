@@ -3,7 +3,7 @@
 /* Open Source Software - may be modified and shared by FRC teams. The code   */
 /* must be accompanied by the FIRST BSD license file in the root directory of */
 /* the project.                                                               */
-/*----------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------
 
 #include "Subsystems/HatchPiston.h"
 #include <SmartDashboard/SmartDashboard.h>
@@ -44,4 +44,4 @@ void HatchPiston::Retract()
   // valeurs true/false inconnues
   solenoid0->Set(false);
   solenoid1->Set(true);
-}
+}*/

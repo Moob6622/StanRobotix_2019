@@ -11,7 +11,7 @@
 
 Actuate::Actuate() 
 {
-  Requires(&Robot::m_actuator);
+  Requires(&Robot::m_hatchsystem);
 }
 
 // Called just before this Command runs the first time
@@ -22,7 +22,7 @@ void Actuate::Initialize()
 // Called repeatedly when this Command is scheduled to run
 void Actuate::Execute() 
 { 
-  Robot::m_actuator.MoveDelta(Robot::m_oi.GetActuatorInput());
+  Robot::m_hatchsystem.MoveDelta(Robot::m_oi.GetActuatorInput());
 }
 
 // Make this return true when this Command no longer needs to run execute()

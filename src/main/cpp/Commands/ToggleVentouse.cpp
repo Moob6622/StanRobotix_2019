@@ -9,7 +9,7 @@
 #include "Robot.h"
 
 ToggleVentouse::ToggleVentouse() {
-  Requires(&Robot::m_ventouse);
+  Requires(&Robot::m_hatchsystem);
 }
 
 // Called just before this Command runs the first time
@@ -17,7 +17,7 @@ void ToggleVentouse::Initialize() {}
 
 // Called repeatedly when this Command is scheduled to run
 void ToggleVentouse::Execute() {
-  Robot::m_ventouse.Toggle();
+  Robot::m_hatchsystem.VentouseToggle();
 }
 
 // Make this return true when this Command no longer needs to run execute()

@@ -13,12 +13,14 @@
 
 GPS Robot::m_gps;
 OI Robot::m_oi;
-Actuator Robot::m_actuator;
+//Actuator Robot::m_actuator;
 DriveTrain Robot::m_drivetrain;
 Vision Robot::m_vision;
-Ventouse Robot::m_ventouse;
-HatchPiston Robot::m_piston;
+//Ventouse Robot::m_ventouse;
+//HatchPiston Robot::m_piston;
 CordeMoteur Robot::m_CordeMoteur;
+
+HatchSystem Robot::m_hatchsystem;
 
 double Robot::PIDVal;
 double Robot::PIDP;
@@ -100,8 +102,8 @@ void Robot::TeleopInit()
   m_RotationPID = new RotationPID();
   m_gps.ResetSensors();
 
-  m_ventouse.TurnOff();
-  m_piston.Retract();
+  //m_ventouse.TurnOff();
+  //m_piston.Retract();
 }
 
 void Robot::TeleopPeriodic() 

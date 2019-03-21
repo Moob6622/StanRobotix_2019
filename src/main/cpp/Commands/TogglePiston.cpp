@@ -9,7 +9,7 @@
 #include "Robot.h"
 
 TogglePiston::TogglePiston() {
-  Requires(&Robot::m_piston);
+  Requires(&Robot::m_hatchsystem);
 }
 
 // Called just before this Command runs the first time
@@ -17,7 +17,7 @@ void TogglePiston::Initialize() {}
 
 // Called repeatedly when this Command is scheduled to run
 void TogglePiston::Execute() {
-  Robot::m_piston.Toggle();
+  Robot::m_hatchsystem.PistonToggle();
 }
 
 // Make this return true when this Command no longer needs to run execute()
