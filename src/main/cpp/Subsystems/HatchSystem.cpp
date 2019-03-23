@@ -16,7 +16,7 @@
 HatchSystem::HatchSystem() : Subsystem("HatchSystem")
 {
   mActuator = new Servo{kActuator};
-  mActuator->Set(0.5);
+  mActuator->Set(0.25);
   ///////////////////////////////////////////////////
   mPistonSolenoid0 = new Solenoid(0,kHatchPiston0);
   mPistonSolenoid1 = new Solenoid(0,kHatchPiston1);
@@ -35,7 +35,7 @@ HatchSystem::HatchSystem() : Subsystem("HatchSystem")
 
 void HatchSystem::InitDefaultCommand() {
   // Set the default command for a subsystem here.
-  // SetDefaultCommand(new MySpecialCommand());
+  SetDefaultCommand(new Actuate());
 }
 
 //Actuator methods
@@ -57,7 +57,7 @@ void HatchSystem::PistonToggle()
   std::cout<<"piston"<<std::endl;
   mPistonSolenoid0->Set(!mPistonSolenoid0->Get());
   mPistonSolenoid1->Set(!mPistonSolenoid1->Get());
-  SmartDashboard::PutBoolean("Piston", mPistonSolenoid0->Get());
+  SmartDashboard::PutBoolean("Piston", mPistonSolenoid1->Get());
 }
 
 void HatchSystem::PistonRetract()
@@ -71,7 +71,7 @@ void HatchSystem::VentouseToggle()
 {
   std::cout<<"ventouse"<<std::endl;
   mVentouseSolenoid0->Set(!mVentouseSolenoid0->Get());
-  mVentouseSolenoid0->Set(!mVentouseSolenoid1->Get());
+  mVentouseSolenoid1->Set(!mVentouseSolenoid1->Get());
   SmartDashboard::PutBoolean("Ventouse", mVentouseSolenoid0->Get());
 }
 

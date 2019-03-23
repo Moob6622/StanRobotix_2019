@@ -21,7 +21,7 @@ void Actuate::Initialize()
 
 // Called repeatedly when this Command is scheduled to run
 void Actuate::Execute() 
-{ 
+{
   Robot::m_hatchsystem.MoveDelta(Robot::m_oi.GetActuatorInput());
 }
 

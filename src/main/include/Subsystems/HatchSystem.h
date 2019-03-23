@@ -13,7 +13,6 @@
 
 class HatchSystem : public frc::Subsystem {
  private:
-  Servo * mActuator;
 
   Solenoid * mPistonSolenoid0;
   Solenoid * mPistonSolenoid1;
@@ -24,6 +23,7 @@ class HatchSystem : public frc::Subsystem {
 
  public:
   HatchSystem();
+  Servo * mActuator;
   void InitDefaultCommand() override;
 
   //Actuator Methods

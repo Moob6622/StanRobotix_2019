@@ -6,6 +6,7 @@
 /*----------------------------------------------------------------------------*/
 
 #include "Commands/Aligner.h"
+#include "Commands/Actuate.h"
 #include "Robot.h"
 #include <SmartDashboard/SmartDashboard.h>
 #include <iostream>
@@ -34,7 +35,7 @@ void Aligner::Execute()
      {
        wPower = mCPidPtr->GetPIDOutput();
      }
-  Robot::m_drivetrain.TankDrive(wPower,-wPower);
+  Robot::m_hatchsystem.MoveDelta(wPower);
 }
 
 // Make this return true when this Command no longer needs to run execute()
