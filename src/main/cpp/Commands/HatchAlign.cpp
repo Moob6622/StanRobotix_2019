@@ -24,9 +24,7 @@ HatchAlign::HatchAlign() {
   //AddSequential(new Turn(-90*theta/fabs(theta), Robot::m_RotationPID));
   //AddSequential(new Advance(dist*cos(theta*M_PI/180), Robot::m_StraightPID, false));
 
-  std::cout<<"avant"<<std::endl;
   AddSequential(new Aligner(Robot::m_CentrePID));
-  std::cout<<"apres"<<std::endl;
 
 }
  
