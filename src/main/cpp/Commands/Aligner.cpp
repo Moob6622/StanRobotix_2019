@@ -16,6 +16,7 @@ Aligner::Aligner(CentrePID * iCPid)
   Requires(&Robot::m_drivetrain);
   Requires(&Robot::m_vision);
   mCPidPtr = iCPid;
+  mPower = 0;
 }
 
 // Called just before this Command runs the first time
@@ -29,18 +30,24 @@ void Aligner::Initialize()
 // Called repeatedly when this Command is scheduled to run
 void Aligner::Execute()
 {
-   double wPower = 0;
-
    if(mCPidPtr != nullptr) 
      {
-       wPower = mCPidPtr->GetPIDOutput();
+       mPower = mCPidPtr->GetPIDOutput();
      }
-  Robot::m_hatchsystem.MoveDelta(wPower);
+  Robot::m_hatchsystem.MoveDelta(mPower);
+  
 }
 
 // Make this return true when this Command no longer needs to run execute()
 bool Aligner::IsFinished() 
 {
+  if (
+    (mPower > 0 && Robot::m_hatchsystem.ActuatorIsMax()) 
+  ||(mPower < 0 && Robot::m_hatchsystem.ActuatorIsMin())
+     )
+   {
+     return true; 
+   }
   if(mCPidPtr != nullptr) 
   { 
     return mCPidPtr->OnTarget();

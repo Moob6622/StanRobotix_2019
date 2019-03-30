@@ -51,6 +51,16 @@ void HatchSystem::MoveDelta(double iDistance)
   }
 }
 
+bool HatchSystem::ActuatorIsMax()
+{
+  return (mActuator->GetPosition() == 1);
+}
+
+bool HatchSystem::ActuatorIsMin()
+{
+  return (mActuator->GetPosition() == -1);
+}
+
 //Piston methods
 void HatchSystem::PistonToggle()
 {

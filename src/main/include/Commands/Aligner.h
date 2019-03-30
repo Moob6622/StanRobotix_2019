@@ -25,4 +25,5 @@ class Aligner : public frc::Command {
 
  private:
   CentrePID * mCPidPtr;
+  double mPower;
 };

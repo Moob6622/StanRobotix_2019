@@ -28,6 +28,8 @@ class HatchSystem : public frc::Subsystem {
 
   //Actuator Methods
   void MoveDelta(double distance);
+  bool ActuatorIsMax();
+  bool ActuatorIsMin();
 
   //Piston methods
   void PistonToggle();
