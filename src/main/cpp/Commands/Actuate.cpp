@@ -8,6 +8,7 @@
 #include "Commands/Actuate.h"
 #include "Robot.h"
 #include <iostream>
+#include <SmartDashboard/SmartDashboard.h>
 
 Actuate::Actuate() 
 {
@@ -22,7 +23,13 @@ void Actuate::Initialize()
 // Called repeatedly when this Command is scheduled to run
 void Actuate::Execute() 
 {
-  Robot::m_hatchsystem.MoveDelta(Robot::m_oi.GetActuatorInput());
+  Robot::m_hatchsystem.SetActuator(Robot::m_oi.GetActuatorInput());
+  SmartDashboard::PutNumber("input actuator", Robot::m_oi.GetActuatorInput());
+  std::cout<<"left: "<<Robot::m_hatchsystem.IsSwitchSetL()<<std::endl;
+  std::cout<<"right: "<<Robot::m_hatchsystem.IsSwitchSetR()<<std::endl;
+  std::cout<<"running"<<std::endl;
+  SmartDashboard::PutBoolean("left switch", Robot::m_hatchsystem.IsSwitchSetL());
+  SmartDashboard::PutBoolean("right switch", Robot::m_hatchsystem.IsSwitchSetR());
 }
 
 // Make this return true when this Command no longer needs to run execute()

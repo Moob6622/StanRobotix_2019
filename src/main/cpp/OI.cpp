@@ -56,16 +56,19 @@ double OI::GetRightJoystick()
 
 double OI::GetActuatorInput()
 {
-  if (mRBButtonPtr->Get() && !mLBButtonPtr->Get())
+  if (false)
   {
-    return 1.0;
+    return 0.0;
   }
-  
-  if (!mRBButtonPtr->Get() && mLBButtonPtr->Get())
+  else if (mJoystickPtr->GetRawAxis(kJoystickLeftTrigger) != 0 /*!Robot::m_hatchsystem.IsSwitchSetL()*/)
   {
-    return -1.0;
+    return mJoystickPtr->GetRawAxis(kJoystickLeftTrigger);
+  } 
+  else if (mJoystickPtr->GetRawAxis(kJoystickRightTrigger) != 0  /*!&Robot::m_hatchsystem.IsSwitchSetR()*/)
+  {
+    return  -mJoystickPtr->GetRawAxis(kJoystickRightTrigger);
   }
-  return 0.0;
+
 }
 
 double OI::GetLT(){

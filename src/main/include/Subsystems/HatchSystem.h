@@ -8,8 +8,10 @@
 #pragma once
 
 #include <Commands/Subsystem.h>
-#include <Servo.h>
+#include <Spark.h>
 #include <Solenoid.h>
+#include <DigitalInput.h>
+#include <Commands\Actuate.h>
 
 class HatchSystem : public frc::Subsystem {
  private:
@@ -19,15 +21,23 @@ class HatchSystem : public frc::Subsystem {
 
   Solenoid * mVentouseSolenoid0;
   Solenoid * mVentouseSolenoid1;
+
+  Spark * mActuator;
+
+  DigitalInput * mLimitSwitchR;
+  DigitalInput * mLimitSwitchL;
+
+  Actuate * mDefaultCommand;
   
+
 
  public:
   HatchSystem();
-  Servo * mActuator;
+  
   void InitDefaultCommand() override;
 
   //Actuator Methods
-  void MoveDelta(double distance);
+  void SetActuator(double motorInput);
   bool ActuatorIsMax();
   bool ActuatorIsMin();
 
@@ -38,6 +48,10 @@ class HatchSystem : public frc::Subsystem {
   //Ventouse methods
   void VentouseToggle();
   void VentouseTurnOff();
+
+  //Limit Switch methods;
+  bool IsSwitchSetR();
+  bool IsSwitchSetL();
 
 
 };

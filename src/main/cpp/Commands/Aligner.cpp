@@ -34,7 +34,7 @@ void Aligner::Execute()
      {
        mPower = mCPidPtr->GetPIDOutput();
      }
-  Robot::m_hatchsystem.MoveDelta(mPower);
+  Robot::m_hatchsystem.SetActuator(mPower);
   
 }
 
@@ -42,8 +42,8 @@ void Aligner::Execute()
 bool Aligner::IsFinished() 
 {
   if (
-    (mPower > 0 && Robot::m_hatchsystem.ActuatorIsMax()) 
-  ||(mPower < 0 && Robot::m_hatchsystem.ActuatorIsMin())
+    (mPower > 0 && !Robot::m_hatchsystem.IsSwitchSetL()) 
+  ||(mPower < 0 && !Robot::m_hatchsystem.IsSwitchSetR())
      )
    {
      return true; 

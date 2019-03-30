@@ -13,10 +13,9 @@
 #include <SmartDashboard/SmartDashboard.h>
 
 
-HatchSystem::HatchSystem() : Subsystem("HatchSystem")
+HatchSystem::HatchSystem() : Subsystem("HatchSystem"), mDefaultCommand(nullptr)
 {
-  mActuator = new Servo{kActuator};
-  mActuator->Set(1.0);
+  mActuator = new Spark(kActuator);
   ///////////////////////////////////////////////////
   mPistonSolenoid0 = new Solenoid(0,kHatchPiston0);
   mPistonSolenoid1 = new Solenoid(0,kHatchPiston1);
@@ -29,6 +28,13 @@ HatchSystem::HatchSystem() : Subsystem("HatchSystem")
 
   mVentouseSolenoid0->Set(true);
   mVentouseSolenoid1->Set(false);
+  //////////////////////////////////////////////////
+
+  mLimitSwitchR = new DigitalInput(5);
+  mLimitSwitchL = new DigitalInput(6);
+  std::cout<<"gd"<<std::endl;
+
+  mDefaultCommand =new Actuate();
 
 
 }
@@ -39,16 +45,11 @@ void HatchSystem::InitDefaultCommand() {
 }
 
 //Actuator methods
-void HatchSystem::MoveDelta(double iDistance)
+void HatchSystem::SetActuator(double actuatorInput)
 {
-  if (mActuator != nullptr)
-  {
-    if(iDistance != 0)
-    {
-      double wDistance = std::max(std::min(mActuator->Get() + iDistance * 0.002, 1.0), 0.0);
-      mActuator->Set(wDistance);
-    }
-  }
+  //mActuator->Set(0.5*actuatorInput);
+
+  SmartDashboard::PutNumber("actuator input", actuatorInput);
 }
 
 bool HatchSystem::ActuatorIsMax()
@@ -64,7 +65,6 @@ bool HatchSystem::ActuatorIsMin()
 //Piston methods
 void HatchSystem::PistonToggle()
 {
-  std::cout<<"piston"<<std::endl;
   mPistonSolenoid0->Set(!mPistonSolenoid0->Get());
   mPistonSolenoid1->Set(!mPistonSolenoid1->Get());
   SmartDashboard::PutBoolean("Piston", mPistonSolenoid1->Get());
@@ -76,10 +76,9 @@ void HatchSystem::PistonRetract()
   mPistonSolenoid1->Set(true);
 }
 
-//Ventous methods
+//Ventouse methods
 void HatchSystem::VentouseToggle()
 {
-  std::cout<<"ventouse"<<std::endl;
   mVentouseSolenoid0->Set(!mVentouseSolenoid0->Get());
   mVentouseSolenoid1->Set(!mVentouseSolenoid1->Get());
   SmartDashboard::PutBoolean("Ventouse", mVentouseSolenoid0->Get());
@@ -89,4 +88,20 @@ void HatchSystem::VentouseTurnOff()
 {
   mVentouseSolenoid0->Set(true);
   mVentouseSolenoid1->Set(false);
+}
+
+//Limit Switch methods
+
+bool HatchSystem::IsSwitchSetR()
+{
+  std::cout<<"subsystem"<<mLimitSwitchR->Get()<<std::endl;
+  return mLimitSwitchR->Get();
+  SmartDashboard::PutBoolean("RightSwitch", mLimitSwitchR->Get());
+}
+
+bool HatchSystem::IsSwitchSetL()
+{
+  std::cout<<"subsystem"<<mLimitSwitchL<<std::endl;
+  return mLimitSwitchL->Get();
+  SmartDashboard::PutBoolean("Leftswitch", mLimitSwitchL->Get());
 }
