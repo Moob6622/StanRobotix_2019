@@ -16,7 +16,7 @@
 HatchSystem::HatchSystem() : Subsystem("HatchSystem")
 {
   mActuator = new Servo{kActuator};
-  mActuator->Set(0.25);
+  mActuator->Set(1.0);
   ///////////////////////////////////////////////////
   mPistonSolenoid0 = new Solenoid(0,kHatchPiston0);
   mPistonSolenoid1 = new Solenoid(0,kHatchPiston1);
@@ -45,7 +45,7 @@ void HatchSystem::MoveDelta(double iDistance)
   {
     if(iDistance != 0)
     {
-      double wDistance = std::max(std::min(mActuator->Get() + iDistance * 0.002, 0.8), 0.2);
+      double wDistance = std::max(std::min(mActuator->Get() + iDistance * 0.002, 1.0), 0.0);
       mActuator->Set(wDistance);
     }
   }
