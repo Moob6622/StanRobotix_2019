@@ -8,6 +8,7 @@
 #pragma once
 
 #include <Commands/Command.h>
+#include <Math.h>
 
 class RobotWiggle : public frc::Command {
  public:

@@ -36,6 +36,7 @@
 
 #include <Subsystems/HatchSystem.h>
 
+#include <DigitalInput.h>
 
 //class Vision;
 
@@ -62,6 +63,9 @@ class Robot : public frc::TimedRobot
   static StraightPID* m_StraightPID;
   static RotationPID* m_RotationPID;
 
+  // DigitalInput * test;
+  // DigitalInput * test2;
+
   void RobotInit() override;
   void RobotPeriodic() override;
   void DisabledInit() override;
@@ -71,6 +75,8 @@ class Robot : public frc::TimedRobot
   void TeleopInit() override;
   void TeleopPeriodic() override;
   void TestPeriodic() override;
+
+  
 
  private:
   Preferences* prefs;

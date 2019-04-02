@@ -30,8 +30,8 @@ HatchSystem::HatchSystem() : Subsystem("HatchSystem"), mDefaultCommand(nullptr)
   mVentouseSolenoid1->Set(false);
   //////////////////////////////////////////////////
 
-  mLimitSwitchR = new DigitalInput(5);
-  mLimitSwitchL = new DigitalInput(6);
+  mLimitSwitchR = new DigitalInput(kLimitSwitchR);
+  mLimitSwitchL = new DigitalInput(kLimitSwitchL);
   std::cout<<"gd"<<std::endl;
 
   mDefaultCommand =new Actuate();
@@ -47,7 +47,7 @@ void HatchSystem::InitDefaultCommand() {
 //Actuator methods
 void HatchSystem::SetActuator(double actuatorInput)
 {
-  //mActuator->Set(0.5*actuatorInput);
+  mActuator->Set(0.5*actuatorInput);
 
   SmartDashboard::PutNumber("actuator input", actuatorInput);
 }
@@ -95,13 +95,13 @@ void HatchSystem::VentouseTurnOff()
 bool HatchSystem::IsSwitchSetR()
 {
   std::cout<<"subsystem"<<mLimitSwitchR->Get()<<std::endl;
-  return mLimitSwitchR->Get();
   SmartDashboard::PutBoolean("RightSwitch", mLimitSwitchR->Get());
+  return mLimitSwitchR->Get();
 }
 
 bool HatchSystem::IsSwitchSetL()
 {
   std::cout<<"subsystem"<<mLimitSwitchL<<std::endl;
+  SmartDashboard::PutBoolean("LeftSwitch", mLimitSwitchL->Get());
   return mLimitSwitchL->Get();
-  SmartDashboard::PutBoolean("Leftswitch", mLimitSwitchL->Get());
 }

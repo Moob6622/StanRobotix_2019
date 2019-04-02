@@ -45,7 +45,11 @@ void Robot::RobotInit()
 
   m_gps.ResetSensors();
 
-  m_vision.Initialization(); 
+  m_vision.Initialization();
+
+//  test = new DigitalInput(2); 
+//  test2 = new DigitalInput(3);
+ 
 }
 
 /**
@@ -109,6 +113,7 @@ void Robot::TeleopInit()
 void Robot::TeleopPeriodic() 
 { 
   frc::Scheduler::GetInstance()->Run();
+  // std::cout<<"test switch: "<<test->Get()<<std::endl;
 }
 
 void Robot::TestPeriodic() 

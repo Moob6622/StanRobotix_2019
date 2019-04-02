@@ -18,8 +18,8 @@ constexpr int kVentouse0 = 2;
 constexpr int kVentouse1 = 3;
 constexpr int kHatchPiston0 = 0;
 constexpr int kHatchPiston1 =1;
-constexpr int kLimitSwitchR = 3;
-constexpr int kLimitSwitchL = 2;
+constexpr int kLimitSwitchR = 5;
+constexpr int kLimitSwitchL = 6;
 
 
 constexpr int kMotorLeft1 = 1;
